@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHATIN - AKTU Previous Year Papers</title>
+    <meta name="description"
+        content="Access official AKTU University Previous Year Papers (PYP) for Computer Science (CSE) students. Download B.Tech papers for 1st, 2nd, 3rd, and Final years for free.">
+    <meta name="keywords"
+        content="AKTU Previous Year Papers, AKTU B.Tech PYP, CSE Question Papers, Engineering Study Material, Dushyant Saini, Neelesh Tiwari, WHATIN Ecosystem, Dr. APJ Abdul Kalam Technical University, B.Tech PDF Notes">
+    <meta name="author" content="Dushyant Saini">
+    <meta property="og:title" content="AKTU Previous Year Papers Archive | WHATIN">
+    <meta property="og:description"
+        content="Your one-stop destination for AKTU CSE B.Tech Previous Year Papers. Curated largely by Dushyant Saini for student excellence.">
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E97CV891FV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E97CV891FV');
+    </script>
+
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Pacifico&family=Poppins:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="collegepyp.css"> <!-- Reusing the premium grid/tab styles -->
+
+    <style>
+        /* Specific overrides for AKTU PYP Page */
+        .aktu-badge {
+            background: linear-gradient(135deg, #A80000 0%, #FF0000 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo-title" style="display: flex; align-items: center; gap: 1rem; cursor: pointer;"
+                onclick="window.location.href='index.html'">
+                <div class="logo">WHATIN 💡</div>
+                <h1 style="font-size: 1.2rem; margin: 0; display: none;">AKTU PYP ARCHIVE</h1>
+            </div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><button onclick="window.location.href='index.html'" class="nav-btn">Home</button></li>
+                    <li><button onclick="showHome()" class="nav-btn active-btn">Papers</button></li>
+                    <li><button onclick="showAbout()" class="nav-btn">About</button></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="spacer" style="height: 80px;"></div>
+
+    <main id="main-content" class="container" style="padding: 2rem 0; min-height: 80vh;">
+        <div class="pyp-header" style="text-align: center; margin-bottom: 3rem;">
+            <div class="aktu-badge">AKTU Official Archive</div>
+            <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 1rem;">AKTU PREVIOUS YEAR <br><span
+                    class="gradient-text">QUESTION PAPERS</span></h1>
+            <p class="intro" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
+                Welcome to the official CSE Previous Year Paper archive for <strong>AKTU</strong>. Select your year to
+                view available
+                subjects with downloadable PDFs.
+            </p>
+            <div class="branch-heading"
+                style="margin-top: 1.5rem; font-weight: 600; color: var(--accent-primary); letter-spacing: 1px;">
+                Branch: Computer Science & Engineering (CSE)
+            </div>
+        </div>
+
+        <div class="btn-group-container">
+            <div class="btn-group">
+                <button data-target="year1" class="active">1st Year</button>
+                <button data-target="year2">2nd Year</button>
+                <button data-target="year3">3rd Year</button>
+                <button data-target="year4">Final Year</button>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- 1st Year Section -->
+            <section class="year-section active" id="year1">
+                <h3 class="year-title">1st Year Subjects (Common)</h3>
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-square-root-alt"></i></div>
+                        <div class="sub-info">
+                            <span>Mathematics-2</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/math-2.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-atom"></i></div>
+                        <div class="sub-info">
+                            <span>Physics</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/Physics.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="sub-info">
+                            <span>Basic Electrical</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/ELECTRICAL.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-flask"></i></div>
+                        <div class="sub-info">
+                            <span>Chemistry</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/chemistry.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-users"></i></div>
+                        <div class="sub-info">
+                            <span>Soft Skills</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/SOFT%20SKILLS.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="sub-info">
+                            <span>EVS</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/EVS.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-code"></i></div>
+                        <div class="sub-info">
+                            <span>PPS</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/PPS.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-cogs"></i></div>
+                        <div class="sub-info">
+                            <span>Mechanical</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/MECHANICAL.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="sub-info">
+                            <span>Electronics</span>
+                            <a href="https://raw.githubusercontent.com/crazy-develop/phadai/main/electronics.pdf"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2nd Year Section -->
+            <section class="year-section" id="year2">
+                <h3 class="year-title">2nd Year Subjects (CSE Focus)</h3>
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="sub-info">
+                            <span>DSTL</span>
+                            <a href="https://drive.google.com/file/d/1ixqH6YUuVHQeHp9SthRzd5UdpDVSh1S1/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="sub-info">
+                            <span>COA</span>
+                            <a href="https://drive.google.com/file/d/1S2ZyNaKunr7GtZt0GNe4D91SGX3MRghd/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-database"></i></div>
+                        <div class="sub-info">
+                            <span>Data Structure</span>
+                            <a href="https://drive.google.com/file/d/1U0-R6ND_MI_2YpYc4Mg1t20R2LjJdBHU/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fab fa-python"></i></div>
+                        <div class="sub-info">
+                            <span>Python</span>
+                            <a href="https://drive.google.com/file/d/1PHVonwc2cjcVl1bXinVXL9B02yaS3Zbw/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-user-secret"></i></div>
+                        <div class="sub-info">
+                            <span>Cyber Security</span>
+                            <a href="https://drive.google.com/file/d/1Sq6xKEB0QBcBm6xc2Yffw1DrYRVZYyPG/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-comments"></i></div>
+                        <div class="sub-info">
+                            <span>Tech Comm.</span>
+                            <a href="https://drive.google.com/file/d/16nqeiHnCTIkAtjnteV8Uo7a5Fo-ewOlP/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="subject-card">
+                        <div class="sub-icon"><i class="fas fa-heart"></i></div>
+                        <div class="sub-info">
+                            <span>UHVAPE</span>
+                            <a href="https://drive.google.com/file/d/1dS_pvug_LMU5eNLX5pfjmL51kWECg3bp/view?usp=drive_link"
+                                target="_blank" class="download-btn">View PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3rd Year Section -->
+            <section class="year-section" id="year3">
+                <h3 class="year-title">3rd Year Subjects</h3>
+                <div class="coming-soon">
+                    <i class="fas fa-hourglass-half"></i>
+                    <p>Content for 3rd Year is coming soon!</p>
+                </div>
+            </section>
+
+            <!-- 4th Year Section -->
+            <section class="year-section" id="year4">
+                <h3 class="year-title">Final Year Subjects</h3>
+                <div class="coming-soon">
+                    <i class="fas fa-hourglass-half"></i>
+                    <p>Content for Final Year is coming soon!</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Creator Highlight Section -->
+        <div
+            style="margin-top: 5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem;">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Architected & Curated By</p>
+            <h2
+                style="font-size: 3rem; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 5px 20px rgba(255,195,0,0.2);">
+                DUSHYANT SAINI
+            </h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">&</p>
+            <h3 style="font-size: 2rem; color: var(--text-primary); opacity: 0.9;">NEELESH TIWARI</h3>
+        </div>
+    </main>
+
+    <section class="about-section" id="about" style="display: none;">
+        <div class="about-container">
+            <h2>About WHATIN</h2>
+            <p>
+                Hello! My name is <strong>Dushyant Saini</strong>, and I am the founder of WHATIN. Our vision is simple
+                yet powerful: to provide every student with easy access to academic resources, regardless of their year
+                or course. At WHATIN, we are dedicated to offering AKTU University previous year papers (PYPs) and other
+                study materials that can help students excel in their academic journey. Our mission is to simplify
+                learning by ensuring that students have all the resources they need in one place, making preparation for
+                exams more effective, structured, and stress-free.
+            </p>
+            <p>
+                We understand that navigating through university exams can be challenging. Students often face
+                difficulties in finding authentic, relevant, and organized content that aligns with their syllabus.
+                WHATIN addresses this problem by providing carefully curated previous year papers from AKTU University,
+                covering all courses and all years. These papers are designed to help students practice thoroughly,
+                understand exam patterns, and gain confidence before attempting their own exams. By giving access to
+                past questions, we allow learners to identify important topics, revise efficiently, and enhance their
+                problem-solving skills.
+            </p>
+            <p>
+                Our platform is not just about papers; it is about empowering students. We aim to provide clarity,
+                direction, and motivation in their academic journey. By offering free access to PYPs and study content,
+                WHATIN ensures that every student, whether in the first year or the final year, can achieve their full
+                potential without facing any financial or accessibility barriers. We believe that quality education
+                should
+                be accessible to everyone, and our platform reflects this commitment.
+            </p>
+            <p>
+                In addition to academic preparation, WHATIN encourages students to develop a deeper understanding of
+                their subjects, explore new ideas, and build a strong foundation for their careers. Each paper and study
+                material we provide is carefully organized, original, and designed to guide students in achieving
+                academic excellence. Our goal is to give learners not just resources, but also a sense of hope,
+                direction, and confidence for their future.
+            </p>
+            <p>
+                In essence, WHATIN is more than a study platform; it is a trusted companion for every AKTU student,
+                providing structured resources, past exam papers, and guidance to help them succeed. We strive to create
+                an ecosystem where students can access everything they need for their academic journey in one place,
+                making learning simpler, more organized, and highly effective.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">&copy; 2025 WHATIN. All rights reserved. Powered by students, for students.<br> <span
+                    style="font-size: 0.9rem; color: var(--accent-primary);">Designed & Crafted by Dushyant
+                    Saini</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab Logic (Reused for consistency)
+        const buttons = document.querySelectorAll(".btn-group button");
+        const yearSections = document.querySelectorAll(".year-section");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                buttons.forEach(b => b.classList.remove("active"));
+                yearSections.forEach(section => section.classList.remove("active"));
+
+                btn.classList.add("active");
+                const target = btn.getAttribute("data-target");
+                document.getElementById(target).classList.add("active");
+            });
+        });
+
+        function showHome() {
+            document.getElementById("main-content").style.display = "block";
+            document.getElementById("about").style.display = "none";
+
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-btn'));
+            document.querySelector("button[onclick='showHome()']").classList.add('active-btn');
+        }
+
+        function showAbout() {
+            document.getElementById("main-content").style.display = "none";
+            document.getElementById("about").style.display = "flex";
+
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-btn'));
+            document.querySelector("button[onclick='showAbout()']").classList.add('active-btn');
+        }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
