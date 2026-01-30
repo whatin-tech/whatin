@@ -260,6 +260,65 @@
                 transform: translateY(0);
             }
         }
+
+        .college-special-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+        }
+
+        .college-special-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-secondary);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+        }
+
+        .paper-download-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .paper-download-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent-secondary);
+            color: #fff;
+        }
+
+        .paper-download-btn .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .paper-download-btn i {
+            font-size: 1.1rem;
+        }
+
+        .paper-download-btn .arrow-icon {
+            font-size: 0.8rem;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .paper-download-btn:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(3px);
+            color: var(--accent-secondary);
+        }
+
+        @media (max-width: 600px) {
+            .papers-grid-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 
@@ -613,14 +672,106 @@
 
     <script src="script.js"></script>
     <script>
-        document.querySelectorAll('.year-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.year-section').forEach(s => s.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(tab.getAttribute('data-year')).classList.add('active');
+        // Tab switching logic (Global, works without Live Server)
+        function initTabs() {
+            document.querySelectorAll('.year-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.year-section').forEach(s => s.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.getAttribute('data-year');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) targetSection.classList.add('active');
+                });
             });
-        });
+        }
+        initTabs();
+    </script>
+    <script type="module">
+        import { db, collection, onSnapshot, query, orderBy, where } from './firebase-config.js';
+
+        // Global Data Sync Logic for College PYPs
+        const loadResources = () => {
+            const q = query(
+                collection(db, "resources"),
+                where("category", "==", "college")
+            );
+
+            onSnapshot(q, (snapshot) => {
+                const data = snapshot.docs.map(doc => doc.data());
+                // Sort locally by date
+                data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+                // Grouping logic: { year: { subjectName: [papers] } }
+                const grouped = {};
+                data.forEach(item => {
+                    if (!grouped[item.year]) grouped[item.year] = {};
+                    if (!grouped[item.year][item.title]) grouped[item.year][item.title] = [];
+                    grouped[item.year][item.title].push(item);
+                });
+
+                // Render each year
+                ["year1", "year2", "year3", "year4"].forEach(yearId => {
+                    const section = document.getElementById(yearId);
+                    if (!section) return;
+
+                    // Remove "coming soon" if we have data
+                    if (grouped[yearId]) {
+                        const cs = section.querySelector('.coming-soon');
+                        if (cs) cs.remove();
+                    }
+
+                    let grid = section.querySelector('.subjects-grid');
+                    if (!grid) {
+                        grid = document.createElement('div');
+                        grid.className = 'subjects-grid dynamic-college';
+                        section.appendChild(grid);
+                    }
+
+                    grid.innerHTML = ''; // Clear for fresh render
+
+                    const yearData = grouped[yearId] || {};
+                    Object.keys(yearData).forEach(subjectName => {
+                        const papers = yearData[subjectName];
+                        const card = document.createElement('div');
+                        card.className = 'subject-card college-special-card';
+                        card.style.display = 'block'; // Block layout for better structure
+
+                        card.innerHTML = `
+                            <div class="card-header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div class="sub-icon-premium" style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent-secondary), #a855f7); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin: 0; font-size: 1.2rem; color: #fff;">${subjectName}</h4>
+                                        <span style="font-size: 0.75rem; color: var(--text-secondary);">${papers.length} Papers Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="papers-grid-layout" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
+                                ${papers.map(p => `
+                                    <a href="${p.link}" target="_blank" class="paper-download-btn">
+                                       <div class="btn-content">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>${p.paperType || 'Resource'}</span>
+                                       </div>
+                                       <i class="fas fa-chevron-right arrow-icon"></i>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                });
+            }, (error) => {
+                console.error("Firestore Error:", error);
+            });
+        };
+
+        // Initialize
+        loadResources();
     </script>
 </body>
 

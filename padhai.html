@@ -443,29 +443,41 @@
     </footer>
 
     <script src="script.js"></script>
-    <script type="module">
-        import { db, collection, onSnapshot, query, orderBy } from './firebase-config.js';
-
-        // Tab switching logic
-        document.querySelectorAll('.year-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.year-section').forEach(s => s.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(tab.getAttribute('data-year')).classList.add('active');
+    <script>
+        // Tab switching logic (Global, works without Live Server)
+        function initTabs() {
+            document.querySelectorAll('.year-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.year-section').forEach(s => s.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.getAttribute('data-year');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) targetSection.classList.add('active');
+                });
             });
-        });
+        }
+        initTabs();
+    </script>
+    <script type="module">
+        import { db, collection, onSnapshot, query, orderBy, where } from './firebase-config.js';
 
         // Global Data Sync Logic
         const loadResources = () => {
-            const q = query(collection(db, "resources"), orderBy("createdAt", "desc"));
+            const q = query(
+                collection(db, "resources"),
+                where("category", "==", "aktu")
+            );
 
             onSnapshot(q, (snapshot) => {
-                // Clear all dynamic grids first to avoid duplicates on update
+                const data = snapshot.docs.map(doc => doc.data());
+                // Sort locally by date
+                data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+                // Clear dynamic items
                 document.querySelectorAll('.subjects-grid.dynamic').forEach(g => g.innerHTML = '');
 
-                snapshot.forEach((doc) => {
-                    const res = doc.data();
+                data.forEach((res) => {
                     const section = document.getElementById(res.year);
 
                     if (section) {
