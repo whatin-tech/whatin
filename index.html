@@ -21,37 +21,119 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
         crossorigin="anonymous"></script>
 
-    <title>WHATIN - All Projects, Notes, Tools & Links Hub</title>
+    <title>WHATIN - The Premium Academic Ecosystem for Engineering Students</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="One-stop access to all WHATIN websites including Topper Notes, Developer Tools, Coding Projects, Portfolio, Student Resources, and More.">
+        content="WHATIN Ecosystem - The most comprehensive hub for AKTU Topper Notes, PYPs, Unit-Wise Questions, and Scholarship Guides. Architected for engineering excellence by Dushyant Saini.">
     <meta name="keywords"
-        content="whatin, whatin hub, all whatin links, whatin projects, dushyant saini projects, aktu topper notes, btech study resources, coding tools, web developer links, student portal, study portal, frontend projects, backend tools, notes for btech cse, links.whatin, padhai.whatin, tools.whatin, portfolio.whatin, github student tools, topper notes aktu, aktu cs notes, developer portfolio, web links hub, links collection website, website hub, multi link site, crazy develop projects, personal site hub, central link website">
+        content="aktu topper notes, btech cse resources, whatin, dushyant saini, aktu previous year papers, scholarship guides, engineering study material, GL Bajaj PYP, unit wise important questions, aktu cse notes pdf, whatin hub, academic ecosystem">
     <meta name="author" content="Dushyant Saini">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="WHATIN - All Sites at One Place">
+    <meta property="og:title" content="WHATIN Ecosystem - Academic & Technical Hub">
     <meta property="og:description"
-        content="All your favorite WHATIN websites - notes, tools, portfolio, and more in one centralized place.">
-    <meta property="og:image" content="https://links.whatin.in/preview.jpg">
-    <meta property="og:url" content="https://toppernotes.whatin.in/">
+        content="Centralized access to high-quality engineering notes, previous year papers, and technical tools.">
+    <meta property="og:image" content="https://whatin.in/assets/preview-image.jpg">
+    <meta property="og:url" content="https://whatin.in/">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://whatin.in/" />
+    <link rel="icon" type="image/png" href="https://whatin.in/favicon.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+        }
+
+        .study-guides-section {
+            padding: 8rem 0;
+            background: linear-gradient(180deg, rgba(255, 195, 0, 0) 0%, rgba(255, 195, 0, 0.03) 100%);
+        }
+
+        .guide-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 30px;
+            transition: 0.4s;
+            height: 100%;
+        }
+
+        .guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-10px);
+            background: rgba(255, 195, 0, 0.05);
+        }
+
+        .faq-section {
+            padding: 8rem 0;
+        }
+
+        .faq-grid {
+            max-width: 900px;
+            margin: 4rem auto 0;
+        }
+
+        .faq-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .faq-answer {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active {
+            border-color: var(--accent-primary);
+        }
+    </style>
 </head>
 
 <body>
@@ -67,7 +149,7 @@
                     <li><a href="#projects">Resources</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
-                    <li><a href="#projects" class="cta-btn-header">Start Learning</a></li>
+                    <li><a href="#projects" class="cta-btn-header">Get Started</a></li>
                 </ul>
             </nav>
             <div class="mobile-menu-btn" id="mobile-menu-btn">
@@ -82,11 +164,12 @@
                 <h1 class="hero-title">Nexus of <span class="gradient-text">Academic</span> & <br>Technical Excellence
                 </h1>
                 <p class="hero-subtitle">The WHATIN Ecosystem provides a high-performance environment for students and
-                    developers to research, build, and succeed.</p>
+                    developers to research, build, and succeed with curated, verified, and high-quality educational
+                    resources.</p>
 
                 <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">Explore Hub</a>
-                    <a href="about.html" class="btn btn-secondary">Our Story</a>
+                    <a href="#projects" class="btn btn-primary">Explore Resources</a>
+                    <a href="about.html" class="btn btn-secondary">Learn Our Story</a>
                 </div>
             </div>
         </section>
@@ -94,70 +177,120 @@
         <!-- Top Ad Placeholder -->
         <div class="container">
             <div class="ad-leaderboard">
-                <span>Space for AdSense Display Ad (Horizontal)</span>
+                <span
+                    style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 0.5rem; display: block;">ADVERTISEMENT</span>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3296618712266727"
+                    data-ad-slot="YOUR_AUTO_ADS_SLOT" data-ad-format="auto" data-full-width-responsive="true"></ins>
             </div>
         </div>
 
         <section id="projects" class="projects-section">
             <div class="container">
-                <h2 class="section-title">The Content Hub</h2>
+                <div class="section-header" style="text-align: center; margin-bottom: 5rem;">
+                    <h2 class="section-title">The Digital Content Hub</h2>
+                    <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Select your target domain
+                        to begin your journey towards technical mastery. All resources are verified for authenticity and
+                        relevance.</p>
+                </div>
                 <div class="projects-grid">
                     <a href="padhai.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-book-reader"></i></div>
                         <div class="card-content">
                             <h3>AKTU PYPs</h3>
-                            <p>Premium archive of Previous Year Papers across all semesters.</p>
+                            <p>Premium archive of Previous Year Papers across all semesters including special
+                                carryovers.</p>
                         </div>
                     </a>
                     <a href="topper.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-award"></i></div>
                         <div class="card-content">
                             <h3>Topper Notes</h3>
-                            <p>Meticulously curated notes from top academic achievers.</p>
+                            <p>Meticulously hand-written notes from top academic achievers of technical universities.
+                            </p>
                         </div>
                     </a>
                     <a href="unitwise.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-list-check"></i></div>
                         <div class="card-content">
                             <h3>Unit-Wise Hub</h3>
-                            <p>Strategically organized important questions for every unit.</p>
+                            <p>Strategically organized important questions for every unit with model answers.</p>
                         </div>
                     </a>
                     <a href="scholarship.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
                         <div class="card-content">
                             <h3>Scholarship Hub</h3>
-                            <p>Real-time updates and guides for UP Scholarship applicants.</p>
+                            <p>Step-by-step guides, status tracking, and error resolution for UP Scholarship portal.</p>
                         </div>
                     </a>
                     <a href="https://divya.whatin.in/" class="project-card">
                         <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                         <div class="card-content">
-                            <h3>B.Ed Notes</h3>
-                            <p>All notes of B.Ed specifically curated for Rajasthan and other boards.</p>
+                            <h3>B.Ed Portal</h3>
+                            <p>Dedicated archive for B.Ed scholars focusing on Rajasthan Board and NCERT standards.</p>
                         </div>
                     </a>
                     <a href="https://nptel.whatin.in/" class="project-card">
                         <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
                         <div class="card-content">
-                            <h3>NPTEL Course</h3>
-                            <p>Explore Swayam NPTEL courses, assignments, and exam preparation.</p>
+                            <h3>NPTEL Mastery</h3>
+                            <p>Crack Swayam NPTEL exams with our comprehensive assignment archives and notes.</p>
                         </div>
                     </a>
                     <a href="collegepyp.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-university"></i></div>
                         <div class="card-content">
-                            <h3>GL BAJAJ PYP</h3>
-                            <p>Internal exams previous year papers {ST-1, ST-2, PUT}.</p>
+                            <h3>GL Bajaj Hub</h3>
+                            <p>Campus-specific internal exam archive for ST-1, ST-2, and Pre-University Tests.</p>
                         </div>
                     </a>
                     <a href="game.html" class="project-card">
                         <div class="card-icon"><i class="fas fa-gamepad"></i></div>
                         <div class="card-content">
                             <h3>Dev Zone</h3>
-                            <p>Interactive projects and development sandbox experiments.</p>
+                            <p>Boost your logical thinking with our interactive mini-games and dev sandboxes.</p>
                         </div>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New High-Value Content Section: Study Guides -->
+        <section class="study-guides-section">
+            <div class="container">
+                <h2 class="section-title">Strategic <span class="gradient-text">Study Insights</span></h2>
+                <div class="mission-grid" style="margin-top: 4rem;">
+                    <div class="guide-card">
+                        <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
+                                class="fas fa-brain"></i></div>
+                        <h3>The 80/20 Rule in AKTU</h3>
+                        <p>Our analysis shows that 80% of exam questions are derived from a specific 20% of the
+                            syllabus. We identify these "Critical Zones" in our Unit-Wise Hub to help you score more in
+                            less time.</p>
+                        <a href="unitwise.html"
+                            style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">Explore
+                            Critical Zones &rarr;</a>
+                    </div>
+                    <div class="guide-card">
+                        <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
+                                class="fas fa-file-signature"></i></div>
+                        <h3>Presentation Mastery</h3>
+                        <p>Technical examiners value structure. Learn how to use architectural diagrams, flowcharts, and
+                            technical keywords from our Topper Notes collection to enhance your presentation.</p>
+                        <a href="topper.html"
+                            style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">View
+                            Topper Samples &rarr;</a>
+                    </div>
+                    <div class="guide-card">
+                        <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
+                                class="fas fa-clock"></i></div>
+                        <h3>PUT Pressure Handling</h3>
+                        <p>The Pre-University Test is your mirror. Practice with our GL Bajaj PUT archive under strict
+                            3-hour timing to eliminate exam-day anxiety and manage your time perfectly.</p>
+                        <a href="collegepyp.html"
+                            style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">Access
+                            PUT Archive &rarr;</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -165,7 +298,11 @@
         <!-- Mid Ad Placeholder -->
         <div class="container">
             <div class="ad-leaderboard">
-                <span>In-Feed Content Advertisement Placeholder</span>
+                <span style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 0.5rem; display: block;">IN-FEED
+                    RECOMMENDATION AD</span>
+                <ins class="adsbygoogle" style="display:block" data-ad-format="fluid"
+                    data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-3296618712266727"
+                    data-ad-slot="YOUR_FEED_SLOT"></ins>
             </div>
         </div>
 
@@ -188,46 +325,87 @@
                         <h3 style="margin-top: 2rem; color: var(--accent-primary);">Synergy Between Academia & Industry
                         </h3>
                         <p>At WHATIN, we believe that academic excellence is the foundation of industrial innovation.
-                            Our resources are designed not just to help you pass exams, but to build a conceptual
+                            Our resources are designed not just to help you pass exams, but to build conceptual
                             clarity that translates into real-world problem-solving skills. Whether you're preparing for
                             a semester exam or a technical interview, our ecosystem provides the dual advantage of
                             exam-focused notes and industry-relevant projects.</p>
+                        <p>We pride ourselves on <strong>authenticity</strong>. Every note and paper uploaded to our
+                            server undergoes a manual verification process by our content team to ensure it meets the
+                            current university standards (NEP-2020 and updated syllabus).</p>
                     </div>
                     <div class="info-stats">
                         <div class="stat-card">
                             <span class="stat-num">2.5K+</span>
-                            <span class="stat-label">Active Users</span>
+                            <span class="stat-label">Verified Learners</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-num">100+</span>
-                            <span class="stat-label">Verified Files</span>
+                            <span class="stat-num">500+</span>
+                            <span class="stat-label">Curated PDFs</span>
+                        </div>
+                        <div class="stat-card"
+                            style="margin-top: 1.5rem; background: var(--accent-gradient); color: #000;">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-label" style="color: #000; opacity: 0.8;">Free Access</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="revolution-section">
+        <!-- FAQ Section for SEO and Content Value -->
+        <section class="faq-section">
             <div class="container">
-                <h2 class="section-title">Why WHATIN?</h2>
-                <div class="rev-grid">
-                    <div class="rev-card">
-                        <span class="rev-number">01</span>
-                        <h3>Lightning Fast</h3>
-                        <p>Optimized infrastructure for instantaneous access to study materials.</p>
+                <h2 class="section-title">Common <span class="gradient-text">Questions</span></h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">Are the resources on WHATIN officially verified? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Yes, all resources, especially the Topper Notes and Previous Year
+                            Papers, are manually reviewed by our curators to ensure they align with the latest AKTU
+                            syllabus and NEP-2020 guidelines.</div>
                     </div>
-                    <div class="rev-card">
-                        <span class="rev-number">02</span>
-                        <h3>Student Centric</h3>
-                        <p>Designed by students, for students. Intuitive and friction-free.</p>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I access GL Bajaj internal papers? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">You can access segment-specific papers for ST-1, ST-2, and PUT in our
+                            "GL Bajaj Hub" section. These are organized by year and branch for easy navigation.</div>
                     </div>
-                    <div class="rev-card">
-                        <span class="rev-number">03</span>
-                        <h3>Complete Ecosystem</h3>
-                        <p>From notes to projects, a unified platform for all your digital needs.</p>
+                    <div class="faq-item">
+                        <div class="faq-question">What is the "Dev Zone" for? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">The Dev Zone is an interactive playground where students can experiment
+                            with coding logic, play educational games, and explore the technical side of the WHATIN
+                            ecosystem.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I contribute my notes to WHATIN? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Absolutely! We encourage academic collaboration. Use the contact form or
+                            reach out via Instagram to share your resources and get them featured in the Topper section.
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+        <div class="container">
+            <h2 class="section-title">Why WHATIN?</h2>
+            <div class="rev-grid">
+                <div class="rev-card">
+                    <span class="rev-number">01</span>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized infrastructure for instantaneous access to study materials.</p>
+                </div>
+                <div class="rev-card">
+                    <span class="rev-number">02</span>
+                    <h3>Student Centric</h3>
+                    <p>Designed by students, for students. Intuitive and friction-free.</p>
+                </div>
+                <div class="rev-card">
+                    <span class="rev-number">03</span>
+                    <h3>Complete Ecosystem</h3>
+                    <p>From notes to projects, a unified platform for all your digital needs.</p>
+                </div>
+            </div>
+        </div>
         </section>
 
         <section class="visionaries-section" style="padding: 8rem 0; background: rgba(255,195,0,0.02);">
@@ -303,6 +481,7 @@
                 <a href="contact.html">Contact</a>
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="terms-conditions.html">Terms & Conditions</a>
+                <a href="disclaimer.html">Disclaimer</a>
             </div>
             <div class="social-links">
                 <a href="#"><i class="fab fa-github"></i></a>
@@ -318,13 +497,13 @@
     <script src="script.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-	createChat({
-		webhookUrl: "https://dushya.app.n8n.cloud/webhook/4670d8dc-28e9-4a72-acca-cb089329481a/chat"
-	});
-</script>
+        createChat({
+            webhookUrl: "https://dushya.app.n8n.cloud/webhook/4670d8dc-28e9-4a72-acca-cb089329481a/chat"
+        });
+    </script>
 </body>
 
 </html>

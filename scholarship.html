@@ -23,7 +23,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UP Scholarship Portal | Whatin - Professional V5</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -36,13 +38,24 @@
             --text-dark: #202124;
             --text-light: #5f6368;
             --subtle-border: #e0e0e0;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-main);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
         }
 
         body {
@@ -571,13 +584,40 @@
             </div>
         </div>
 
+        <div class="card" style="background: var(--surface-light); border-left: 5px solid var(--attention-color);">
+            <h2 class="section-title" style="border-bottom-color: var(--attention-color);"><i
+                    class="fas fa-lightbulb"></i> Pro Tips for Success</h2>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1rem;">
+                <div>
+                    <h4 style="color: var(--attention-color); margin-bottom: 0.5rem;">Aadhaar Seeding is Crucial</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Ensure your Bank Account is seeded with
+                        Aadhaar and NCPB mapping is active. Most rejections happen due to "Aadhaar Not Seeded" status.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: var(--attention-color); margin-bottom: 0.5rem;">Income Certificate Validity</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Always check the issuance date. UP Govt
+                        requires the certificate to be within the last 3 years at the time of final submission.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--attention-color); margin-bottom: 0.5rem;">Final Print Submission</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">After locking the application, wait for 3
+                        days to get the final print. Submit this print with all attachments to your college office
+                        promptly.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
         <div class="footer-links">
-            <a href="query.html" target="_blank">Query</a> |
-            <a href="https://scholarship.up.gov.in/faq.aspx" target="_blank">FAQ</a> |
-            <a href="https://scholarship.up.gov.in/" target="_blank">Official Portal</a>
+            <a href="about.html">About Us</a> |
+            <a href="contact.html">Contact</a> |
+            <a href="privacy-policy.html">Privacy Policy</a> |
+            <a href="terms-conditions.html">Terms & Conditions</a> |
+            <a href="disclaimer.html">Disclaimer</a>
         </div>
         <div class="social-links"
             style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; font-size: 1.2rem;">
