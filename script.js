@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             // Only prevent default if it's an internal link
             if (targetId.startsWith('#')) {
                 e.preventDefault();
@@ -166,4 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
             consentBox.style.display = 'none';
         });
     }
+
+    // FAQ Accordion Toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            // Close all other FAQ items
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+
+            // Toggle current item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
 });
