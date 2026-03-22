@@ -58,25 +58,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.style.overflow = "hidden"; // Prevent scrolling behind intro
 
+    let isFired = false;
+
     // Single interaction anywhere on the page triggers it
     const igniteSystem = (e) => {
-        // Remove listeners instantly so it doesn't trigger twice
-        document.removeEventListener("click", igniteSystem);
+        if(isFired) return;
+        isFired = true;
+
+        // Remove listeners instantly 
+        document.removeEventListener("pointerdown", igniteSystem);
         document.removeEventListener("keydown", igniteSystem);
-        document.removeEventListener("touchend", igniteSystem);
-        document.removeEventListener("touchstart", igniteSystem);
         
         if(h2Text) h2Text.style.display = "none";
         
-        // Mobile browsers need a very direct trigger. Load first, then play.
+        // Mobile browsers need a very direct trigger.
         if(audio) {
-            audio.play().catch(err => {
-                console.log("Retrying audio...");
-                // Fallback for some browsers that need a second nudge
-                audio.muted = true;
-                audio.play().then(() => {
-                    audio.muted = false;
-                });
+            audio.load();
+            audio.volume = 1.0;
+            audio.play().then(() => {
+                console.log("Audio successful");
+            }).catch(err => {
+                console.error("Audio failed:", err);
             });
         }
         
@@ -120,8 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Attach listener to entire document so ANY interaction fires the effect perfectly
-    document.addEventListener("click", igniteSystem);
+    document.addEventListener("pointerdown", igniteSystem);
     document.addEventListener("keydown", igniteSystem);
-    document.addEventListener("touchend", igniteSystem);
-    document.addEventListener("touchstart", igniteSystem);
 });
