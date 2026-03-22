@@ -179,21 +179,5 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // Cookie Consent Logic
-    if (!localStorage.getItem('cookieConsent')) {
-        const consentBox = document.createElement('div');
-        consentBox.id = 'cookie-consent';
-        consentBox.innerHTML = `
-            <div class="consent-text">
-                <p>We use cookies to enhance your experience and analyze site traffic. By continuing, you agree to our use of cookies.</p>
-            </div>
-            <button class="btn btn-primary" id="accept-cookies">Accept</button>
-        `;
-        document.body.appendChild(consentBox);
 
-        document.getElementById('accept-cookies').addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'true');
-            consentBox.style.display = 'none';
-        });
-    }
 });

@@ -44,3 +44,84 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+// Global "Click Anywhere" Lightning Strike Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById("lightning-intro-wrapper");
+    if(!wrapper) return;
+
+    const flash = document.getElementById("flash-screen");
+    const bolt = document.getElementById("lightning-bolt");
+    const audio = document.getElementById("thunder-blast-audio");
+    const h2Text = wrapper.querySelector('h2');
+
+    document.body.style.overflow = "hidden"; // Prevent scrolling behind intro
+
+    // Single interaction anywhere on the page triggers it
+    const igniteSystem = (e) => {
+        // Remove listeners instantly so it doesn't trigger twice
+        document.removeEventListener("click", igniteSystem);
+        document.removeEventListener("keydown", igniteSystem);
+        document.removeEventListener("touchend", igniteSystem);
+        document.removeEventListener("touchstart", igniteSystem);
+        
+        if(h2Text) h2Text.style.display = "none";
+        
+        // Mobile browsers need a very direct trigger. Load first, then play.
+        if(audio) {
+            audio.play().catch(err => {
+                console.log("Retrying audio...");
+                // Fallback for some browsers that need a second nudge
+                audio.muted = true;
+                audio.play().then(() => {
+                    audio.muted = false;
+                });
+            });
+        }
+        
+        // Lightning Strike Visuals
+        flash.classList.add("super-flash");
+        bolt.classList.add("super-bolt");
+        
+        setTimeout(() => {
+            const viewportWidth = window.innerWidth;
+            const spreadX = viewportWidth > 600 ? 1200 : viewportWidth; 
+            const halfX = spreadX / 2;
+            
+            const elementsToScatter = document.querySelectorAll('.pop-in, .pop-scale, .pop-left, h1, h2, .btn, .project-card, .guide-card, nav, .footer-content');
+            
+            elementsToScatter.forEach(el => {
+                const randomX = (Math.random() * spreadX) - halfX; 
+                const randomY = (Math.random() * 600) + 50; 
+                const randomRot = (Math.random() * 720) - 360; 
+                
+                el.style.setProperty('--tx', randomX + 'px');
+                el.style.setProperty('--ty', randomY + 'px');
+                el.style.setProperty('--rot', randomRot + 'deg');
+                
+                el.classList.add('super-scatter');
+            });
+            
+            // Turn black background transparent so we see the scattered elements clearly
+            wrapper.style.background = "transparent";
+            
+            setTimeout(() => {
+                 elementsToScatter.forEach(el => {
+                     el.classList.remove('super-scatter');
+                     void el.offsetWidth;
+                 });
+                 wrapper.remove();
+                 document.body.style.overflow = ""; // restore scrolling!
+                 window.dispatchEvent(new Event('scroll'));
+            }, 2500);
+
+        }, 100); 
+    };
+
+    // Attach listener to entire document so ANY interaction fires the effect perfectly
+    document.addEventListener("click", igniteSystem);
+    document.addEventListener("keydown", igniteSystem);
+    document.addEventListener("touchend", igniteSystem);
+    document.addEventListener("touchstart", igniteSystem);
+});

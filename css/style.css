@@ -606,9 +606,9 @@ footer {
     transform: translateY(-5px);
 }
 
-/* Cookie Consent */
-#cookie-consent {
-    position: fixed;
+
+
+
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
@@ -703,3 +703,4 @@ footer {
         padding: 3rem 2rem;
     }
 }
+html, body { overflow-x: hidden; }

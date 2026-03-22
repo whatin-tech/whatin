@@ -143,6 +143,36 @@
 </head>
 
 <body>
+
+    <!-- Cinematic Interactive Lightning Intro -->
+    <!-- Cinematic Interactive Lightning Intro -->
+    <div id="lightning-intro-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.01); z-index: 999999; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.3s ease; backdrop-filter: blur(2px);">
+        <h2 style="color: rgba(56, 189, 248, 0.2); font-family: 'Outfit', sans-serif; letter-spacing: clamp(6px, 3vw, 15px); animation: pulse 3s infinite; font-weight: 800; text-align: center; padding: 0 20px; font-size: clamp(3rem, 12vw, 5rem); text-transform: uppercase; margin: 0; word-break: break-word; -webkit-text-stroke: 1px rgba(56, 189, 248, 0.8);">WELCOME</h2>
+        
+        <div class="flash-screen" id="flash-screen" style="position: absolute; top:0; left:0; width: 100%; height: 100%; background: #fff; opacity: 0; pointer-events: none;"></div>
+        <svg class="super-lightning" id="lightning-bolt" viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; top: -5%; width: 100vw; height: 110vh; opacity: 0; pointer-events: none;">
+            <defs>
+                <filter id="lightningGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.5" result="blur1" />
+                    <feGaussianBlur stdDeviation="3" result="blur2" />
+                    <feGaussianBlur stdDeviation="5" result="blur3" />
+                    <feMerge><feMergeNode in="blur3"/><feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <ellipse cx="50" cy="5" rx="30" ry="3" fill="#ffffff" filter="url(#lightningGlow)" style="opacity: 0.9;" />
+            <ellipse cx="50" cy="5" rx="15" ry="5" fill="#a0e6ff" filter="url(#lightningGlow)" />
+            <polyline points="50,5 47,15 53,20 44,35 55,50 48,65 53,80 50,95 53,100" fill="none" stroke="#ffffff" stroke-width="0.8" filter="url(#lightningGlow)"/>
+            <polyline points="50,5 47,15 53,20 44,35 55,50 48,65 53,80 50,95 53,100" fill="none" stroke="#22d3ee" stroke-width="2.5" opacity="0.6" filter="url(#lightningGlow)"/>
+            <polyline points="44,35 32,42 36,48 20,55 30,65 25,75 28,85" fill="none" stroke="#bae6fd" stroke-width="0.6" filter="url(#lightningGlow)"/>
+            <polyline points="32,42 15,45 22,58 10,60" fill="none" stroke="#7dd3fc" stroke-width="0.4" filter="url(#lightningGlow)"/>
+            <polyline points="47,15 38,20 42,28 35,38" fill="none" stroke="#7dd3fc" stroke-width="0.5" filter="url(#lightningGlow)"/>
+            <polyline points="55,50 68,55 60,65 75,70 65,85 72,95" fill="none" stroke="#bae6fd" stroke-width="0.6" filter="url(#lightningGlow)"/>
+            <polyline points="68,55 85,58 75,68 88,75" fill="none" stroke="#7dd3fc" stroke-width="0.4" filter="url(#lightningGlow)"/>
+            <polyline points="53,20 62,25 58,35 70,40" fill="none" stroke="#7dd3fc" stroke-width="0.5" filter="url(#lightningGlow)"/>
+        </svg>
+        <audio id="thunder-blast-audio" src="thundersound.mp3" preload="auto"></audio>
+    </div>
+
     <canvas id="bgCanvas"></canvas>
 
     <header id="main-header">
