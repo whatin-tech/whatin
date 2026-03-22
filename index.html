@@ -50,7 +50,8 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations/animations.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -134,6 +135,11 @@
             border-color: var(--accent-primary);
         }
     </style>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
 </head>
 
 <body>
@@ -145,13 +151,16 @@
             <nav id="nav-menu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="pages/about.html">About</a></li>
                     <li><a href="#projects">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="pages/login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
                     <li><a href="#projects" class="cta-btn-header">Get Started</a></li>
                 </ul>
             </nav>
+            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
+                <i class="fas fa-sun" id="theme-icon"></i>
+            </div>
             <div class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
@@ -161,15 +170,16 @@
     <main>
         <section id="home" class="hero-section">
             <div class="container">
-                <h1 class="hero-title">Nexus of <span class="gradient-text">Academic</span> & <br>Technical Excellence
+                <h1 class="hero-title pop-left">Nexus of <span class="gradient-text">Academic</span> & <br>Technical Excellence
                 </h1>
-                <p class="hero-subtitle">The WHATIN Ecosystem provides a high-performance environment for students and
+                <p class="hero-subtitle pop-in" style="animation-delay: 0.2s">The WHATIN Ecosystem provides a high-performance environment for students and
                     developers to research, build, and succeed with curated, verified, and high-quality educational
                     resources.</p>
 
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">Explore Resources</a>
-                    <a href="about.html" class="btn btn-secondary">Learn Our Story</a>
+                <div id="react-hero-widget"></div>
+                <div class="hero-cta pop-scale cin-container" style="animation-delay: 0.4s">
+                    <a href="#projects" class="btn btn-primary btn-ripple shimmer">Explore Resources</a>
+                    <a href="pages/about.html" class="btn btn-secondary btn-ripple">Learn Our Story</a>
                 </div>
             </div>
         </section>
@@ -184,16 +194,19 @@
             </div>
         </div>
 
+        
+        <div id="react-latest-resources" class="container" style="margin-top: 2rem;"></div>
         <section id="projects" class="projects-section">
+
             <div class="container">
                 <div class="section-header" style="text-align: center; margin-bottom: 5rem;">
-                    <h2 class="section-title">The Digital Content Hub</h2>
+                    <h2 class="section-title pop-in">The Digital Content Hub</h2>
                     <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Select your target domain
                         to begin your journey towards technical mastery. All resources are verified for authenticity and
                         relevance.</p>
                 </div>
                 <div class="projects-grid">
-                    <a href="padhai.html" class="project-card">
+                    <a href="pages/padhai.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-book-reader"></i></div>
                         <div class="card-content">
                             <h3>AKTU PYPs</h3>
@@ -201,7 +214,7 @@
                                 carryovers.</p>
                         </div>
                     </a>
-                    <a href="topper.html" class="project-card">
+                    <a href="pages/topper.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-award"></i></div>
                         <div class="card-content">
                             <h3>Topper Notes</h3>
@@ -209,42 +222,42 @@
                             </p>
                         </div>
                     </a>
-                    <a href="unitwise.html" class="project-card">
+                    <a href="pages/unitwise.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-list-check"></i></div>
                         <div class="card-content">
                             <h3>Unit-Wise Hub</h3>
                             <p>Strategically organized important questions for every unit with model answers.</p>
                         </div>
                     </a>
-                    <a href="scholarship.html" class="project-card">
+                    <a href="pages/scholarship.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
                         <div class="card-content">
                             <h3>Scholarship Hub</h3>
                             <p>Step-by-step guides, status tracking, and error resolution for UP Scholarship portal.</p>
                         </div>
                     </a>
-                    <a href="https://divya.whatin.in/" class="project-card">
+                    <a href="https://divya.whatin.in/" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                         <div class="card-content">
                             <h3>B.Ed Portal</h3>
                             <p>Dedicated archive for B.Ed scholars focusing on Rajasthan Board and NCERT standards.</p>
                         </div>
                     </a>
-                    <a href="https://nptel.whatin.in/" class="project-card">
+                    <a href="https://nptel.whatin.in/" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
                         <div class="card-content">
                             <h3>NPTEL Mastery</h3>
                             <p>Crack Swayam NPTEL exams with our comprehensive assignment archives and notes.</p>
                         </div>
                     </a>
-                    <a href="collegepyp.html" class="project-card">
+                    <a href="pages/collegepyp.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-university"></i></div>
                         <div class="card-content">
                             <h3>GL Bajaj Hub</h3>
                             <p>Campus-specific internal exam archive for ST-1, ST-2, and Pre-University Tests.</p>
                         </div>
                     </a>
-                    <a href="game.html" class="project-card">
+                    <a href="pages/game.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-gamepad"></i></div>
                         <div class="card-content">
                             <h3>Dev Zone</h3>
@@ -258,36 +271,36 @@
         <!-- New High-Value Content Section: Study Guides -->
         <section class="study-guides-section">
             <div class="container">
-                <h2 class="section-title">Strategic <span class="gradient-text">Study Insights</span></h2>
+                <h2 class="section-title pop-in">Strategic <span class="gradient-text">Study Insights</span></h2>
                 <div class="mission-grid" style="margin-top: 4rem;">
-                    <div class="guide-card">
+                    <div class="guide-card pop-in">
                         <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
                                 class="fas fa-brain"></i></div>
                         <h3>The 80/20 Rule in AKTU</h3>
                         <p>Our analysis shows that 80% of exam questions are derived from a specific 20% of the
                             syllabus. We identify these "Critical Zones" in our Unit-Wise Hub to help you score more in
                             less time.</p>
-                        <a href="unitwise.html"
+                        <a href="pages/unitwise.html"
                             style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">Explore
                             Critical Zones &rarr;</a>
                     </div>
-                    <div class="guide-card">
+                    <div class="guide-card pop-in">
                         <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
                                 class="fas fa-file-signature"></i></div>
                         <h3>Presentation Mastery</h3>
                         <p>Technical examiners value structure. Learn how to use architectural diagrams, flowcharts, and
                             technical keywords from our Topper Notes collection to enhance your presentation.</p>
-                        <a href="topper.html"
+                        <a href="pages/topper.html"
                             style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">View
                             Topper Samples &rarr;</a>
                     </div>
-                    <div class="guide-card">
+                    <div class="guide-card pop-in">
                         <div style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1.5rem;"><i
                                 class="fas fa-clock"></i></div>
                         <h3>PUT Pressure Handling</h3>
                         <p>The Pre-University Test is your mirror. Practice with our GL Bajaj PUT archive under strict
                             3-hour timing to eliminate exam-day anxiety and manage your time perfectly.</p>
-                        <a href="collegepyp.html"
+                        <a href="pages/collegepyp.html"
                             style="color: var(--accent-primary); margin-top: 1.5rem; display: inline-block; font-weight: 700; text-decoration: none;">Access
                             PUT Archive &rarr;</a>
                     </div>
@@ -309,7 +322,7 @@
         <section class="info-rich-section">
             <div class="container">
                 <div class="info-content-grid">
-                    <div class="info-text">
+                    <div class="info-text pop-left">
                         <h2 class="section-title" style="text-align: left;">Bridging the <span
                                 class="gradient-text">Academic Gap</span></h2>
                         <p>In today's digital age, information is everywhere, but quality remains a challenge. The
@@ -333,16 +346,16 @@
                             server undergoes a manual verification process by our content team to ensure it meets the
                             current university standards (NEP-2020 and updated syllabus).</p>
                     </div>
-                    <div class="info-stats">
-                        <div class="stat-card">
+                    <div class="info-stats pop-right">
+                        <div class="stat-card pop-num">
                             <span class="stat-num">2.5K+</span>
                             <span class="stat-label">Verified Learners</span>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card pop-num">
                             <span class="stat-num">500+</span>
                             <span class="stat-label">Curated PDFs</span>
                         </div>
-                        <div class="stat-card"
+                        <div class="stat-card pop-num"
                             style="margin-top: 1.5rem; background: var(--accent-gradient); color: #000;">
                             <span class="stat-num">100%</span>
                             <span class="stat-label" style="color: #000; opacity: 0.8;">Free Access</span>
@@ -355,28 +368,28 @@
         <!-- FAQ Section for SEO and Content Value -->
         <section class="faq-section">
             <div class="container">
-                <h2 class="section-title">Common <span class="gradient-text">Questions</span></h2>
+                <h2 class="section-title pop-in">Common <span class="gradient-text">Questions</span></h2>
                 <div class="faq-grid">
-                    <div class="faq-item">
+                    <div class="faq-item pop-left">
                         <div class="faq-question">Are the resources on WHATIN officially verified? <i
                                 class="fas fa-chevron-down"></i></div>
                         <div class="faq-answer">Yes, all resources, especially the Topper Notes and Previous Year
                             Papers, are manually reviewed by our curators to ensure they align with the latest AKTU
                             syllabus and NEP-2020 guidelines.</div>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item pop-left">
                         <div class="faq-question">How do I access GL Bajaj internal papers? <i
                                 class="fas fa-chevron-down"></i></div>
                         <div class="faq-answer">You can access segment-specific papers for ST-1, ST-2, and PUT in our
                             "GL Bajaj Hub" section. These are organized by year and branch for easy navigation.</div>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item pop-left">
                         <div class="faq-question">What is the "Dev Zone" for? <i class="fas fa-chevron-down"></i></div>
                         <div class="faq-answer">The Dev Zone is an interactive playground where students can experiment
                             with coding logic, play educational games, and explore the technical side of the WHATIN
                             ecosystem.</div>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item pop-left">
                         <div class="faq-question">Can I contribute my notes to WHATIN? <i
                                 class="fas fa-chevron-down"></i></div>
                         <div class="faq-answer">Absolutely! We encourage academic collaboration. Use the contact form or
@@ -387,19 +400,19 @@
             </div>
         </section>
         <div class="container">
-            <h2 class="section-title">Why WHATIN?</h2>
+            <h2 class="section-title pop-in">Why WHATIN?</h2>
             <div class="rev-grid">
-                <div class="rev-card">
+                <div class="rev-card pop-scale">
                     <span class="rev-number">01</span>
                     <h3>Lightning Fast</h3>
                     <p>Optimized infrastructure for instantaneous access to study materials.</p>
                 </div>
-                <div class="rev-card">
+                <div class="rev-card pop-scale">
                     <span class="rev-number">02</span>
                     <h3>Student Centric</h3>
                     <p>Designed by students, for students. Intuitive and friction-free.</p>
                 </div>
-                <div class="rev-card">
+                <div class="rev-card pop-scale">
                     <span class="rev-number">03</span>
                     <h3>Complete Ecosystem</h3>
                     <p>From notes to projects, a unified platform for all your digital needs.</p>
@@ -410,12 +423,12 @@
 
         <section class="visionaries-section" style="padding: 8rem 0; background: rgba(255,195,0,0.02);">
             <div class="container">
-                <h2 class="section-title">The <span class="gradient-text">Visionaries</span> Behind WHATIN</h2>
+                <h2 class="section-title pop-in">The <span class="gradient-text">Visionaries</span> Behind WHATIN</h2>
                 <div class="vision-grid"
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 5rem;">
 
                     <!-- Dushyant Saini -->
-                    <div class="vision-card"
+                    <div class="vision-card pop-scale"
                         style="background: var(--glass-bg); padding: 4rem 2.5rem; border-radius: 40px; border: 1px solid var(--glass-border); text-align: center; position: relative; overflow: hidden;">
                         <div
                             style="width: 80px; height: 80px; background: var(--accent-gradient); border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2rem; color: #fff; box-shadow: 0 10px 20px rgba(255,195,0,0.3);">
@@ -441,7 +454,7 @@
                     </div>
 
                     <!-- Neelesh Tiwari -->
-                    <div class="vision-card"
+                    <div class="vision-card pop-scale"
                         style="background: var(--glass-bg); padding: 4rem 2.5rem; border-radius: 40px; border: 1px solid var(--glass-border); text-align: center; position: relative; overflow: hidden;">
                         <div
                             style="width: 80px; height: 80px; background: var(--accent-gradient); border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2rem; color: #fff; box-shadow: 0 10px 20px rgba(255,195,0,0.3);">
@@ -477,11 +490,11 @@
         <div class="container footer-content">
             <div class="logo">WHATIN 💡</div>
             <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms-conditions.html">Terms & Conditions</a>
-                <a href="disclaimer.html">Disclaimer</a>
+                <a href="pages/about.html">About Us</a>
+                <a href="pages/contact.html">Contact</a>
+                <a href="pages/privacy-policy.html">Privacy Policy</a>
+                <a href="pages/terms-conditions.html">Terms & Conditions</a>
+                <a href="pages/disclaimer.html">Disclaimer</a>
             </div>
             <div class="social-links">
                 <a href="#"><i class="fab fa-github"></i></a>
@@ -494,7 +507,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
     <script type="module">
@@ -504,6 +517,22 @@
             webhookUrl: "https://dushya.app.n8n.cloud/webhook/4670d8dc-28e9-4a72-acca-cb089329481a/chat"
         });
     </script>
+
+    <!-- Vanilla JS Animation Logic -->
+    <script src="animations/animations.js"></script>
+
+    <!-- React 18 integration -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <!-- Global Firebase Exporter for React -->
+    <script type="module">
+        import { db, collection, onSnapshot, query, limit, orderBy } from './js/firebase-config.js';
+        window.firebaseDB = { db, collection, onSnapshot, query, limit, orderBy };
+        window.dispatchEvent(new Event('firebaseReady'));
+    </script>
+    <script type="text/babel" src="react/app.jsx" defer></script>
+
 </body>
 
 </html>

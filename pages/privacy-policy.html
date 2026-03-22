@@ -22,8 +22,13 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
 </head>
 
 <body>
@@ -34,13 +39,16 @@
             <div class="logo" onclick="window.location.href='index.html'">WHATIN 💡</div>
             <nav id="nav-menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="index.html#projects">Resources</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="index.html#projects" class="cta-btn-header">Start Learning</a></li>
                 </ul>
             </nav>
+            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
+                <i class="fas fa-sun" id="theme-icon"></i>
+            </div>
             <div class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
@@ -155,7 +163,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

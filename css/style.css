@@ -1,3 +1,18 @@
+
+:root.light-mode {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --accent-primary: #0ea5e9;
+    --accent-secondary: #4f46e5;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(14, 165, 233, 0.2);
+    --card-hover-shadow: 0 0 30px rgba(14, 165, 233, 0.15);
+    --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%);
+    --surface-light: rgba(0, 0, 0, 0.02);
+}
+
 :root {
     --bg-primary: #020617;
     /* Midnight navy */
@@ -25,6 +40,7 @@
 }
 
 body {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
