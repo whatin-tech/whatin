@@ -71,16 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if(h2Text) h2Text.style.display = "none";
         
-        // Mobile browsers need a very direct trigger.
-        if(audio) {
-            audio.load();
-            audio.volume = 1.0;
-            audio.play().then(() => {
-                console.log("Audio successful");
-            }).catch(err => {
-                console.error("Audio failed:", err);
-            });
-        }
+        // Creating a NEW audio object inside the user's click stack is the "Gold Standard" for mobile.
+        const strikeSound = new Audio('thundersound.mp3');
+        strikeSound.volume = 1.0;
+        strikeSound.play().catch(err => console.error("SFX Error:", err));
         
         // Lightning Strike Visuals
         flash.classList.add("super-flash");
