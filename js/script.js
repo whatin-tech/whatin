@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (themeIcon) {
+        if (localStorage.getItem('theme') === 'light') {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-mode');
+            if (document.documentElement.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+    }
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navMenu = document.querySelector('nav');
@@ -149,23 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // Cookie Consent Logic
-    if (!localStorage.getItem('cookieConsent')) {
-        const consentBox = document.createElement('div');
-        consentBox.id = 'cookie-consent';
-        consentBox.innerHTML = `
-            <div class="consent-text">
-                <p>We use cookies to enhance your experience and analyze site traffic. By continuing, you agree to our use of cookies.</p>
-            </div>
-            <button class="btn btn-primary" id="accept-cookies">Accept</button>
-        `;
-        document.body.appendChild(consentBox);
 
-        document.getElementById('accept-cookies').addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'true');
-            consentBox.style.display = 'none';
-        });
-    }
+
 
     // FAQ Accordion Toggle
     const faqItems = document.querySelectorAll('.faq-item');

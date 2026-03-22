@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | WHATIN Ecosystem</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .admin-dashboard {
@@ -91,6 +91,11 @@
             background-size: 1.5em;
         }
     </style>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
 </head>
 
 <body>
@@ -101,7 +106,7 @@
             <div class="logo" onclick="window.location.href='index.html'">WHATIN 💡</div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="padhai.html">View Site</a></li>
                     <li><a href="#" id="logoutBtn" class="btn btn-secondary btn-sm"
                             style="padding: 0.6rem 1.2rem;">Logout</a></li>
@@ -238,7 +243,7 @@
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         // Predefined Subjects for GL Bajaj
         const subjectsData = {
@@ -311,7 +316,7 @@
     </style>
 
     <script type="module">
-        import { db, auth, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, onAuthStateChanged, signOut, where } from './firebase-config.js';
+        import { db, auth, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, onAuthStateChanged, signOut, where } from '../js/firebase-config.js';
 
         // Elements
         const aktuContainer = document.getElementById('aktuContainer');

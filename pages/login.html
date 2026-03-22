@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | WHATIN Ecosystem</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .login-section {
@@ -66,6 +66,11 @@
             color: var(--accent-primary);
         }
     </style>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
 </head>
 
 <body>
@@ -89,13 +94,13 @@
                 <button type="submit" class="btn btn-primary login-btn">Sign In</button>
             </form>
 
-            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Ecosystem</a>
+            <a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Ecosystem</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
     <script type="module">
-        import { auth, signInWithEmailAndPassword } from './firebase-config.js';
+        import { auth, signInWithEmailAndPassword } from '../js/firebase-config.js';
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
