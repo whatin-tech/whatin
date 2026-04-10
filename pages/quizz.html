@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Quizz | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Test your engineering and tech knowledge with WHATIN's interactive quizzes. Challenge yourself and learn actively.">
+    <meta name="keywords" content="Tech Quiz, Engineering Quiz, WHATIN Quiz, Computer Science Test, Coding Quiz">
+    
+    <!-- Google AdSense Verification -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E97CV891FV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E97CV891FV');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
+        crossorigin="anonymous"></script>
+
+    <meta name="author" content="Dushyant Saini">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../animations/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .quiz-hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .quiz-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quiz-screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-screen.active {
+            display: block;
+        }
+
+        .quiz-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            color: #fff;
+        }
+
+        .quiz-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .start-btn {
+            background: var(--accent-gradient);
+            color: #000;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Question Screen */
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+        }
+
+        .question-number {
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            background: rgba(255, 68, 68, 0.1);
+            color: #ff4444;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 68, 68, 0.2);
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem;
+            border-radius: 15px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
+            transform: translateX(5px);
+        }
+
+        .option-btn.selected {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent-primary);
+            color: #fff;
+        }
+
+        .option-btn.correct {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: #28a745;
+            color: #28a745;
+        }
+        
+        .option-btn.correct::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            color: #28a745;
+        }
+
+        .option-btn.wrong {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .option-btn.wrong::after {
+            content: '\f00d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            color: #dc3545;
+        }
+
+        .next-btn-container {
+            margin-top: 2rem;
+            text-align: right;
+            display: none;
+        }
+
+        .next-btn {
+            background: var(--accent-gradient);
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 auto 2rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+            color: #fff;
+        }
+
+        .result-message {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-wrapper {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+            .question-text {
+                font-size: 1.2rem;
+            }
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="guidance.html">Guidance</a></li>
+                    <li><a href="../index.html#projects">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Start Learning</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
+                <i class="fas fa-sun" id="theme-icon"></i>
+            </div>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <nav aria-label="Breadcrumb" style="padding-top: 2rem;">
+                <ul class="breadcrumb" style="display: flex; list-style: none; gap: 0.5rem; color: #fff; margin-bottom: 2rem;">
+                    <li><a href="../index.html" style="color: #fff; text-decoration: none; opacity: 0.7;">Home</a></li>
+                    <li style="opacity: 0.7;">/</li>
+                    <li style="color: var(--accent-primary);">Quizz</li>
+                </ul>
+            </nav>
+
+            <section class="quiz-hero">
+                <h1 class="hero-title">Tech <span class="gradient-text">Quizz</span> Arena</h1>
+                <p class="hero-subtitle">Challenge your technical skills with our curated questions spanning Data Structures, Algorithms, Operating Systems, and more.</p>
+
+                <div class="quiz-wrapper" style="margin-top: 3rem; text-align: center; border: none; background: transparent; box-shadow: none;">
+                    
+                    <iframe src="https://h5p.org/h5p/embed/1559259" width="100%" height="600" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *" title="suvidha Puzzles" style="border-radius: 15px; width: 100%; min-height: 400px; max-width: 1091px;"></iframe>
+                    <script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+                </div>
+            </section>
+
+            <!-- Mid Ad Placeholder -->
+            <div class="container" style="margin-top: 4rem;">
+                <div class="ad-leaderboard">
+                    <span style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 0.5rem; display: block;">ADVERTISEMENT</span>
+                    <ins class="adsbygoogle" style="display:block" data-ad-format="fluid"
+                        data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-3296618712266727"
+                        data-ad-slot="YOUR_FEED_SLOT"></ins>
+                </div>
+            </div>
+
+            <!-- Deep Content Section for SEO -->
+            <section class="deep-content-section" style="margin-top: 4rem;">
+                <h2 class="section-title" style="text-align: left;">Why Interactive Tech <span class="gradient-text">Quizzes</span>?</h2>
+                <div class="info-content-grid" style="margin-top: 2rem;">
+                    <div class="info-text">
+                        <p>Passive reading is only half the battle. Active recall through quizzes significantly improves memory retention, especially for complex engineering subjects. The <strong>WHATIN Quizz Arena</strong> is designed to test your reflexes and analytical skills under timed pressure.</p>
+                        
+                        <h3 style="margin-top: 2rem; color: var(--accent-primary);"><i class="fas fa-layer-group"></i> Covering Core Subjects</h3>
+                        <p>Our quizzes pull from a diverse database covering Computer Science fundamentals: Data Structures, Operating Systems, Database Management Systems, and Object-Oriented Programming. Prepare for your university exams and corporate placement interviews simultaneously.</p>
+                        
+                        <h3 style="margin-top: 2rem; color: var(--accent-primary);"><i class="fas fa-chart-line"></i> Measure Your Growth</h3>
+                        <p>Track your score, recognize your weak areas, and revisit our <strong><a href="unitwise.html" style="color: var(--accent-primary);">Unit-Wise Hub</a></strong> or <strong><a href="topper.html" style="color: var(--accent-primary);">Topper Notes</a></strong> to reinforce your conceptual grounding.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini & Neelesh Tiwari.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+    <!-- Vanilla JS Animation Logic (Optional Canvas BG) -->
+    <script src="../animations/animations.js"></script>
+
+    <!-- Custom Scripts / H5P embedded via iframe above -->
+</body>
+
+</html>
