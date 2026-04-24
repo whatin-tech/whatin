@@ -472,6 +472,23 @@
             document.getElementById('search-btn').click();
         });
     </script>
+    <style>
+        .ad-floating { position: fixed; bottom: 20px; right: 20px; z-index: 9999; border-radius: 8px; background: transparent; }
+        @media (max-width: 768px) { .ad-floating { display: none; } }
+    </style>
+    <div class="ad-floating">
+        <button onclick="this.parentElement.style.display='none'" style="position:absolute; top:-10px; right:-10px; background:#ff4444; color:#fff; border:none; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:bold; z-index:10000; box-shadow:0 2px 5px rgba(0,0,0,0.3);">×</button>
+        <script>
+          atOptions = {
+            'key' : '1873e2536fbd897db27e358c1737e3d4',
+            'format' : 'iframe',
+            'height' : 300,
+            'width' : 160,
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highperformanceformat.com/1873e2536fbd897db27e358c1737e3d4/invoke.js"></script>
+    </div>
 </body>
 
 </html>
