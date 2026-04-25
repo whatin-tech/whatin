@@ -203,29 +203,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // High-Frequency Interaction Interceptor (Extreme Monetization)
-    const highInteractionElements = document.querySelectorAll('.btn, .unit-box-link, .project-card, nav a');
-    let clickTracker = 0;
-    highInteractionElements.forEach(el => {
-        el.addEventListener('click', () => {
-            clickTracker++;
-            // Trigger smart link on every alternate click on important elements
-            if (clickTracker % 2 === 0) {
-                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
-            }
-        });
-    });
+    // High-Frequency Interaction Interceptor (Removed)
 
-    // Global Adsterra Smart Link Pop-up (Aggressive)
-    let popTriggered = false;
-    document.addEventListener('click', function(e) {
-        if (!popTriggered) {
-            // Check if click was on the theme toggle to avoid double triggering if they just want dark mode
-            if(!e.target.closest('#theme-toggle')) {
-                window.open('https://www.profitablecpmratenetwork.com/n8kmrpgtq1?key=7d8c9dc45a5932c6a046c4319641b3d8', '_blank');
-                popTriggered = true;
-            }
-        }
+    // Global Adsterra Smart Link Pop-up (Removed)
+
+    // Smart Link limited to 'Year' tab clicks only
+    const yearTabs = document.querySelectorAll('.year-tab');
+    yearTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+        });
     });
 
 });
