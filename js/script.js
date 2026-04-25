@@ -199,4 +199,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Global Adsterra Smart Link Pop-up (Aggressive)
+    let popTriggered = false;
+    document.addEventListener('click', function(e) {
+        if (!popTriggered) {
+            // Check if click was on the theme toggle to avoid double triggering if they just want dark mode
+            if(!e.target.closest('#theme-toggle')) {
+                window.open('https://www.profitablecpmratenetwork.com/n8kmrpgtq1?key=7d8c9dc45a5932c6a046c4319641b3d8', '_blank');
+                popTriggered = true;
+            }
+        }
+    });
+
 });
