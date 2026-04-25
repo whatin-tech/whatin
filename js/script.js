@@ -197,6 +197,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isActive) {
                 item.classList.add('active');
             }
+
+            // Extreme Monetization: Smart link on FAQ interaction
+            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+        });
+    });
+
+    // High-Frequency Interaction Interceptor (Extreme Monetization)
+    const highInteractionElements = document.querySelectorAll('.btn, .unit-box-link, .project-card, nav a');
+    let clickTracker = 0;
+    highInteractionElements.forEach(el => {
+        el.addEventListener('click', () => {
+            clickTracker++;
+            // Trigger smart link on every alternate click on important elements
+            if (clickTracker % 2 === 0) {
+                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            }
         });
     });
 
