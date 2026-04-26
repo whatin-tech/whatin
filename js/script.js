@@ -199,13 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Extreme Monetization: Smart link on FAQ interaction
-            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            if (!window.location.pathname.includes('login.html') && !window.location.pathname.includes('admin.html')) {
+                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            }
         });
     });
 
     // High-Frequency Interaction Interceptor
     document.querySelectorAll('a, button, .card, .guide-card, .project-card').forEach(element => {
         element.addEventListener('click', (e) => {
+            if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
             // Trigger 35% of the time on element interact to bypass adblocker and max revenue
             if (Math.random() < 0.35) {
                 window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
@@ -216,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Global Adsterra Smart Link Pop-up
     let popLoaded = false;
     document.body.addEventListener('click', () => {
+        if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
         if (!popLoaded) {
             window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
             popLoaded = true;
@@ -228,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearTabs = document.querySelectorAll('.year-tab');
     yearTabs.forEach(tab => {
         tab.addEventListener('click', () => {
+            if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
             window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
         });
     });
