@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Extreme Monetization: Dynamic Injection of Monetag Tags to maximize Global Revenue on every page
     function injectMonetagAds() {
         const scripts = [
-            { src: 'https://n6wxm.com/vignette.min.js', zone: '10251500' },
+            // Vignette pop-up removed
             { src: 'https://omg10.com/4/10251483', 'data-cfasync': 'false' },
             { src: 'https://5gvci.com/act/files/tag.min.js?z=10251464', 'data-cfasync': 'false', async: true },
             { src: 'https://al5sm.com/tag.min.js', zone: '10106780' },
