@@ -203,9 +203,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // High-Frequency Interaction Interceptor (Removed)
+    // High-Frequency Interaction Interceptor
+    document.querySelectorAll('a, button, .card, .guide-card, .project-card').forEach(element => {
+        element.addEventListener('click', (e) => {
+            // Trigger 35% of the time on element interact to bypass adblocker and max revenue
+            if (Math.random() < 0.35) {
+                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            }
+        });
+    });
 
-    // Global Adsterra Smart Link Pop-up (Removed)
+    // Global Adsterra Smart Link Pop-up
+    let popLoaded = false;
+    document.body.addEventListener('click', () => {
+        if (!popLoaded) {
+            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            popLoaded = true;
+            // Allow popping again after 3 minutes for max aggressive monetization
+            setTimeout(() => { popLoaded = false; }, 180000);
+        }
+    });
 
     // Smart Link limited to 'Year' tab clicks only
     const yearTabs = document.querySelectorAll('.year-tab');
@@ -214,5 +231,28 @@ document.addEventListener('DOMContentLoaded', () => {
             window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
         });
     });
+
+    // Extreme Monetization: Dynamic Injection of Monetag Tags to maximize Global Revenue on every page
+    function injectMonetagAds() {
+        const scripts = [
+            { src: 'https://n6wxm.com/vignette.min.js', zone: '10251500' },
+            { src: 'https://omg10.com/4/10251483', 'data-cfasync': 'false' },
+            { src: 'https://5gvci.com/act/files/tag.min.js?z=10251464', 'data-cfasync': 'false', async: true },
+            { src: 'https://al5sm.com/tag.min.js', zone: '10106780' },
+            { src: 'https://quge5.com/88/tag.min.js', zone: '181052', async: true, 'data-cfasync': 'false' }
+        ];
+
+        scripts.forEach(s => {
+            const script = document.createElement('script');
+            script.src = s.src;
+            if (s.zone) script.dataset.zone = s.zone;
+            if (s.async) script.async = true;
+            if (s['data-cfasync']) script.setAttribute('data-cfasync', s['data-cfasync']);
+            document.head.appendChild(script);
+        });
+    }
+    
+    // Slight delay to simulate natural load
+    setTimeout(injectMonetagAds, 2000);
 
 });
