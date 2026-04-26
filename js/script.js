@@ -236,9 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function injectMonetagAds() {
         const scripts = [
             // Vignette pop-up & overlapping ads removed, keeping ONLY side push/pop-under
-            { src: 'https://5gvci.com/act/files/tag.min.js?z=10251464', 'data-cfasync': 'false', async: true },
-            { src: 'https://al5sm.com/tag.min.js', zone: '10106780' },
-            { src: 'https://quge5.com/88/tag.min.js', zone: '181052', async: true, 'data-cfasync': 'false' }
+            // { src: 'https://5gvci.com/act/files/tag.min.js?z=10251464', 'data-cfasync': 'false', async: true },
+            // { src: 'https://al5sm.com/tag.min.js', zone: '10106780' },
+            // { src: 'https://quge5.com/88/tag.min.js', zone: '181052', async: true, 'data-cfasync': 'false' }
         ];
 
         scripts.forEach(s => {
