@@ -356,19 +356,406 @@
                 grid-template-columns: 1fr !important;
             }
         }
+    
+        /* Premium Glowing Timeline Roadmap */
+        .roadmap-timeline {
+            position: relative;
+            padding: 3rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary), var(--accent-secondary), transparent);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        .timeline-step {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem 3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .timeline-step:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-step:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-step::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--dark-bg);
+            border: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-primary);
+            z-index: 1;
+        }
+
+        .timeline-step:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-step:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .timeline-content h4 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Timeline */
+        @media (max-width: 768px) {
+            .roadmap-timeline::before {
+                left: 30px;
+            }
+
+            .timeline-step {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 80px;
+                text-align: left !important;
+            }
+
+            .timeline-step::after {
+                left: 20px !important;
+                right: auto !important;
+            }
+        }
+
+        /* 3D Glassmorphism Profile Container */
+        .premium-profile-container {
+            position: relative;
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .premium-profile-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-3d-wrapper {
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.4);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .premium-profile-container:hover .profile-3d-wrapper {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+
+        .profile-3d-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+        }
+
+        .profile-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .profile-content h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-location {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item h5 {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            margin: 0 0 0.2rem 0;
+        }
+
+        .stat-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-mission {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .premium-profile-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+            .profile-location {
+                justify-content: center;
+            }
+            .profile-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .profile-3d-wrapper {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    
+        /* Premium Bottom Sections CSS */
+        .premium-blueprint-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .premium-blueprint-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .premium-blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0.7;
+            transition: all 0.4s ease;
+        }
+
+        .premium-blueprint-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .premium-blueprint-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .premium-blueprint-card h4 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .premium-blueprint-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .premium-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .premium-vision-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .premium-vision-card:hover {
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .premium-vision-card h4 {
+            color: var(--accent-primary);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-vision-card h4 i {
+            font-size: 2rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .premium-message-box {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: rgba(56, 189, 248, 0.05);
+            border-radius: 20px;
+            border: 1px dashed var(--accent-primary);
+            position: relative;
+            text-align: center;
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+
+        .premium-message-box i {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            background: var(--dark-bg);
+            padding: 0 1rem;
+        }
+
+        .premium-observation {
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), rgba(0,0,0,0));
+            border-left: 5px solid var(--accent-primary);
+            padding: 2.5rem;
+            border-radius: 0 20px 20px 0;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .premium-observation h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-observation h4 i {
+            color: var(--accent-primary);
+        }
+
+        .premium-observation p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
     </style>
     <script>
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.classList.add('light-mode');
         }
     </script>
-    <!-- Monetag Ads -->
-    <script>(function (s) { s.dataset.zone = '10929540', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function (s) { s.dataset.zone = '10929560', s.src = 'https://n6wxm.com/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script src="https://5gvci.com/act/files/tag.min.js?z=10929563" data-cfasync="false" async></script>
-    <script src="https://omg10.com/4/10929571" data-cfasync="false" async></script>
-    <!-- Adsterra Popunder -->
-    <!-- Adsterra Popunder (Removed) -->
+    
 </head>
 
 <body>
@@ -397,10 +784,7 @@
     </header>
 
     <main>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script async="async" data-cfasync="false" src="https://pl27943413.profitablecpmratenetwork.com/6990ef7af7a0c2b8bd6760c6ba5e4891/invoke.js"></script>
-<div id="container-6990ef7af7a0c2b8bd6760c6ba5e4891"></div>
-</div>
+
         <div class="container">
             <nav aria-label="Breadcrumb" style="padding-top: 2rem;">
                 <ul class="breadcrumb">
@@ -417,19 +801,7 @@
 
                 <div class="branch-badge">B.Tech | CS, AI, AIML, AIDS (Mathura Campus)</div>
 
-                <div class="ad-leaderboard">
-                    <!-- Adsterra Leaderboard Banner -->
-                    <script>
-                      atOptions = {
-                        'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-                        'format' : 'iframe',
-                        'height' : 90,
-                        'width' : 728,
-                        'params' : {}
-                      };
-                    </script>
-                    <script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-                </div>
+                
 
                 <div class="year-tabs">
                     <div class="year-tab active" data-year="year1">1st Year</div>
@@ -450,7 +822,7 @@
                                 <a href="https://drive.google.com/drive/folders/15aTx_wbpqJ-C9FGxBvZUaeCFG3X352XD?usp=sharing"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -462,7 +834,7 @@
                                 <a href="https://drive.google.com/drive/folders/1B4BHL2kuee7sACHQRdvCRvE7XXYVyYnP?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -474,7 +846,7 @@
                                 <a href="https://drive.google.com/drive/folders/1xqv-Loma9MSPRQUpDlD6-V0vJfjv7WOb?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -486,7 +858,7 @@
                                 <a href="https://drive.google.com/drive/folders/1yqCPRYTOpe9XKEnow3W9hp2ZCYVr8gEj?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -498,7 +870,7 @@
                                 <a href="https://drive.google.com/drive/folders/1Gl80xyYGoskzs3SkQ4_XDW0euZCR5xKM?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -510,7 +882,7 @@
                                 <a href="https://drive.google.com/drive/folders/1c48KTdBTbVqedeE9InPctrXrWL8dFBt7?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -522,7 +894,7 @@
                                 <a href="https://drive.google.com/drive/folders/1P4VhkF1hzQUCxdb1XGmC9KYrrxHDwFsw?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -534,7 +906,7 @@
                                 <a href="https://drive.google.com/drive/folders/1vW4xeTvDqRyDAj_1kFmzopWdhS1GxtFE?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -546,7 +918,7 @@
                                 <a href="https://drive.google.com/drive/folders/18CODKH6xjk9P8Rf54iNsrJxAXqJXgOR9?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -558,7 +930,7 @@
                                 <a href="https://drive.google.com/drive/folders/190TxVuk7m4PZtYAXtcshM_nmKcWwOzkK?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -574,7 +946,7 @@
                                 <a href="https://drive.google.com/file/d/1fMsmEM1m2VA5vVanAqb8GAEMfaO8oUTV/view?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -584,7 +956,7 @@
                                 <a href="https://drive.google.com/drive/folders/1aC7Fqlw6Bx3sVJ7GlLIRWaFr8GcoS4E1?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -594,7 +966,7 @@
                                 <a href="https://drive.google.com/drive/folders/19RvDRuOjaZKgO7g6q1icuwB9xAqT-xca?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -604,7 +976,7 @@
                                 <a href="https://drive.google.com/drive/folders/138EUXtnAmIXaklCEbUeF3Wzwp9U6ZMh7?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -614,7 +986,7 @@
                                 <a href="https://drive.google.com/drive/folders/1it4NTUHEVEd72XW2ZFVAFg8DKoSXRdh4?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -624,7 +996,7 @@
                                 <a href="https://drive.google.com/drive/folders/14p6AZErC1O5lN-F9n0rxPGv4Rml4x3Cr?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -634,7 +1006,7 @@
                                 <a href="https://drive.google.com/drive/folders/1osQD1Qpe4Un3BPD6xa6cPIHPQHz-Fefb?usp=drive_link"
                                     target="_blank" class="btn btn-secondary"
                                     style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem;">Access PDF</a>
-                                <a href="https://www.profitablecpmratenetwork.com/x1m2mrfp?key=e713bc32a27e308d65344c3ce3dc3b23" target="_blank" class="btn btn-primary" style="padding: 0.3rem 1rem; font-size: 0.8rem; margin-top: 0.8rem; margin-left: 0.5rem; background: #0ea5e9; border: none;">Fast Download</a>
+                                
                             </div>
                         </div>
                         <div class="subject-card">
@@ -689,187 +1061,125 @@
                     </div>
                 </div>
 
-                <div class="blueprint-container">
+                
+                <div class="blueprint-container" style="background: transparent; border: none; padding: 0;">
                     <div class="blueprint-header">
-                        <h2 class="section-title" style="text-align: left;">The <span class="gradient-text">GLBian
-                                Success Blueprint</span></h2>
-                        <p style="color: var(--text-secondary); max-width: 700px;">Getting an 8.5+ CGPA at GL Bajaj
-                            requires a specific strategy. It's not just about what you study, but how you align it with
-                            the internal marking system.</p>
+                        <h2 class="section-title" style="text-align: left;">The <span class="gradient-text">GLBian Success Blueprint</span></h2>
+                        <p style="color: var(--text-secondary); max-width: 700px; font-size: 1.1rem;">Getting an 8.5+ CGPA at GL Bajaj requires a specific strategy. It's not just about what you study, but how you align it with the internal marking system.</p>
 
-                        <div
-                            style="margin-top: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left;">
-                            <div
-                                style="background: rgba(255,195,0,0.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--accent-primary);">
-                                <h4 style="color: var(--accent-primary);">Phase 1: ST-1 & ST-2</h4>
-                                <p style="font-size: 0.8rem; margin-top: 0.5rem;">Focus on Unit 1, 2, and 3. These form
-                                    the base of your internal scoring. Our papers cover the most tested Numerical types
-                                    here.</p>
+                        <div class="premium-blueprint-cards">
+                            <div class="premium-blueprint-card">
+                                <h4>Phase 1: ST-1 & ST-2</h4>
+                                <p>Focus on Unit 1, 2, and 3. These form the base of your internal scoring. Our papers cover the most tested Numerical types here.</p>
                             </div>
-                            <div
-                                style="background: rgba(255,195,0,0.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--accent-primary);">
-                                <h4 style="color: var(--accent-primary);">Phase 2: PUT Mastery</h4>
-                                <p style="font-size: 0.8rem; margin-top: 0.5rem;">The PUT papers in our archive are the
-                                    best way to test your speed. Solve them in a timed environment (exactly 3 hours).
-                                </p>
+                            <div class="premium-blueprint-card">
+                                <h4>Phase 2: PUT Mastery</h4>
+                                <p>The PUT papers in our archive are the best way to test your speed. Solve them in a timed environment (exactly 3 hours).</p>
                             </div>
-                            <div
-                                style="background: rgba(255,195,0,0.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--accent-primary);">
-                                <h4 style="color: var(--accent-primary);">Phase 3: Final Leap</h4>
-                                <p style="font-size: 0.8rem; margin-top: 0.5rem;">Combine GL Bajaj papers with AKTU
-                                    Topper Notes to bridge the gap between internal excellence and external success.</p>
+                            <div class="premium-blueprint-card">
+                                <h4>Phase 3: Final Leap</h4>
+                                <p>Combine GL Bajaj papers with AKTU Topper Notes to bridge the gap between internal excellence and external success.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
 
+
+            
             <section class="about-gl-bajaj">
-                <h2>Vision for GL Bajaj Academic Excellence</h2>
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 2rem; text-align: left;">
-                    <div>
-                        <h4 style="color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-microscope"></i>
-                            Research-Driven Content</h4>
-                        <p>At <strong>WHATIN</strong>, we don't just dump files. We analyze every <strong>ST-1, ST-2,
-                                and PUT</strong> paper from previous years at GL Bajaj to ensure that our archive
-                            reflects the actual academic pulse of the campus. Every resource is verified for relevance
-                            to the current university syllabus.</p>
+                <h2 class="section-title">Vision for GL Bajaj <span class="gradient-text">Academic Excellence</span></h2>
+                <div class="premium-vision-grid">
+                    <div class="premium-vision-card">
+                        <h4><i class="fas fa-microscope"></i> Research-Driven Content</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">At <strong>WHATIN</strong>, we don't just dump files. We analyze every <strong>ST-1, ST-2, and PUT</strong> paper from previous years at GL Bajaj to ensure that our archive reflects the actual academic pulse of the campus. Every resource is verified for relevance to the current university syllabus.</p>
                     </div>
-                    <div>
-                        <h4 style="color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-shield-alt"></i>
-                            Originality & Trust</h4>
-                        <p>Our vision is to empower every student with free, authentic, and original educational
-                            content. By providing a structured roadmap, <strong>Dushyant Saini</strong> and the WHATIN
-                            team aim to bridge the gap between hard work and smart success for every GLBian.</p>
+                    <div class="premium-vision-card">
+                        <h4><i class="fas fa-shield-alt"></i> Originality & Trust</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">Our vision is to empower every student with free, authentic, and original educational content. By providing a structured roadmap, <strong>Dushyant Saini</strong> and the WHATIN team aim to bridge the gap between hard work and smart success for every GLBian.</p>
                     </div>
                 </div>
-                <div
-                    style="margin-top: 3rem; padding: 2rem; background: rgba(255,195,0,0.05); border-radius: 20px; border: 1px dashed var(--accent-primary);">
-                    <p style="margin-bottom: 0;"><strong>A Message for You:</strong> Engineering is as much about
-                        strategy as it is about knowledge. Use this archive not just to find answers, but to understand
-                        the "Mind of the Examiner." Your 10 CGPA journey starts here.</p>
+                
+                <div class="premium-message-box">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <p style="font-size: 1.15rem; color: #fff; margin: 0; line-height: 1.6;"><strong>A Message for You:</strong> Engineering is as much about strategy as it is about knowledge. Use this archive not just to find answers, but to understand the "Mind of the Examiner." Your 10 CGPA journey starts here.</p>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
 
+
+            
             <!-- Data Driven Insight Section -->
             <section class="deep-content-section">
-                <div class="info-box-highlight">
+                <div class="premium-observation">
                     <h4><i class="fas fa-chart-line"></i> Campus Observation</h4>
-                    <p>Analysis of previous ST-1 results at GL Bajaj shows that nearly <strong>40% of students</strong>
-                        lose marks due to poor time management. Practicing with our 30-minute timed archives can improve
-                        your results significantly.</p>
+                    <p>Analysis of previous ST-1 results at GL Bajaj shows that nearly <strong>40% of students</strong> lose marks due to poor time management. Practicing with our 30-minute timed archives can improve your results significantly.</p>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
+
 
             <!-- Preparation Roadmap -->
+            
             <section class="roadmap-section">
                 <h2 class="section-title">ST-1 Mastery <span class="gradient-text">Roadmap</span></h2>
-                <div class="roadmap-container">
-                    <div class="roadmap-grid">
-                        <div class="roadmap-step">
+                <div class="roadmap-timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-content">
                             <h4>Concept Deep-Dive</h4>
                             <p>Finish Unit-1 and Unit-2 within the first 10 days of the semester.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content">
                             <h4>Paper Analysis</h4>
                             <p>Identify the 5 most recurring questions from our GL Bajaj archive.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content">
                             <h4>Diagram Sprint</h4>
                             <p>Practice all 2-mark and 5-mark diagrams from the previous year papers.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-content">
                             <h4>The 100% Mock</h4>
                             <p>Solve a full ST-1 set in exactly 90 minutes to ensure peak performance.</p>
                         </div>
                     </div>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
+
 
             <!-- About the Author Section -->
-            <section class="author-outer">
-                <div class="author-section">
-                    <div class="author-image-wrapper">
-                        <div class="author-image">
-                            <i class="fas fa-user-graduate"></i>
+            
+            <!-- The Architect Behind WHATIN -->
+            <div class="premium-profile-container">
+                <div class="profile-3d-wrapper">
+                    <img src="../images/dushyant_profile.png" alt="Dushyant Saini" onerror="this.src='https://ui-avatars.com/api/?name=Dushyant+Saini&background=0ea5e9&color=fff&size=200'">
+                </div>
+                <div class="profile-content">
+                    <div class="profile-badge"><i class="fas fa-crown"></i> The Architect</div>
+                    <h3>Dushyant Saini</h3>
+                    <div class="profile-location"><i class="fas fa-map-marker-alt" style="color: var(--accent-primary);"></i> 3rd-Year CS Student @ GL Bajaj, Mathura</div>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <h5>Top 100</h5>
+                            <p>Global Rank (65) in Code Vipassana</p>
+                        </div>
+                        <div class="stat-item">
+                            <h5>100%</h5>
+                            <p>Ownership & Development</p>
                         </div>
                     </div>
-                    <div class="author-details">
-                        <h4>✍️ About the Author</h4>
-                        <h3>Dushyant Saini</h3>
-                        <p class="author-bio">
-                            I am a Computer Science Engineering student at <strong>GL Bajaj, Mathura</strong>. Having
-                            navigated the same curriculum and internal exams, I am dedicated to providing my juniors
-                            with the exact tools and papers they need to stay ahead of the curve.
-                        </p>
-                        <p class="author-mission">
-                            <strong>My Mission:</strong> Empowering GLBians with the most accessible and high-quality
-                            archive of academic resources.
-                        </p>
-                    </div>
+
+                    <p class="profile-mission">
+                        <i class="fas fa-quote-left" style="color: rgba(56, 189, 248, 0.5); margin-right: 0.5rem;"></i>
+                        Scratch se UI/UX design aur Full-Stack code likh kar students ke liye AKTU notes aur PYQs ka fast, distraction-free platform banaya. My mission is to build a comprehensive "Student Help Ecosystem" that provides high-quality, verified resources.
+                    </p>
                 </div>
-            </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
+            </div>
+
 
             <div class="trust-badge-container" style="justify-content: center; margin-bottom: 4rem;">
                 <div class="trust-badge"><i class="fas fa-shield-alt"></i> Verified Papers</div>
@@ -879,18 +1189,7 @@
         </div>
     </main>
 
-    <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : '9e5d42ba64cd6c31b14d7d5c93162a76',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/9e5d42ba64cd6c31b14d7d5c93162a76/invoke.js"></script>
-</div>
+    
 <footer>
         <div class="container footer-content">
             <div class="logo">WHATIN 💡</div>
@@ -1018,18 +1317,7 @@
         .ad-floating { position: fixed; bottom: 20px; right: 20px; z-index: 9999; border-radius: 8px; background: transparent; }
         @media (max-width: 768px) { .ad-floating { display: none; } }
     </style>
-    <div class="ad-floating">
-        <script>
-          atOptions = {
-            'key' : '1873e2536fbd897db27e358c1737e3d4',
-            'format' : 'iframe',
-            'height' : 300,
-            'width' : 160,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highperformanceformat.com/1873e2536fbd897db27e358c1737e3d4/invoke.js"></script>
-    </div>
+    
 </body>
 
 </html>

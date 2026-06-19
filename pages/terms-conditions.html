@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms & Conditions | WHATIN Ecosystem</title>
 
-    <!-- Google AdSense Verification -->
-    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    
 
     <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Terms and Conditions for using WHATIN Ecosystem services and resources. Understanding your rights and responsibilities.">
-    <meta name="author" content="Dushyant Saini">
+    
+    
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,38 +22,84 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode');
+    
+    
+    
+
+    <!-- Comprehensive SEO Tags -->
+    <meta name="description" content="WHATIN Ecosystem - The premier academic hub for B.Tech CSE students. Founded and Architected by Dushyant Saini, a visionary student at GL Bajaj Group of Institutions, Mathura. Access Topper Notes, PYPs, Unit-Wise Questions, and Career Guidance.">
+    <meta name="keywords" content="WHATIN, Dushyant Saini, Founder Dushyant Saini WHATIN, GL Bajaj Group of Institutions Mathura student, AKTU B.Tech CSE resources, Topper Notes, PYP, Engineering Education, Tech Ecosystem">
+    <meta name="author" content="Dushyant Saini">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social SEO -->
+    <meta property="og:title" content="WHATIN Ecosystem | Architected by Dushyant Saini">
+    <meta property="og:description" content="Founded by Dushyant Saini from GL Bajaj Mathura, WHATIN is the ultimate academic toolkit for engineering students.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WHATIN Ecosystem">
+    
+    <!-- Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WHATIN Ecosystem | Founded by Dushyant Saini">
+    <meta name="twitter:description" content="The ultimate engineering toolkit created by Dushyant Saini.">
+
+    <!-- Schema.org JSON-LD for AI & Google Knowledge Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://whatin.in/#founder",
+          "name": "Dushyant Saini",
+          "jobTitle": "Lead Architect & Founder",
+          "affiliation": {
+            "@type": "EducationalOrganization",
+            "name": "GL Bajaj Group of Institutions, Mathura"
+          },
+          "url": "https://linkedin.com/in/dushyant-saini-6384a532b",
+          "sameAs": [
+            "https://www.instagram.com/thedushyant_saini"
+          ],
+          "description": "Visionary student at GL Bajaj Group of Institutions, Mathura. Founder and sole architect of the WHATIN Ecosystem."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://whatin.in/#website",
+          "url": "https://whatin.in",
+          "name": "WHATIN Ecosystem",
+          "description": "Academic platform for B.Tech students founded by Dushyant Saini.",
+          "creator": {
+            "@id": "https://whatin.in/#founder"
+          },
+          "publisher": {
+            "@id": "https://whatin.in/#founder"
+          }
         }
+      ]
+    }
     </script>
-    <!-- Monetag Ads -->
-    <script>(function (s) { s.dataset.zone = '10929540', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function (s) { s.dataset.zone = '10929560', s.src = 'https://n6wxm.com/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script src="https://5gvci.com/act/files/tag.min.js?z=10929563" data-cfasync="false" async></script>
-    <script src="https://omg10.com/4/10929571" data-cfasync="false" async></script>
-    <!-- Adsterra Popunder -->
-    <!-- Adsterra Popunder (Removed) -->
+
 </head>
 
 <body>
     <canvas id="bgCanvas"></canvas>
 
-    <header id="main-header">
+        <header id="main-header">
         <div class="container header-content">
-            <div class="logo" onclick="window.location.href='index.html'">WHATIN 💡</div>
-            <nav id="nav-menu">
-                <ul>
+            <div class="logo" onclick="window.location.href='index.html'">W H A T I N</div>
+                        <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="index.html#projects">Resources</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="index.html#projects" class="cta-btn-header">Start Learning</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
-                <i class="fas fa-sun" id="theme-icon"></i>
-            </div>
+            
             <div class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
@@ -106,7 +150,7 @@
 
     <footer>
         <div class="container footer-content">
-            <div class="logo">WHATIN 💡</div>
+            <div class="logo" onclick="window.location.href='index.html'">W H A T I N</div>
             <div class="footer-links">
                 <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
@@ -126,6 +170,7 @@
     </footer>
 
     <script src="../js/script.js"></script>
+<script type="module" src="../js/nav-auth.js"></script>
 </body>
 
 </html>

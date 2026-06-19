@@ -162,17 +162,357 @@
             color: var(--text-secondary);
             font-style: italic;
         }
-    </style>
-    <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode');
+    
+        /* Premium Weightage Section */
+        .premium-weightage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-    </script>
+        .weightage-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .weightage-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+        .weightage-card.high::before { background: #ff4757; }
+        .weightage-card.medium::before { background: #ffa502; }
+        .weightage-card.low::before { background: #2ed573; }
+        
+        .weightage-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .weightage-card.high:hover { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 15px 35px rgba(255, 71, 87, 0.15); }
+        .weightage-card.medium:hover { border-color: rgba(255, 165, 2, 0.5); box-shadow: 0 15px 35px rgba(255, 165, 2, 0.15); }
+        .weightage-card.low:hover { border-color: rgba(46, 213, 115, 0.5); box-shadow: 0 15px 35px rgba(46, 213, 115, 0.15); }
+
+        .w-level {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .weightage-card.high .w-level { color: #ff4757; }
+        .weightage-card.medium .w-level { color: #ffa502; }
+        .weightage-card.low .w-level { color: #2ed573; }
+
+        .weightage-card h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .w-marks {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin: 1.5rem 0;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        .w-marks span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            display: block;
+            text-shadow: none;
+        }
+        .weightage-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.2);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Premium VS Section */
+        .premium-vs-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .premium-vs-container { flex-direction: column; gap: 4rem; }
+        }
+        .vs-card {
+            flex: 1;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            width: 100%;
+            position: relative;
+            transition: 0.4s;
+        }
+        .vs-card.left-side {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid #3498db;
+        }
+        .vs-card.right-side {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(155, 89, 182, 0.05));
+            border-right: 4px solid #9b59b6;
+        }
+        .vs-card:hover {
+            transform: scale(1.02);
+        }
+        .vs-card.left-side:hover { box-shadow: -15px 15px 40px rgba(52, 152, 219, 0.1); border-color: rgba(52, 152, 219, 0.3); }
+        .vs-card.right-side:hover { box-shadow: 15px 15px 40px rgba(155, 89, 182, 0.1); border-color: rgba(155, 89, 182, 0.3); }
+
+        .vs-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .vs-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .vs-card.left-side .vs-header i { color: #3498db; }
+        .vs-card.right-side .vs-header i { color: #9b59b6; }
+        
+        .vs-header h3 {
+            font-size: 1.6rem;
+            color: #fff;
+        }
+        
+        .premium-comp-list {
+            list-style: none;
+            padding: 0;
+        }
+        .premium-comp-list li {
+            padding: 1.2rem;
+            background: rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            transition: 0.3s;
+        }
+        .premium-comp-list li:hover {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+        }
+        .vs-card.left-side .premium-comp-list li i { color: #3498db; }
+        .vs-card.right-side .premium-comp-list li i { color: #9b59b6; }
+
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            border: 8px solid #0f172a;
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            .vs-badge { top: 48%; }
+        }
+    
+        /* Premium Roadmap Timeline */
+        .premium-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .premium-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; width: 2px; height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary), transparent);
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .premium-timeline::before { left: 30px; }
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+            padding: 0 3rem;
+            perspective: 1000px;
+        }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+        @media (max-width: 768px) {
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 0; left: 0 !important; text-align: left !important; }
+        }
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 20px; height: 20px;
+            background: var(--bg-dark);
+            border: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-primary);
+            z-index: 2;
+        }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+        @media (max-width: 768px) {
+            .timeline-item:nth-child(odd) .timeline-dot { right: auto; left: 20px; }
+            .timeline-item:nth-child(even) .timeline-dot { left: 20px; }
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.4s;
+            transform: translateZ(0);
+        }
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-primary);
+            transform: translateY(-5px) translateZ(20px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .timeline-step-num {
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .timeline-content h4 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Premium Author Box */
+        .premium-author-box {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0, 240, 255, 0.05));
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 30px;
+            padding: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .premium-author-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 60%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .premium-author-box { flex-direction: column; text-align: center; padding: 2rem; gap: 2rem; }
+        }
+
+        .author-3d-image {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            perspective: 1000px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        .author-3d-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            transform: rotateX(15deg) rotateY(-15deg);
+            transition: 0.5s;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: -10px 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        .author-3d-image:hover img {
+            transform: rotateX(0) rotateY(0) scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+            border-color: rgba(0, 240, 255, 0.5);
+        }
+
+        .author-info {
+            z-index: 2;
+        }
+        .author-info h4 {
+            color: var(--accent-primary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .author-info h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .mission-badge {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.2rem;
+            border-radius: 0 12px 12px 0;
+            color: #fff;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .mission-badge { border-left: none; border-top: 4px solid var(--accent-primary); border-radius: 0 0 12px 12px; }
+        }
+
+    </style>
+    
     <!-- Monetag Ads -->
-    <script>(function (s) { s.dataset.zone = '10929540', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function (s) { s.dataset.zone = '10929560', s.src = 'https://n6wxm.com/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script src="https://5gvci.com/act/files/tag.min.js?z=10929563" data-cfasync="false" async></script>
-    <script src="https://omg10.com/4/10929571" data-cfasync="false" async></script>
+    
+    
+    
+    
     <!-- Adsterra Popunder -->
     <!-- Adsterra Popunder (Removed) -->
 </head>
@@ -193,9 +533,7 @@
                     <li><a href="index.html#projects" class="cta-btn-header">Start Learning</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
-                <i class="fas fa-sun" id="theme-icon"></i>
-            </div>
+            
             <div class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
@@ -203,10 +541,7 @@
     </header>
 
     <main>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script async="async" data-cfasync="false" src="https://pl27943413.profitablecpmratenetwork.com/6990ef7af7a0c2b8bd6760c6ba5e4891/invoke.js"></script>
-<div id="container-6990ef7af7a0c2b8bd6760c6ba5e4891"></div>
-</div>
+
         <div class="container">
             <section class="notes-hero">
                 <h1 class="hero-title">Academic <span class="gradient-text">Excellence</span> Notes</h1>
@@ -214,23 +549,11 @@
                 <p class="hero-subtitle">Meticulously curated handwritten and digital notes from top academic achievers.
                     Designed to simplify complex engineering schemas.</p>
 
-                <div class="ad-leaderboard">
-                    <!-- Adsterra Leaderboard Banner -->
-                    <script>
-                      atOptions = {
-                        'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-                        'format' : 'iframe',
-                        'height' : 90,
-                        'width' : 728,
-                        'params' : {}
-                      };
-                    </script>
-                    <script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-                </div>
+                
 
                 <div class="year-navigator">
                     <!-- 1st Year Section -->
-                    <div class="year-block">
+                    <div class="year-block collapsed">
                         <div class="year-header" onclick="toggleYear(this)">
                             <h2>1st Year Archive</h2>
                             <i class="fas fa-chevron-down"></i>
@@ -450,16 +773,7 @@
                 </div>
             </section>
 <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
+
 </div>
 
             <!-- Data Driven Insight Section -->
@@ -472,39 +786,41 @@
                 </div>
             </section>
 <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
+
 </div>
 
-            <!-- Study Roadmap Section -->
+            <!-- Study Roadmap Premium Section -->
             <section class="roadmap-section">
                 <h2 class="section-title">Preparation <span class="gradient-text">Roadmap</span></h2>
-                <div class="roadmap-container">
-                    <div class="roadmap-grid">
-                        <div class="roadmap-step">
+                <div class="premium-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-step-num">Step 01</span>
                             <h4>Core Calculus</h4>
-                            <p>Focus on Differential and Integral calculus basics. These form the foundation of 60% of
-                                technical subjects.</p>
+                            <p>Focus on Differential and Integral calculus basics. These form the foundation of 60% of technical subjects.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-step-num">Step 02</span>
                             <h4>Matrix & Algebra</h4>
-                            <p>Master rank of matrix and eigen values. Perfect for securing easy marks in the first
-                                section.</p>
+                            <p>Master rank of matrix and eigen values. Perfect for securing easy marks in the first section.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-step-num">Step 03</span>
                             <h4>PYQ Sprint</h4>
-                            <p>Solve the last 3 years of Previous Year Papers available in our <a href="padhai.html"
-                                    style="color: var(--accent-primary);">PYP Hub</a>.</p>
+                            <p>Solve the last 3 years of Previous Year Papers available in our <a href="padhai.html" style="color: var(--accent-primary); text-decoration: none; border-bottom: 1px dashed;">PYP Hub</a>.</p>
                         </div>
-                        <div class="roadmap-step">
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-step-num">Step 04</span>
                             <h4>Mock Challenge</h4>
                             <p>Attempt a full-length 3-hour mock test using the GL Bajaj PUT archives.</p>
                         </div>
@@ -512,137 +828,90 @@
                 </div>
             </section>
 <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
+
 </div>
 
-            <!-- Marks Weightage Table -->
+            
+            <!-- Marks Weightage Premium Cards -->
             <section class="weightage-section">
                 <h2 class="section-title">Marks <span class="gradient-text">Weightage</span></h2>
-                <div class="data-table-wrapper">
-                    <table class="weightage-table">
-                        <thead>
-                            <tr>
-                                <th>Subject Unit</th>
-                                <th>Expected Marks</th>
-                                <th>Difficulty Level</th>
-                                <th>Focus Area</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Unit 1: Quantum Physics</td>
-                                <td>15-20 Marks</td>
-                                <td>Medium</td>
-                                <td>Wave Mechanics</td>
-                            </tr>
-                            <tr>
-                                <td>Unit 2: Electromagnetic Field</td>
-                                <td>12-15 Marks</td>
-                                <td>High</td>
-                                <td>Maxwell's Equations</td>
-                            </tr>
-                            <tr>
-                                <td>Unit 3: Semiconductors</td>
-                                <td>18-22 Marks</td>
-                                <td>Low</td>
-                                <td>PN Junction</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <p class="hero-subtitle" style="text-align: center; margin-bottom: 3rem;">Clear breakdown of where to focus your energy for maximum score.</p>
+                <div class="premium-weightage-grid">
+                    <div class="weightage-card medium">
+                        <div class="w-level">Medium Priority</div>
+                        <h3>Quantum Physics</h3>
+                        <div class="w-marks">15-20 <span>Marks</span></div>
+                        <p>Focus Area: Wave Mechanics</p>
+                    </div>
+                    <div class="weightage-card high">
+                        <div class="w-level">High Priority <i class="fas fa-fire"></i></div>
+                        <h3>Electromagnetic Field</h3>
+                        <div class="w-marks">12-15 <span>Marks</span></div>
+                        <p>Focus Area: Maxwell's Equations</p>
+                    </div>
+                    <div class="weightage-card low">
+                        <div class="w-level">Low Priority</div>
+                        <h3>Semiconductors</h3>
+                        <div class="w-marks">18-22 <span>Marks</span></div>
+                        <p>Focus Area: PN Junction</p>
+                    </div>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
 
-            <!-- Comparison Section -->
-            <section class="comparison-section">
+            <!-- Strategic Comparison Premium Section -->
+            <section class="comparison-section" style="margin-top: 5rem; margin-bottom: 3rem;">
                 <h2 class="section-title">Strategic <span class="gradient-text">Comparison</span></h2>
-                <div class="comparison-grid">
-                    <div class="comp-card">
-                        <h4>12th Grade Maths</h4>
-                        <ul class="comp-list">
-                            <li><i class="fas fa-check-circle"></i> Focus on NCERT Patterns</li>
-                            <li><i class="fas fa-check-circle"></i> Broad syllabus coverage</li>
-                            <li><i class="fas fa-check-circle"></i> Step-marking is lenient</li>
+                <p class="hero-subtitle" style="text-align: center; margin-bottom: 3rem;">Understand the shift in mindset required from school to engineering.</p>
+                
+                <div class="premium-vs-container">
+                    <div class="vs-card left-side">
+                        <div class="vs-header">
+                            <i class="fas fa-school"></i>
+                            <h3>12th Grade Maths</h3>
+                        </div>
+                        <ul class="premium-comp-list">
+                            <li><i class="fas fa-check"></i> Focus on standard NCERT Patterns</li>
+                            <li><i class="fas fa-check"></i> Broad syllabus coverage</li>
+                            <li><i class="fas fa-check"></i> Step-marking is usually lenient</li>
                         </ul>
                     </div>
-                    <div class="comp-card vs-right">
-                        <h4>Engineering Maths</h4>
-                        <ul class="comp-list">
-                            <li><i class="fas fa-bolt"></i> Application-based logic</li>
-                            <li><i class="fas fa-bolt"></i> University specific (AKTU)</li>
-                            <li><i class="fas fa-bolt"></i> Requires conceptual depth</li>
+                    
+                    <div class="vs-badge">VS</div>
+
+                    <div class="vs-card right-side">
+                        <div class="vs-header">
+                            <i class="fas fa-university"></i>
+                            <h3>Engineering Maths</h3>
+                        </div>
+                        <ul class="premium-comp-list">
+                            <li><i class="fas fa-bolt"></i> Application-based complex logic</li>
+                            <li><i class="fas fa-bolt"></i> Highly specific to University (AKTU)</li>
+                            <li><i class="fas fa-bolt"></i> Requires deep conceptual clarity</li>
                         </ul>
                     </div>
                 </div>
             </section>
-<div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
-</div>
 
-            <!-- About the Author Section -->
-            <section class="author-outer">
-                <div class="author-section">
-                    <div class="author-image-wrapper">
-                        <div class="author-image">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
+            <!-- About the Author Premium Section -->
+            <section class="author-outer" style="margin-top: 5rem;">
+                <div class="premium-author-box">
+                    <div class="author-3d-image">
+                        <img src="../images/dushyant_profile.png" alt="Dushyant Saini">
                     </div>
-                    <div class="author-details">
+                    <div class="author-info">
                         <h4>✍️ About the Author</h4>
                         <h3>Dushyant Saini</h3>
-                        <p class="author-bio">
-                            I am a <strong>B.Tech Computer Science Engineering</strong> student and an active member of
-                            the AKTU student community.
-                            My mission is to build a comprehensive "Student Help Ecosystem" that provides high-quality,
-                            verified resources to help my peers excel in their academic journey.
+                        <p>
+                            I am a <strong>B.Tech Computer Science Engineering</strong> student and an active member of the AKTU student community. My mission is to build a comprehensive "Student Help Ecosystem" that provides high-quality, verified resources to help my peers excel in their academic journey.
                         </p>
-                        <p class="author-mission">
-                            <strong>My Mission:</strong> Helping 10,000+ students navigate engineering with clarity and
-                            confidence.
-                        </p>
+                        <div class="mission-badge">
+                            <strong><i class="fas fa-rocket"></i> My Mission:</strong> Helping 10,000+ students navigate engineering with clarity and confidence.
+                        </div>
                     </div>
                 </div>
             </section>
 <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
+
 </div>
 
             <section class="deep-content-section">
@@ -700,31 +969,13 @@
                 </div>
             </section>
 <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : 'f89b870371f260a6bc0a120ecbd7a0a0',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/f89b870371f260a6bc0a120ecbd7a0a0/invoke.js"></script>
+
 </div>
         </div>
     </main>
 
     <div style="width:100%; display:flex; justify-content:center; margin: 2rem 0; clear:both; overflow:hidden;">
-<script>
-  atOptions = {
-    'key' : '9e5d42ba64cd6c31b14d7d5c93162a76',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/9e5d42ba64cd6c31b14d7d5c93162a76/invoke.js"></script>
+
 </div>
 <footer>
         <div class="container footer-content">
@@ -758,16 +1009,7 @@
         @media (max-width: 768px) { .ad-floating { display: none; } }
     </style>
     <div class="ad-floating">
-        <script>
-          atOptions = {
-            'key' : '1873e2536fbd897db27e358c1737e3d4',
-            'format' : 'iframe',
-            'height' : 300,
-            'width' : 160,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highperformanceformat.com/1873e2536fbd897db27e358c1737e3d4/invoke.js"></script>
+        
     </div>
 </body>
 

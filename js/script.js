@@ -1,34 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    
-    if (themeIcon) {
-        if (localStorage.getItem('theme') === 'light') {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        } else {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-    }
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('light-mode');
-            if (document.documentElement.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
-        });
-    }
-
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navMenu = document.querySelector('nav');
@@ -133,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
                 let directionX = (Math.random() * 0.3) - 0.15;
                 let directionY = (Math.random() * 0.3) - 0.15;
-                let color = 'rgba(56, 189, 248, 0.3)'; // Primary Blue with low opacity
+                let color = 'rgba(255, 255, 255, 0.3)'; // Primary Blue with low opacity
 
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
@@ -158,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (distance < (canvas.width / 8) * (canvas.height / 8)) {
                         opacityValue = 1 - (distance / 25000);
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue * 0.15})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.15})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -200,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Extreme Monetization: Smart link on FAQ interaction
             if (!window.location.pathname.includes('login.html') && !window.location.pathname.includes('admin.html')) {
-                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+                
             }
         });
     });
@@ -211,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
             // Trigger 35% of the time on element interact to bypass adblocker and max revenue
             if (Math.random() < 0.35) {
-                window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+                
             }
         });
     });
@@ -221,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', () => {
         if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
         if (!popLoaded) {
-            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            
             popLoaded = true;
             // Allow popping again after 3 minutes for max aggressive monetization
             setTimeout(() => { popLoaded = false; }, 180000);
@@ -233,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     yearTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             if (window.location.pathname.includes('login.html') || window.location.pathname.includes('admin.html')) return;
-            window.open('https://www.profitablecpmratenetwork.com/v3uvd0tv?key=2d715abf7fd11ba1a2328aff13975382', '_blank');
+            
         });
     });
 

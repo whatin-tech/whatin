@@ -43,4 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 600);
         });
     });
+
+    // Saku Monsters Parallax Effect
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const floatItems = document.querySelectorAll('.saku-float-item');
+        
+        floatItems.forEach((item, index) => {
+            // Alternate speeds based on index
+            const speed = (index % 2 === 0) ? 0.3 : 0.15;
+            // Apply a subtle Y translation on top of the CSS animation by setting a CSS variable or direct transform.
+            // Since they already have CSS keyframe animations, modifying transform directly might conflict.
+            // Instead, we can adjust margin-top to achieve parallax without breaking the bobbing transform.
+            item.style.marginTop = `${scrolled * speed}px`;
+        });
+    });
 });
