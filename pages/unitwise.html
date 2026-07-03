@@ -464,11 +464,6 @@
         }
     </style>
 
-    <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode');
-        }
-    </script>
     <!-- Monetag Ads -->
     
     
@@ -485,18 +480,17 @@
         <div class="container header-content">
             <div class="logo" onclick="window.location.href='index.html'">WHATIN 💡</div>
             <nav id="nav-menu">
-                <ul>
+                <ul style="align-items: center; margin: 0;">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="guidance.html">Guidance</a></li>
-                    <li><a href="index.html#projects">Resources</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="index.html#projects" class="cta-btn-header">Start Learning</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle" id="theme-toggle" style="margin-left: 20px; cursor: pointer; font-size: 1.3rem; color: var(--text-secondary); transition: 0.3s; display: flex; align-items: center; z-index: 1001;">
-                <i class="fas fa-sun" id="theme-icon"></i>
-            </div>
             <div class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
@@ -504,7 +498,6 @@
     </header>
 
     <main>
-
         <div class="container">
             <section class="unit-hero">
                 <h1 class="hero-title">Unit-Wise <span class="gradient-text">Mastery</span> Hub</h1>
@@ -790,6 +783,8 @@
         block.classList.toggle('collapsed');
     }
 </script>
+
+
 </body>
 
 </html>

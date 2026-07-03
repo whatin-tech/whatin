@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti Ragging Affidavit | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get your Anti-Ragging, Gap Certificate, and other college affidavits easily through WHATIN. Fast, clear, and designed for students.">
+    <meta name="author" content="Dushyant Saini">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../animations/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .affidavit-hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .doc-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .doc-card h4 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .doc-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .process-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .step-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .cta-container {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(0, 0, 0, 0.2));
+            border-radius: 30px;
+            border: 1px dashed var(--accent-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
+                                    <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <nav aria-label="Breadcrumb" style="padding-top: 2rem;">
+                <ul class="breadcrumb">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="affidavit.html">Get Affidavit</a></li>
+                    <li style="color: var(--accent-primary);">Anti Ragging</li>
+                </ul>
+            </nav>
+
+            <section class="affidavit-hero">
+                <div class="section-badge pop-in" style="margin: 0 auto 1.5rem; display: table;">Official Anti-Ragging Certification</div>
+                <h1 class="hero-title pop-in"><i class="fas fa-ban"></i> Anti Ragging <span class="gradient-text">Affidavit</span></h1>
+                <p class="hero-subtitle pop-in" style="max-width: 600px; margin: 0 auto; font-size: 1.15rem; color: #94a3b8; line-height: 1.6;">
+                    Seamlessly acquire your legally notarized Anti-Ragging Affidavit for college admission with zero hassle.
+                </p>
+
+                <!-- Transparent Pricing & Delivery Modes Section -->
+                <div class="pricing-header pop-in" style="margin-top: 5rem; text-align: center;">
+                    <div class="section-badge" style="margin: 0 auto 1rem; display: table;">Transparent Investment</div>
+                    <h2 class="section-title" style="margin-bottom: 1rem;">Payment Structure & <span class="gradient-text">Delivery</span></h2>
+                    <p style="color: #94a3b8; font-size: 1.1rem; max-width: 650px; margin: 0 auto 3.5rem; line-height: 1.6;">
+                        Your investment is all-inclusive, covering <strong>Government Stamp Paper, Advocate Authorization, Drafting, and On-Campus Delivery</strong>.
+                    </p>
+                </div>
+
+                <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 850px; margin: 0 auto 6rem; position: relative; z-index: 5;">
+                    
+                    <!-- Normal Plan -->
+                    <div class="premium-price-card pop-scale" style="background: rgba(10, 15, 30, 0.55); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(56, 189, 248, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.15); border-radius: 28px; padding: 3.5rem 2.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255,255,255,0.02); text-align: left;">
+                        <div class="card-glow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(56,189,248,0.12), transparent 60%); pointer-events: none;"></div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                            <span style="color: #38bdf8; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Standard Delivery</span>
+                            <div style="padding: 0.4rem 1rem; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); border-radius: 50px; color: #38bdf8; font-size: 0.85rem; font-weight: 600;">1 Week</div>
+                        </div>
+
+                        <h3 style="font-size: 2.8rem; color: #f8fafc; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: baseline; gap: 0.5rem;">
+                            ₹130 <span style="font-size: 1.1rem; color: #94a3b8; font-weight: 500;">/ affidavit</span>
+                        </h3>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2.5rem; line-height: 1.6;">Ideal for planned college submissions.</p>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 3.5rem; display: flex; flex-direction: column; gap: 1.2rem; color: #e2e8f0; font-size: 1.05rem;">
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #38bdf8; font-size: 1.2rem;"></i> Official Stamp Paper Included</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #38bdf8; font-size: 1.2rem;"></i> Notary Attestation</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #38bdf8; font-size: 1.2rem;"></i> Expert Legal Drafting</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #38bdf8; font-size: 1.2rem;"></i> On-Campus Delivery</li>
+                            <li style="display: flex; align-items: center; gap: 1rem; color: #64748b;"><i class="fas fa-clock" style="color: #64748b; font-size: 1.2rem;"></i> Standard Processing (~7 Days)</li>
+                        </ul>
+
+                        <!-- REPLACE "YOUR_STANDARD_PAYMENT_LINK_HERE" WITH YOUR ACTUAL PAYMENT LINK -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeRboj4LXxpqBSjSU6o1KLlL5wGUi6bU8ZUYtfIpBd_ngqy9A/viewform?usp=publish-editor" target="_blank" class="select-plan-btn normal-btn" style="margin-top: auto; text-align: center; padding: 1.2rem; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); border-radius: 16px; color: #38bdf8; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: all 0.3s;">
+                            Select Standard Mode
+                        </a>
+                    </div>
+
+                    <!-- Fast Plan (Highlighted) -->
+                    <div class="premium-price-card fast-card pop-scale" style="background: rgba(10, 25, 20, 0.65); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid rgba(16, 185, 129, 0.3); border-top: 1px solid rgba(16, 185, 129, 0.5); border-radius: 28px; padding: 3.5rem 2.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.15), inset 0 0 25px rgba(16,185,129,0.05); animation-delay: 0.2s; text-align: left;">
+                        
+                        <div class="popular-badge" style="position: absolute; top: 1.5rem; right: 1.5rem; padding: 0.4rem 1.2rem; background: linear-gradient(135deg, #059669, #10b981); color: #000; font-size: 0.85rem; font-weight: 800; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(16,185,129,0.3);">
+                            ⚡ Fast Track
+                        </div>
+
+                        <div class="card-glow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(16,185,129,0.15), transparent 60%); pointer-events: none;"></div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                            <span style="color: #34d399; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Urgent Delivery</span>
+                            <div style="padding: 0.4rem 1rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); border-radius: 50px; color: #34d399; font-size: 0.85rem; font-weight: 600;">1-2 Days</div>
+                        </div>
+
+                        <h3 style="font-size: 2.8rem; color: #f8fafc; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: baseline; gap: 0.5rem;">
+                            ₹150 <span style="font-size: 1.1rem; color: #94a3b8; font-weight: 500;">/ affidavit</span>
+                        </h3>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2.5rem; line-height: 1.6;">Top-priority rapid processing for immediate deadlines.</p>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 3.5rem; display: flex; flex-direction: column; gap: 1.2rem; color: #e2e8f0; font-size: 1.05rem;">
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #34d399; font-size: 1.2rem;"></i> Official Stamp Paper Included</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #34d399; font-size: 1.2rem;"></i> Notary Attestation</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #34d399; font-size: 1.2rem;"></i> Expert Legal Drafting</li>
+                            <li style="display: flex; align-items: center; gap: 1rem;"><i class="fas fa-check-circle" style="color: #34d399; font-size: 1.2rem;"></i> On-Campus Delivery</li>
+                            <li style="display: flex; align-items: center; gap: 1rem; color: #34d399;"><i class="fas fa-bolt" style="color: #34d399; font-size: 1.2rem;"></i> Express Priority (1-2 Days)</li>
+                        </ul>
+
+                        <!-- REPLACE "YOUR_FAST_TRACK_PAYMENT_LINK_HERE" WITH YOUR ACTUAL PAYMENT LINK -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSccNsS6PkOJ8aUnR3S6uzlUjMkivEwrywwT0QApLtNY-0gq4Q/viewform?usp=sharing&ouid=104115201825937768662" target="_blank" class="select-plan-btn fast-btn" style="margin-top: auto; text-align: center; padding: 1.2rem; background: #10b981; border: 1px solid #34d399; border-radius: 16px; color: #000; font-weight: 800; font-size: 1.1rem; text-decoration: none; transition: all 0.3s; box-shadow: 0 10px 25px rgba(16,185,129,0.4);">
+                            Select Fast Track Mode
+                        </a>
+                    </div>
+                </div>
+
+                <style>
+                    .premium-price-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0; left: -150%;
+                        width: 50%; height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+                        transform: skewX(-20deg);
+                        transition: 0.7s;
+                        pointer-events: none;
+                        z-index: 10;
+                    }
+                    .premium-price-card:hover {
+                        transform: translateY(-10px) scale(1.02);
+                        background: rgba(15, 23, 42, 0.75);
+                    }
+                    .premium-price-card:not(.fast-card):hover {
+                        border-color: #38bdf8;
+                        box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.25);
+                    }
+                    .premium-price-card.fast-card:hover {
+                        background: rgba(15, 30, 25, 0.85);
+                        border-color: #34d399;
+                        box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.4);
+                    }
+                    .premium-price-card:hover::before {
+                        animation: shimmerCard 1.5s infinite;
+                    }
+                    .select-plan-btn.normal-btn:hover {
+                        background: #38bdf8;
+                        color: #000;
+                        box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+                        transform: translateY(-3px);
+                    }
+                    .select-plan-btn.fast-btn:hover {
+                        background: #34d399;
+                        color: #000;
+                        box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
+                        transform: translateY(-3px);
+                    }
+                </style>
+
+                <!-- Transparent Mandatory Documents Section (Premium Liquid Crystal Design) -->
+                <div class="mandatory-header pop-in" style="margin-top: 7rem; text-align: center;">
+                    <div class="section-badge" style="margin: 0 auto 1rem; display: table; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.4rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; animation: pulseRed 2s infinite;">
+                        <i class="fas fa-exclamation-circle"></i> Strictly Required Verification
+                    </div>
+                    <h2 class="section-title" style="margin-bottom: 1rem; font-size: 2.8rem; font-weight: 800; color: #f8fafc;">Mandatory <span class="gradient-text">Documentation</span> <i class="fas fa-file-shield" style="color: var(--accent-primary); font-size: 2.2rem; vertical-align: middle;"></i></h2>
+                    <p style="color: #94a3b8; font-size: 1.15rem; max-width: 680px; margin: 0 auto 3.5rem; line-height: 1.6;">
+                        Legal notarization and advocate authorization require a <strong>clear photocopy (both sides)</strong> of your Aadhar Card. Ensure it is attached with your application.
+                    </p>
+                </div>
+
+                <div class="mandatory-grid" style="display: flex; justify-content: center; max-width: 450px; margin: 0 auto 6rem; position: relative; z-index: 5;">
+                    
+                    <!-- Card 1: Yourself -->
+                    <div class="premium-doc-card pop-scale" style="width: 100%; background: rgba(10, 15, 30, 0.55); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(52, 211, 153, 0.25); border-top: 1px solid rgba(52, 211, 153, 0.5); border-radius: 28px; padding: 3.5rem 2.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), inset 0 0 25px rgba(52,211,153,0.03);">
+                        <div class="card-glow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(52,211,153,0.12), transparent 60%); pointer-events: none;"></div>
+                        
+                        <div class="doc-icon-container" style="width: 80px; height: 80px; margin-bottom: 2rem; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.4); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(52,211,153,0.2), inset 0 0 20px rgba(52,211,153,0.2); animation: floatIcon 4s ease-in-out infinite;">
+                            <i class="fas fa-user" style="font-size: 2.5rem; color: #34d399; filter: drop-shadow(0 0 10px rgba(52,211,153,0.8));"></i>
+                        </div>
+
+                        <span style="color: #34d399; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">Primary Applicant</span>
+                        <h3 style="font-size: 2.2rem; color: #f8fafc; font-weight: 800; margin-bottom: 1rem;">Yourself</h3>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2.5rem; line-height: 1.6;">Self-identification required to bind the anti-ragging affidavit legally to your academic record.</p>
+
+                        <ul style="list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 1rem; color: #e2e8f0; font-size: 1rem; text-align: left; width: 100%;">
+                            <li style="display: flex; align-items: center; gap: 0.8rem;"><i class="fas fa-check-circle" style="color: #34d399;"></i> Both Sides Clear Copy</li>
+                            <li style="display: flex; align-items: center; gap: 0.8rem;"><i class="fas fa-check-circle" style="color: #34d399;"></i> Fully Legible Aadhar No.</li>
+                            <li style="display: flex; align-items: center; gap: 0.8rem;"><i class="fas fa-check-circle" style="color: #34d399;"></i> Recent Photograph Visible</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <style>
+                    /* Premium Animations & Hover Effects */
+                    .premium-doc-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0; left: -150%;
+                        width: 50%; height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+                        transform: skewX(-20deg);
+                        transition: 0.7s;
+                        pointer-events: none;
+                        z-index: 10;
+                    }
+                    .premium-doc-card:hover {
+                        transform: translateY(-10px) scale(1.02);
+                        background: rgba(15, 23, 42, 0.75);
+                    }
+                    .premium-doc-card:nth-child(1):hover {
+                        border-color: #34d399;
+                        box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(52, 211, 153, 0.25);
+                    }
+                    .premium-doc-card:hover::before {
+                        animation: shimmerCard 1.5s infinite;
+                    }
+
+                    @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.2); } }
+                    @keyframes shimmer { 0% { left: -150%; } 100% { left: 200%; } }
+                    @keyframes floatIcon { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+                    @keyframes pulseRed { 0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); } 70% { box-shadow: 0 0 0 10px rgba(239,68,68,0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); } }
+                </style>
+
+                </div>
+
+                <div class="process-container pop-in" style="position: relative; padding: 4rem; overflow: hidden;">
+                    <!-- Decorative Background elements -->
+                    <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(56, 189, 248, 0.1); filter: blur(40px); border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: rgba(139, 92, 246, 0.1); filter: blur(50px); border-radius: 50%;"></div>
+
+                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 3rem; text-align: center; position: relative; z-index: 2;">How It <span class="gradient-text">Works</span> <i class="fas fa-cogs" style="font-size: 1.5rem; color: var(--accent-primary);"></i></h3>
+                    
+                    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 2.5rem;">
+                        
+                        <div class="step-item pop-left" style="align-items: flex-start;">
+                            <div class="step-number" style="box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); background: linear-gradient(135deg, #0ea5e9, #38bdf8);">
+                                <i class="fas fa-mouse-pointer" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <div class="step-content" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 16px; flex-grow: 1; backdrop-filter: blur(5px);">
+                                <h4 style="color: #38bdf8; font-size: 1.3rem;"><span style="color: #fff;">01.</span> Select Category</h4>
+                                <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem;">Choose the specific type of affidavit you need from our available options above (Anti-Ragging, Gap, Scholarship, etc.).</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item pop-right" style="align-items: flex-start; animation-delay: 0.2s;">
+                            <div class="step-number" style="box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); background: linear-gradient(135deg, #9333ea, #c084fc);">
+                                <i class="fas fa-file-invoice" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <div class="step-content" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 16px; flex-grow: 1; backdrop-filter: blur(5px);">
+                                <h4 style="color: #c084fc; font-size: 1.3rem;"><span style="color: #fff;">02.</span> Submit & Pay</h4>
+                                <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem;">Carefully fill out the official form with your exact details, upload your required documents, and securely complete the payment.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item pop-left" style="align-items: flex-start; animation-delay: 0.4s;">
+                            <div class="step-number" style="box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); background: linear-gradient(135deg, #d97706, #fbbf24);">
+                                <i class="fas fa-tachometer-alt" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <div class="step-content" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 16px; flex-grow: 1; backdrop-filter: blur(5px);">
+                                <h4 style="color: #fbbf24; font-size: 1.3rem;"><span style="color: #fff;">03.</span> Select Speed</h4>
+                                <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem;">Choose your processing mode: <strong>Fast-Track</strong> for urgent needs or <strong>Normal</strong> processing based on your timeline.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item pop-right" style="align-items: flex-start; animation-delay: 0.6s;">
+                            <div class="step-number" style="box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); background: linear-gradient(135deg, #059669, #34d399);">
+                                <i class="fas fa-map-marker-alt" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <div class="step-content" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 16px; flex-grow: 1; backdrop-filter: blur(5px);">
+                                <h4 style="color: #34d399; font-size: 1.3rem;"><span style="color: #fff;">04.</span> Campus Delivery</h4>
+                                <p style="font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem;">Your official, legally notarized affidavit will be prepared and delivered directly to you inside the college campus right on time.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Trust and Responsibility Banner -->
+                    <div class="trust-banner pop-scale" style="margin-top: 3.5rem; position: relative; z-index: 2; background: linear-gradient(145deg, rgba(20,20,20,0.8), rgba(10,10,10,0.9)); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 5px solid #ef4444; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <h4 style="color: #fff; font-size: 1.4rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;">
+                            <i class="fas fa-shield-check" style="color: #10b981;"></i> 100% Reliable Service
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                            This ecosystem is fully verified and transparent. There is absolutely <strong>0% chance of any scam</strong> or fraud. Your documents are handled with utmost professionalism.
+                        </p>
+                        
+                        <div style="background: rgba(239, 68, 68, 0.1); border-radius: 8px; padding: 1rem 1.5rem; border: 1px dashed rgba(239, 68, 68, 0.4);">
+                            <h5 style="color: #ef4444; font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fas fa-exclamation-triangle"></i> Student Responsibility Notice</h5>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                                You are strictly responsible for the details you provide in the form. If you provide incorrect spelling, wrong names, or invalid data, and the affidavit is printed with those errors, <strong>the liability falls entirely on you</strong>. Please double-check your entries before paying.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                </section>
+
+            <section class="faq-section pop-in" style="margin-top: 5rem; padding-bottom: 4rem;">
+                <div class="section-badge pop-in" style="margin: 0 auto 1rem; display: table;">Got Doubts?</div>
+                <h2 class="section-title pop-in" style="text-align: center; margin-bottom: 3rem;">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                
+                <div class="faq-grid" style="display: grid; gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+                    
+                    <!-- Q1 -->
+                    <div class="guide-article-card faq-item pop-scale" style="padding: 2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="color: var(--accent-primary); font-size: 1.2rem; margin: 0;"><i class="fas fa-question-circle" style="margin-right: 0.5rem;"></i> How exactly does this process work?</h4>
+                            <i class="fas fa-chevron-down faq-toggle-icon" style="color: var(--text-secondary); transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                First, select the type of affidavit you need. Then, fill out the form with your details, submit your documents, and complete the payment. After that, choose your preferred delivery mode (Fast or Normal). Finally, your legally notarized affidavit will be delivered directly to you inside the college campus.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="guide-article-card faq-item pop-scale" style="padding: 2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; animation-delay: 0.1s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="color: var(--accent-primary); font-size: 1.2rem; margin: 0;"><i class="fas fa-shield-alt" style="margin-right: 0.5rem;"></i> Is this service reliable? Can I trust it?</h4>
+                            <i class="fas fa-chevron-down faq-toggle-icon" style="color: var(--text-secondary); transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                Yes, it is <strong>100% reliable and verified</strong>. There is absolutely a 0% chance of any scam. Your documents are handled professionally, and the final affidavit is legally valid and stamped by an authorized Notary.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="guide-article-card faq-item pop-scale" style="padding: 2rem; background: var(--glass-bg); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; animation-delay: 0.2s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="color: #ef4444; font-size: 1.2rem; margin: 0;"><i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i> What if I provide the wrong details in the form?</h4>
+                            <i class="fas fa-chevron-down faq-toggle-icon" style="color: var(--text-secondary); transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                <strong>You are strictly responsible for the details you submit.</strong> However, if you provide wrong information and mistakenly complete the payment, contact the host immediately. You can find the host's direct number in our official WhatsApp group. Get your details corrected on time before printing. If printed with errors, the liability falls entirely on you.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="guide-article-card faq-item pop-scale" style="padding: 2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; animation-delay: 0.3s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="color: var(--accent-primary); font-size: 1.2rem; margin: 0;"><i class="fas fa-shipping-fast" style="margin-right: 0.5rem;"></i> What is the difference between Fast and Normal mode?</h4>
+                            <i class="fas fa-chevron-down faq-toggle-icon" style="color: var(--text-secondary); transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                In <strong>Fast Delivery</strong> mode, you pay an extra ₹30 and your affidavit will be ready within <strong>1 to 2 days</strong>. In <strong>Normal</strong> mode, the standard processing time is about <strong>1 week</strong>. This is the primary difference between the two modes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="guide-article-card faq-item pop-scale" style="padding: 2rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; animation-delay: 0.4s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="color: var(--accent-primary); font-size: 1.2rem; margin: 0;"><i class="fas fa-users" style="margin-right: 0.5rem;"></i> What if my father is absent or deceased? Whose Aadhar should I provide?</h4>
+                            <i class="fas fa-chevron-down faq-toggle-icon" style="color: var(--text-secondary); transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                By default, your <strong>Father's Aadhar card</strong> is strictly required. However, in the unfortunate event that your father is deceased or absent, you can absolutely provide the Aadhar card of your <strong>Mother or legal Guardian</strong> instead.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JS Animation Logic -->
+    <script src="../animations/animations.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/nav-auth.js"></script>
+
+
+</body>
+</html>

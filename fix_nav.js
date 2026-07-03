@@ -25,6 +25,7 @@ function replaceNav(filePath, isRoot) {
                     <li><a href="${rootPrefix}guidance.html"${getActive('guidance.html')}>Guidance</a></li>
                     <li><a href="${pagesPrefix}contributors.html"${getActive('contributors.html')}>Contributors</a></li>
                     <li><a href="${pagesPrefix}contact.html"${getActive('contact.html')}>Contact</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
                     <li><a href="${pagesPrefix}login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
                     <li><a href="${rootPrefix}index.html#projects" class="cta-btn-header">Resources</a></li>
                 </ul>

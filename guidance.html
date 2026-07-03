@@ -16,96 +16,360 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career & Strategic Guidance | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    
+    
+    
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="stylesheet" href="animations/animations.css">
     <style>
+        /* Premium Ambient Background Animations */
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -40px) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.6)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.9)); }
+        }
+        @keyframes shimmerCard {
+            0% { left: -150%; }
+            100% { left: 200%; }
+        }
+        @keyframes spinAvatar {
+            100% { transform: rotate(360deg); }
+        }
+
         .guidance-hero {
-            padding: 10rem 0 4rem;
+            padding: 12rem 0 6rem;
             text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1.4rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 50px;
+            color: #38bdf8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            backdrop-filter: blur(16px);
         }
 
         .guide-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin: 4rem 0;
+            gap: 3rem;
+            margin: 2rem 0 6rem;
+            position: relative;
+            z-index: 5;
         }
 
         .guide-article-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
             overflow: hidden;
-            transition: 0.4s;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), inset 0 0 20px rgba(255,255,255,0.02);
+        }
+
+        .guide-article-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+            pointer-events: none;
+            z-index: 10;
         }
 
         .guide-article-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-12px) scale(1.02);
+            background: rgba(0, 0, 0, 0.75);
+            box-shadow: 0 35px 65px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.25);
+        }
+
+        .guide-article-card:nth-child(1):hover { border-color: #38bdf8; }
+        .guide-article-card:nth-child(2):hover { border-color: #a855f7; }
+        .guide-article-card:nth-child(3):hover { border-color: #34d399; }
+        .guide-article-card:nth-child(4):hover { border-color: #fbbf24; }
+
+        .guide-article-card:hover::before {
+            animation: shimmerCard 1.5s infinite;
         }
 
         .article-thumb {
-            height: 200px;
-            background: var(--accent-gradient);
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            color: #fff;
-            opacity: 0.8;
+            font-size: 4.5rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .guide-article-card:nth-child(1) .article-thumb { background: radial-gradient(circle at center, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0.4) 70%); }
+        .guide-article-card:nth-child(2) .article-thumb { background: radial-gradient(circle at center, rgba(168,85,247,0.15) 0%, rgba(0,0,0,0.4) 70%); }
+        .guide-article-card:nth-child(3) .article-thumb { background: radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(0,0,0,0.4) 70%); }
+        .guide-article-card:nth-child(4) .article-thumb { background: radial-gradient(circle at center, rgba(245,158,11,0.15) 0%, rgba(0,0,0,0.4) 70%); }
+
+        .guide-article-card:nth-child(1) .article-thumb i { color: #38bdf8; filter: drop-shadow(0 0 15px rgba(56,189,248,0.6)); }
+        .guide-article-card:nth-child(2) .article-thumb i { color: #c084fc; filter: drop-shadow(0 0 15px rgba(192,132,252,0.6)); }
+        .guide-article-card:nth-child(3) .article-thumb i { color: #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6)); }
+        .guide-article-card:nth-child(4) .article-thumb i { color: #fbbf24; filter: drop-shadow(0 0 15px rgba(251,191,36,0.6)); }
+
+        .article-thumb i {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .guide-article-card:hover .article-thumb i {
+            transform: scale(1.18) translateY(-5px);
+            filter: drop-shadow(0 0 25px currentColor);
         }
 
         .article-content {
             padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: transparent;
         }
 
         .article-category {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--accent-primary);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: block;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
+        .guide-article-card:nth-child(1) .article-category { color: #38bdf8; }
+        .guide-article-card:nth-child(2) .article-category { color: #c084fc; }
+        .guide-article-card:nth-child(3) .article-category { color: #34d399; }
+        .guide-article-card:nth-child(4) .article-category { color: #fbbf24; }
 
         .article-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            line-height: 1.3;
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+            color: #f8fafc;
+            line-height: 1.4;
+            font-weight: 700;
+            transition: color 0.3s;
         }
 
+        .guide-article-card:nth-child(1):hover .article-content h3 { color: #38bdf8; }
+        .guide-article-card:nth-child(2):hover .article-content h3 { color: #c084fc; }
+        .guide-article-card:nth-child(3):hover .article-content h3 { color: #34d399; }
+        .guide-article-card:nth-child(4):hover .article-content h3 { color: #fbbf24; }
+
         .article-content p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
             line-height: 1.7;
         }
 
         .read-more-btn {
-            color: var(--accent-primary);
             font-weight: 700;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             text-decoration: none;
             margin-top: auto;
+            font-size: 1.05rem;
+            transition: gap 0.3s;
         }
+
+        .guide-article-card:nth-child(1) .read-more-btn { color: #38bdf8; }
+        .guide-article-card:nth-child(2) .read-more-btn { color: #c084fc; }
+        .guide-article-card:nth-child(3) .read-more-btn { color: #34d399; }
+        .guide-article-card:nth-child(4) .read-more-btn { color: #fbbf24; }
 
         .read-more-btn i {
-            transition: 0.3s;
+            transition: transform 0.3s;
         }
 
-        .read-more-btn:hover i {
-            transform: translateX(5px);
+        .read-more-btn:hover {
+            gap: 1.2rem;
+        }
+
+        .premium-author-card {
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 32px;
+            padding: 4rem;
+            margin: 2rem 0 6rem;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .premium-author-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 2.5rem 1.5rem;
+                gap: 2.5rem;
+            }
+        }
+
+        .author-avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -5px; left: -5px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #a855f7, #34d399);
+            animation: spinAvatar 10s linear infinite;
+        }
+
+        .author-avatar {
+            position: relative;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: #38bdf8;
+            border: 4px solid #000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            z-index: 2;
+        }
+
+        .author-info h4 {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-info h3 {
+            color: #f8fafc;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+        }
+
+        .author-info p {
+            color: #94a3b8;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .author-socials {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .author-socials { justify-content: center; }
+        }
+
+        .author-social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #f8fafc;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .author-social-btn:hover {
+            background: #38bdf8;
+            color: #000;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .premium-trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 5rem;
+        }
+
+        .premium-badge {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #e2e8f0;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.02);
+            transition: all 0.3s;
+        }
+
+        .premium-badge:hover {
+            border-color: #38bdf8;
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 32px rgba(56, 189, 248, 0.25);
         }
     </style>
     
@@ -173,13 +437,14 @@
         <header id="main-header">
         <div class="container header-content">
             <div class="logo" onclick="window.location.href='index.html'">W H A T I N</div>
-                        <nav id="nav-menu">
+                                                <nav id="nav-menu">
                 <ul style="align-items: center; margin: 0;">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="pages/about.html">About</a></li>
                     <li><a href="guidance.html" class="active">Guidance</a></li>
                     <li><a href="pages/contributors.html">Contributors</a></li>
                     <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
                     <li><a href="pages/login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
                     <li><a href="index.html#projects" class="cta-btn-header">Resources</a></li>
                 </ul>
@@ -194,89 +459,94 @@
     <main>
         <div class="container">
             <section class="guidance-hero">
-                <h1 class="hero-title">Career <span class="gradient-text">Blueprint</span> & Guidance</h1>
-                <p class="hero-subtitle">Moving beyond the classroom. Strategic insights to help engineering students
-                    build skills, optimize profiles, and land dream opportunities.</p>
-                <div class="last-updated"><i class="fas fa-calendar-alt"></i> Updated: March 2026</div>
+                <!-- Ambient Glowing Background Orbs -->
+                <div style="position: absolute; top: 10%; left: 15%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 70%); border-radius: 50%; animation: floatOrb 12s ease-in-out infinite alternate; pointer-events: none;"></div>
+                <div style="position: absolute; top: 20%; right: 15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%); border-radius: 50%; animation: floatOrb 15s ease-in-out infinite alternate-reverse; pointer-events: none;"></div>
+
+                <div class="hero-badge pop-in">
+                    <i class="fas fa-compass" style="animation: pulseGlow 3s infinite;"></i> Strategic Engineering Roadmap
+                </div>
+                <h1 class="hero-title pop-in" style="font-size: 3.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 1.5rem;">Career <span class="gradient-text">Blueprint</span> & Guidance</h1>
+                <p class="hero-subtitle pop-in" style="max-width: 750px; margin: 0 auto 2.5rem; font-size: 1.25rem; color: #94a3b8; line-height: 1.7;">Moving beyond the classroom. Strategic insights to help engineering students build world-class skills, optimize profiles, and land dream opportunities.</p>
+                <div class="last-updated pop-scale" style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.05); padding: 0.5rem 1.2rem; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; font-size: 0.9rem;"><i class="fas fa-calendar-check" style="color: #34d399;"></i> Updated: March 2026</div>
             </section>
 
             <div class="guide-grid">
                 <!-- Guide 1 -->
-                <article class="guide-article-card">
+                <article class="guide-article-card pop-scale">
                     <div class="article-thumb"><i class="fas fa-code-branch"></i></div>
                     <div class="article-content">
-                        <span class="article-category">Skill Building</span>
+                        <span class="article-category"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Skill Building</span>
                         <h3>CSE Students Ke Liye Best Skills (2026 Edition)</h3>
-                        <p>In the age of AI, simply knowing C++ or Java isn't enough. We deconstruct the essential tech
-                            stack for modern developers including AI integration, cloud native dev, and advanced
-                            DS/ALGO.
-                        </p>
+                        <p>In the age of AI, simply knowing C++ or Java isn't enough. We deconstruct the essential tech stack for modern developers including AI integration, cloud native dev, and advanced DS/ALGO.</p>
                         <a href="#" class="read-more-btn">Read Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Guide 2 -->
-                <article class="guide-article-card">
+                <article class="guide-article-card pop-scale">
                     <div class="article-thumb"><i class="fas fa-briefcase"></i></div>
                     <div class="article-content">
-                        <span class="article-category">Career Hunt</span>
+                        <span class="article-category"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Career Hunt</span>
                         <h3>Internship Kaise Find Kare: A Step-by-Step Guide</h3>
-                        <p>Stop applying blindly. Learn the "Network-First" approach to land internships at
-                            product-based
-                            companies and startups. How to use cold emailing and referrals effectively.</p>
+                        <p>Stop applying blindly. Learn the "Network-First" approach to land internships at product-based companies and startups. How to use cold emailing and referrals effectively.</p>
                         <a href="#" class="read-more-btn">Read Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Guide 3 -->
-                <article class="guide-article-card">
+                <article class="guide-article-card pop-scale">
                     <div class="article-thumb"><i class="fab fa-linkedin"></i></div>
                     <div class="article-content">
-                        <span class="article-category">Professional Branding</span>
+                        <span class="article-category"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Professional Branding</span>
                         <h3>LinkedIn Profile Optimization for Engineering Students</h3>
-                        <p>Your LinkedIn is your digital resume. Learn how to write a compelling headline, an AI-proof
-                            about section, and how to showcase your projects to attract recruiters.</p>
+                        <p>Your LinkedIn is your digital resume. Learn how to write a compelling headline, an AI-proof about section, and how to showcase your projects to attract top tier recruiters.</p>
                         <a href="#" class="read-more-btn">Read Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
                 <!-- Guide 4 -->
-                <article class="guide-article-card">
+                <article class="guide-article-card pop-scale">
                     <div class="article-thumb"><i class="fas fa-lightbulb"></i></div>
                     <div class="article-content">
-                        <span class="article-category">Mindset</span>
+                        <span class="article-category"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Mindset</span>
                         <h3>Mistakes to Avoid in the First 2 Years of B.Tech</h3>
-                        <p>70% of students regret wasted time in their early semesters. Learn how to balance CGPA with
-                            skill building and project work from the beginning.</p>
+                        <p>70% of students regret wasted time in their early semesters. Learn how to balance CGPA with high impact skill building and project work right from the very beginning.</p>
                         <a href="#" class="read-more-btn">Read Article <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
             </div>
 
             <!-- Author Section -->
-            <section class="author-outer">
-                <div class="author-section">
-                    <div class="author-image-wrapper">
-                        <div class="author-image">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
+            <section class="premium-author-card pop-in">
+                <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+                
+                <div class="author-avatar-container pop-scale">
+                    <div class="avatar-ring"></div>
+                    <div class="author-avatar">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <div class="author-details">
-                        <h4>✍️ About the Author</h4>
-                        <h3>Dushyant Saini</h3>
-                        <p class="author-bio">
-                            As a B.Tech CSE student, I've spent years researching the gap between college curriculum and
-                            industry requirements. This Guidance section is my effort to share the "Unwritten Rules" of
-                            engineering success with my fellow students.
-                        </p>
+                </div>
+                
+                <div class="author-info">
+                    <h4>✍️ About the Author & Architect</h4>
+                    <h3>Dushyant Saini</h3>
+                    <p>
+                        As a B.Tech CSE student, I've spent years researching the gap between college curriculum and industry requirements. This Guidance section is my effort to share the "Unwritten Rules" of engineering success with my fellow students.
+                    </p>
+                    <div class="author-socials">
+                        <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank" class="author-social-btn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/thedushyant_saini" target="_blank" class="author-social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="author-social-btn"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </section>
 
-            <div class="trust-badge-container" style="justify-content: center; margin-bottom: 4rem;">
-                <div class="trust-badge"><i class="fas fa-user-check"></i> Expert Curated</div>
-                <div class="trust-badge"><i class="fas fa-graduation-cap"></i> Student First</div>
-                <div class="trust-badge"><i class="fas fa-map-marker-alt"></i> Uttar Pradesh, India</div>
+            <!-- Premium Trust Badges -->
+            <div class="premium-trust-badges pop-scale">
+                <div class="premium-badge"><i class="fas fa-user-check" style="color: #38bdf8; font-size: 1.2rem;"></i> Expert Curated</div>
+                <div class="premium-badge"><i class="fas fa-graduation-cap" style="color: #a855f7; font-size: 1.2rem;"></i> Student First</div>
+                <div class="premium-badge"><i class="fas fa-map-marker-alt" style="color: #34d399; font-size: 1.2rem;"></i> Uttar Pradesh, India</div>
             </div>
         </div>
     </main>
@@ -301,7 +571,9 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Vanilla JS Animation Logic -->
+    <script src="animations/animations.js"></script>
+    <script src="js/script.js"></script>
     <style>
         .ad-floating { position: fixed; bottom: 20px; right: 20px; z-index: 9999; border-radius: 8px; background: transparent; }
         @media (max-width: 768px) { .ad-floating { display: none; } }
