@@ -121,6 +121,25 @@
     }
     </script>
 
+
+    
+    
+    
+    <!-- End Favicon -->
+
+    <!-- Favicon for Browser & Google Search -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+
+    
+    
+    
+
+
+    <!-- Google AdSense Integration -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -221,6 +240,54 @@
 
     <script src="../js/script.js"></script>
 <script type="module" src="../js/nav-auth.js"></script>
+
+    <!-- Firebase Analytics SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+    <script>
+      const firebaseAnalyticsConfig = {
+        apiKey: "AIzaSyAQFEioBcwIrhDzOcPf7lMleVKGHHjba_8",
+        authDomain: "whatin-analytic-dabfa.firebaseapp.com",
+        databaseURL: "https://whatin-analytic-dabfa-default-rtdb.firebaseio.com",
+        projectId: "whatin-analytic-dabfa",
+        storageBucket: "whatin-analytic-dabfa.firebasestorage.app",
+        messagingSenderId: "649111328567",
+        appId: "1:649111328567:web:acdf7d5f9a52b76526ecb2"
+      };
+
+      // Ensure we don't initialize twice if another script initializes a different firebase app
+      let analyticsApp;
+      if (!firebase.apps.length) {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig);
+      } else {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
+      }
+      
+      const db = analyticsApp.database();
+
+      // ---- 1. Total Visitors Count (har page load par +1) ----
+      const visitorsRef = db.ref('stats/totalVisitors');
+      visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
+
+      // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
+      visitorsRef.on('value', (snapshot) => {
+        const el = document.getElementById('visitorCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+
+      // ---- 3. Total Clicks Count (har click par +1) ----
+      const clicksRef = db.ref('stats/totalClicks');
+      document.addEventListener('click', () => {
+        clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
+      });
+
+      // ---- 4. Live Click Count page par dikhana (if elements exist) ----
+      clicksRef.on('value', (snapshot) => {
+        const el = document.getElementById('clickCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+    </script>
 </body>
 
 </html>
