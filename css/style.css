@@ -778,3 +778,25 @@ footer {
     max-height: 500px;
     opacity: 1;
 }
+
+/* Fix for navbar layout breaking on smaller desktop screens */
+.logo {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.header-content {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+}
+
+nav ul {
+    flex-shrink: 1;
+}
+
+@media (max-width: 1200px) {
+    nav ul {
+        gap: 1.2rem !important;
+    }
+}
