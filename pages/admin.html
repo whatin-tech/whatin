@@ -189,8 +189,9 @@
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="team.html">Team</a></li>
                     <li><a href="contributors.html">Contributors</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    
                     <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
                     <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
                     <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
@@ -225,6 +226,13 @@
                             style="font-size: 3rem; color: var(--accent-secondary); margin-bottom: 1.5rem;"></i>
                         <h3>College GL Bajaj</h3>
                         <p>Manage internal papers (ST-1, ST-2, PUT) and branch-specific resources.</p>
+                    </div>
+                    <div id="btnBsa" class="rev-card choice-card" onclick="switchSection('bsa')"
+                        style="cursor: pointer; background: rgba(52, 211, 153, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid var(--glass-border);">
+                        <i class="fas fa-school"
+                            style="font-size: 3rem; color: #34d399; margin-bottom: 1.5rem;"></i>
+                        <h3>BSA College</h3>
+                        <p>Manage BSA PYPs (STs, PUT, UT).</p>
                     </div>
                 </div>
             </div>
@@ -274,6 +282,7 @@
                 </div>
             </div>
 
+            <!-- College Manager Section (Initially Hidden) -->
             <!-- College Manager Section (Initially Hidden) -->
             <div id="collegeManager" style="display: none;">
                 <div class="admin-header">
@@ -327,8 +336,62 @@
                         <div id="collegeContainer"></div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> <!-- End of College Manager -->
+
+            <!-- BSA Manager Section (Initially Hidden) -->
+            <div id="bsaManager" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
+                            class="fas fa-arrow-left" onclick="showChoice()"
+                            style="cursor: pointer; font-size: 1.5rem; margin-right: 1rem; opacity: 0.5;"></i> College <span class="gradient-text">BSA</span>
+                    </h1>
+                    <div class="stats-badge"
+                        style="background: rgba(52, 211, 153, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #34d399;">
+                        <span id="totalBsa">0</span> Resources
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="upload-card">
+                        <h3>Add BSA Paper</h3>
+                        <form id="bsaForm" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select id="bsaYear" class="form-control" required onchange="updateBsaSubjects()">
+                                    <option value="year1">1st Year</option>
+                                    <option value="year2">2nd Year</option>
+                                    <option value="year3">3rd Year</option>
+                                    <option value="year4">Final Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Subject</label>
+                                <select id="bsaSubject" class="form-control" required>
+                                    <!-- Dynamic Subjects -->
+                                </select>
+                                <input type="text" id="bsaSubjectCustom" class="form-control"
+                                    placeholder="Or type new subject..." style="margin-top: 10px;">
+                            </div>
+                            <div class="form-group">
+                                <label>Paper Type (Sub Branch / Variant)</label>
+                                <input type="text" id="bsaPaperType" class="form-control"
+                                    placeholder="e.g. ST-1, PUT 2024, ST-2" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Paper URL</label>
+                                <input type="url" id="bsaLink" class="form-control" placeholder="https://..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; border-color: #34d399; background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">Add to BSA Portal</button>
+                        </form>
+                    </div>
+                    <div class="data-list-card">
+                        <div id="bsaContainer"></div>
+                    </div>
+                </div>
+            </div> <!-- End of BSA Manager -->
+
+        </div> <!-- End of Container -->
     </main>
 
     <script src="../js/script.js"></script>
@@ -341,11 +404,32 @@
             year4: ["Cloud Computing", "AI", "Mobile Computing", "Cyber Security", "Machine Learning"]
         };
 
+        
+        const bsaSubjectsData = {
+            year1: ["Mathematics-1", "Mathematics-2", "Physics", "Chemistry", "PPS", "Mechanical", "Electrical", "EVS"],
+            year2: ["Data Structures", "Operating System", "COA", "Python", "Cyber Security"],
+            year3: ["DAA", "DBMS", "Computer Networks", "Software Engineering"],
+            year4: ["Machine Learning", "Cloud Computing", "AI"]
+        };
+        function updateBsaSubjects() {
+            const year = document.getElementById('bsaYear').value;
+            const subDropdown = document.getElementById('bsaSubject');
+            if (!subDropdown) return;
+            subDropdown.innerHTML = `<option value="">-- Choose Subject --</option>`;
+            if (bsaSubjectsData[year]) {
+                bsaSubjectsData[year].forEach(sub => {
+                    subDropdown.innerHTML += `<option value="${sub}">${sub}</option>`;
+                });
+            }
+            subDropdown.innerHTML += `<option value="others">Others (Custom)</option>`;
+        }
+
         function switchSection(type) {
             console.log("Switching to section:", type);
             const choice = document.getElementById('adminChoice');
             const aktu = document.getElementById('aktuManager');
             const college = document.getElementById('collegeManager');
+            const bsa = document.getElementById('bsaManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -356,10 +440,17 @@
             if (type === 'aktu') {
                 aktu.style.display = 'block';
                 college.style.display = 'none';
-            } else {
+                if(bsa) bsa.style.display = 'none';
+            } else if (type === 'college') {
                 college.style.display = 'block';
                 aktu.style.display = 'none';
+                if(bsa) bsa.style.display = 'none';
                 updateSubjects();
+            } else if (type === 'bsa') {
+                if(bsa) bsa.style.display = 'block';
+                college.style.display = 'none';
+                aktu.style.display = 'none';
+                updateBsaSubjects();
             }
         }
 
@@ -368,6 +459,7 @@
             document.getElementById('adminChoice').style.display = 'block';
             document.getElementById('aktuManager').style.display = 'none';
             document.getElementById('collegeManager').style.display = 'none';
+            const bm = document.getElementById('bsaManager'); if(bm) bm.style.display = 'none';
         }
 
         function updateSubjects() {
@@ -387,8 +479,10 @@
         // Initialize listeners
         const b1 = document.getElementById('btnAktu');
         const b2 = document.getElementById('btnCollege');
+        const b3 = document.getElementById('btnBsa');
         if (b1) b1.onclick = () => switchSection('aktu');
         if (b2) b2.onclick = () => switchSection('college');
+        if (b3) b3.onclick = () => switchSection('bsa');
     </script>
     <style>
         .choice-card:hover {
@@ -397,7 +491,7 @@
             box-shadow: 0 20px 40px rgba(56, 189, 248, 0.1);
         }
 
-        #btnCollege:hover {
+        #btnCollege:hover, #btnBsa:hover {
             border-color: var(--accent-secondary) !important;
             box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
         }
@@ -513,6 +607,49 @@
             btn.disabled = false;
             btn.innerText = 'Add to College Portal';
         };
+
+        // BSA College Form Handlers and Listener
+        const bsaContainer = document.getElementById('bsaContainer');
+        const totalBsa = document.getElementById('totalBsa');
+
+        const qBsa = query(collection(db, "resources"), where("category", "==", "bsacollege"));
+        onSnapshot(qBsa, (snap) => {
+            const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            if(totalBsa) totalBsa.innerText = data.length;
+            if(bsaContainer) renderList(data, bsaContainer, 'bsa');
+        }, (err) => console.error("BSA Listener Error:", err));
+
+        const bsaForm = document.getElementById('bsaForm');
+        if(bsaForm) {
+            bsaForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const subSelect = document.getElementById('bsaSubject').value;
+                const subCustom = document.getElementById('bsaSubjectCustom').value;
+                const finalSubject = subSelect === 'others' ? subCustom : subSelect;
+
+                if (!finalSubject) return alert('Please select or enter a subject name');
+
+                btn.disabled = true;
+                btn.innerText = 'Processing...';
+                try {
+                    await addDoc(collection(db, "resources"), {
+                        category: 'bsacollege',
+                        title: finalSubject,
+                        paperType: document.getElementById('bsaPaperType').value,
+                        year: document.getElementById('bsaYear').value,
+                        link: document.getElementById('bsaLink').value,
+                        createdAt: new Date()
+                    });
+                    e.target.reset();
+                    updateBsaSubjects();
+                    alert('Success! Paper added to BSA Portal.');
+                } catch (err) { alert(err.message); }
+                btn.disabled = false;
+                btn.innerText = 'Add to BSA Portal';
+            };
+        }
 
         // Logout
         document.getElementById('logoutBtn').onclick = () => signOut(auth);

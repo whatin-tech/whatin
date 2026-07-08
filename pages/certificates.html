@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govt. Certificates | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get your Caste, Income, and Domicile certificates easily through WHATIN. Fast, clear, and designed for students.">
+    <meta name="author" content="Dushyant Saini">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../animations/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .affidavit-hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .doc-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .doc-card h4 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .doc-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .process-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .step-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .cta-container {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(0, 0, 0, 0.2));
+            border-radius: 30px;
+            border: 1px dashed var(--accent-primary);
+        }
+    </style>
+
+    
+    
+    
+    <!-- End Favicon -->
+
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+
+
+    <!-- Favicon for Browser & Google Search -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+
+    <!-- Google AdSense Integration -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
+                                    <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                    
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <!-- The page is intentionally blank for now -->
+            <div class="coming-soon" style="padding: 5rem; text-align: center; border: 1px dashed var(--glass-border); border-radius: 20px; width: 100%; margin-top: 4rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-hammer"></i> Work In Progress</h2>
+                <p style="color: var(--text-secondary);">This page is currently being built. Check back later!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JS Animation Logic -->
+    <script src="../animations/animations.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/nav-auth.js"></script>
+
+
+
+    <!-- Firebase Analytics SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+    <script>
+      const firebaseAnalyticsConfig = {
+        apiKey: "AIzaSyAQFEioBcwIrhDzOcPf7lMleVKGHHjba_8",
+        authDomain: "whatin-analytic-dabfa.firebaseapp.com",
+        databaseURL: "https://whatin-analytic-dabfa-default-rtdb.firebaseio.com",
+        projectId: "whatin-analytic-dabfa",
+        storageBucket: "whatin-analytic-dabfa.firebasestorage.app",
+        messagingSenderId: "649111328567",
+        appId: "1:649111328567:web:acdf7d5f9a52b76526ecb2"
+      };
+
+      // Ensure we don't initialize twice if another script initializes a different firebase app
+      let analyticsApp;
+      if (!firebase.apps.length) {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig);
+      } else {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
+      }
+      
+      const db = analyticsApp.database();
+
+      // ---- 1. Total Visitors Count (har page load par +1) ----
+      const visitorsRef = db.ref('stats/totalVisitors');
+      visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
+
+      // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
+      visitorsRef.on('value', (snapshot) => {
+        const el = document.getElementById('visitorCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+
+      // ---- 3. Total Clicks Count (har click par +1) ----
+      const clicksRef = db.ref('stats/totalClicks');
+      document.addEventListener('click', () => {
+        clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
+      });
+
+      // ---- 4. Live Click Count page par dikhana (if elements exist) ----
+      clicksRef.on('value', (snapshot) => {
+        const el = document.getElementById('clickCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+    </script>
+</body>
+</html>
