@@ -158,25 +158,138 @@
 
     <main>
         
-        <section id="home" class="hero-section">
-            <div class="container">
-                <h1 class="hero-title pop-left">Nexus of <span class="gradient-text">Academic</span> & <br>Technical
-                    Excellence
-                </h1>
-                <p class="hero-subtitle pop-in" style="animation-delay: 0.2s">The WHATIN Ecosystem provides a
-                    high-performance environment for students and
-                    developers to research, build, and succeed with curated, verified, and high-quality educational
-                    resources.</p>
+        <section id="home" class="hero-section hero-split-layout">
+            <div class="container hero-grid">
+                <div class="hero-text-content">
+                    <span class="hero-overline pop-left">Premium Technology</span>
+                    <h1 class="hero-title pop-left" style="animation-delay: 0.1s">Nexus of <span class="gradient-text-teal">Academic</span> & <br>Technical Excellence
+                    </h1>
+                    <p class="hero-subtitle pop-in" style="animation-delay: 0.2s">The WHATIN Ecosystem provides a high-performance environment for students and developers to research, build, and succeed with curated, verified, and high-quality educational resources.</p>
 
-                <div id="react-hero-widget"></div>
-                
-                
-                <div class="hero-cta pop-scale cin-container" style="animation-delay: 0.4s">
-                    <a href="#projects" class="btn btn-primary btn-ripple shimmer">Explore Resources</a>
-                    <a href="pages/about.html" class="btn btn-secondary btn-ripple">Learn Our Story</a>
+                    <div id="react-hero-widget"></div>
+                    
+                    <div class="hero-cta pop-scale cin-container" style="animation-delay: 0.4s">
+                        <a href="#projects" class="btn btn-gradient-teal btn-ripple shimmer">Explore Resources</a>
+                        <a href="pages/hiring.html" class="btn btn-gradient-blue btn-ripple">Join Team</a>
+                    </div>
+                    
+                    <div class="hero-carousel-dots pop-scale" style="animation-delay: 0.5s" id="hero-carousel-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                    </div>
                 </div>
-                <div class="hero-image-container" style="display: flex; justify-content: center; margin-top: 4rem; width: 100%;">
-                    <img src="images/hero-new.png" alt="Meditate" class="float-animate" style="max-width: 60%; height: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)); border-radius: 20px;">
+                
+                <div class="hero-image-content pop-scale" style="animation-delay: 0.3s" id="hero-carousel-container">
+                    
+                    <!-- Slide 0: 3D Emblem -->
+                    <div id="carousel-slide-0" class="carousel-slide active-slide">
+                        <img src="images/user_w_logo.png" alt="WHATIN Emblem" class="float-animate-slow glowing-emblem">
+                    </div>
+                    
+                    <!-- Slide 1: Hiring Box -->
+                    <div id="carousel-slide-1" class="carousel-slide">
+                        <div class="promo-box-premium">
+                            <div class="promo-header">
+                                <span class="premium-badge-cyan" style="background: rgba(250, 204, 21, 0.1); border-color: rgba(250, 204, 21, 0.3); color: #facc15;"><i class="fas fa-rocket"></i> JOIN TEAM WHATIN</span>
+                                <h2 class="promo-title-white">WE ARE <span style="color:#facc15">HIRING</span></h2>
+                                <p class="promo-desc">Our team is growing fast! Step up to a new level and be a part of our visionary journey.</p>
+                            </div>
+                            
+                            <div class="promo-grid-premium">
+                                <!-- Card 1: Cyan -->
+                                <div class="premium-card cyan-card">
+                                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> TECH</span>
+                                    <h4>Developers</h4>
+                                    <p>Build the future.</p>
+                                </div>
+                                <!-- Card 2: Purple -->
+                                <div class="premium-card purple-card">
+                                    <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> MARKETING</span>
+                                    <h4>Growth</h4>
+                                    <p>Scale our impact.</p>
+                                </div>
+                                <!-- Card 3: Blue -->
+                                <div class="premium-card blue-card">
+                                    <div class="card-icon"><i class="fas fa-pencil-ruler"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> DESIGN</span>
+                                    <h4>UI / UX</h4>
+                                    <p>Create experiences.</p>
+                                </div>
+                                <!-- Card 4: Pink -->
+                                <div class="premium-card pink-card">
+                                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> OPERATIONS</span>
+                                    <h4>Management</h4>
+                                    <p>Lead the way.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="promo-footer-premium">
+                                <a href="pages/hiring.html" class="premium-cta-btn" style="background: linear-gradient(90deg, #facc15 0%, #ca8a04 100%); color: #000; box-shadow: 0 10px 30px rgba(250, 204, 21, 0.4);">
+                                    Apply Now <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <div class="promo-trust-premium">
+                                    <span><i class="fas fa-fire" style="color:#facc15"></i> Limited Seats Available</span>
+                                    <span><i class="fas fa-chart-line" style="color:#c084fc"></i> Grow With Us</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Promo Box (Affidavit) -->
+                    <div id="carousel-slide-2" class="carousel-slide">
+                        <div class="promo-box-premium">
+                            <div class="promo-header">
+                                <span class="premium-badge-cyan"><i class="fas fa-bolt"></i> MEGA UPDATE</span>
+                                <h2 class="promo-title-white">ALL AFFIDAVITS <span class="text-cyan">LIVE</span></h2>
+                                <p class="promo-desc">Essential college documents now available with 100% legal validity.</p>
+                            </div>
+                            
+                            <div class="promo-grid-premium">
+                                <!-- Card 1: Cyan -->
+                                <div class="premium-card cyan-card">
+                                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> ANTI-RAGGING</span>
+                                    <h4>UGC Compliance</h4>
+                                    <p>Mandatory for all students.</p>
+                                </div>
+                                <!-- Card 2: Purple -->
+                                <div class="premium-card purple-card">
+                                    <div class="card-icon"><i class="fas fa-history"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> GAP CERTIFICATE</span>
+                                    <h4>Study Break</h4>
+                                    <p>Validates academic gaps.</p>
+                                </div>
+                                <!-- Card 3: Blue -->
+                                <div class="premium-card blue-card">
+                                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> SCHOLARSHIP</span>
+                                    <h4>Govt. Schemes</h4>
+                                    <p>Income declaration proof.</p>
+                                </div>
+                                <!-- Card 4: Pink -->
+                                <div class="premium-card pink-card">
+                                    <div class="card-icon"><i class="fas fa-user-edit"></i></div>
+                                    <span class="card-category"><i class="fas fa-circle"></i> CORRECTION</span>
+                                    <h4>Name Update</h4>
+                                    <p>Legal father/mother name.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="promo-footer-premium">
+                                <a href="pages/affidavit.html" class="premium-cta-btn">
+                                    Apply Now <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <div class="promo-trust-premium">
+                                    <span><i class="fas fa-check-circle" style="color:#38bdf8"></i> 100% Reliable</span>
+                                    <span><i class="fas fa-shield-alt" style="color:#c084fc"></i> Legally Valid</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -207,7 +320,7 @@
                             <p>Apply for Anti-Ragging, Gap, or any other college affidavit directly here.</p>
                         </div>
                     </a>
-                    <a href="pages/certificates.html" class="project-card pop-scale">
+                    <a href="whatingovcertification/index.html" class="project-card pop-scale">
                         <div class="card-icon"><i class="fas fa-certificate"></i></div>
                         <div class="card-content">
                             <h3>Govt. Certificates</h3>

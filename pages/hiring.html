@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Team WHATIN | We Are Hiring</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .hiring-hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+        }
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .role-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .role-card:hover {
+            border-color: #facc15;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(250, 204, 21, 0.1);
+        }
+        .role-icon {
+            font-size: 2.5rem;
+            color: #facc15;
+            margin-bottom: 1.5rem;
+        }
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+        }
+        .role-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .apply-btn {
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.1);
+            color: #facc15;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .apply-btn:hover {
+            background: #facc15;
+            color: #000;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    
+    <!-- Background Elements -->
+    <div class="glow-orb" style="top: 10%; left: 20%; background: rgba(250, 204, 21, 0.15);"></div>
+    <div class="glow-orb" style="bottom: 20%; right: 10%; background: rgba(56, 189, 248, 0.1);"></div>
+
+    <!-- Main Navigation Header -->
+    <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container header-content" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="logo" onclick="window.location.href='../index.html'" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; cursor: pointer;">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="display: flex; align-items: center; gap: 2rem; margin: 0; list-style: none;">
+                    <li><a href="../index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                    <li><a href="about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">About</a></li>
+                    <li><a href="../guidance.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Guidance</a></li>
+                    <li><a href="team.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Team</a></li>
+                    <li><a href="contributors.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header" style="background: var(--accent-gradient); color: #000; padding: 0.6rem 1.2rem; border-radius: 100px; text-decoration: none; font-weight: 700;">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px; padding-bottom: 4rem; min-height: 100vh; position: relative; overflow: hidden; display: block !important;">
+        <!-- Premium Ambient Background (Fixed position to prevent pushing content) -->
+        <div class="glow-orb" style="position: absolute; border-radius: 50%; pointer-events: none; z-index: 1; top: 10%; left: 10%; background: rgba(56, 189, 248, 0.15); width: 400px; height: 400px; filter: blur(120px);"></div>
+        <div class="glow-orb" style="position: absolute; border-radius: 50%; pointer-events: none; z-index: 1; bottom: 10%; right: 10%; background: rgba(250, 204, 21, 0.1); width: 500px; height: 500px; filter: blur(120px);"></div>
+        <div class="glow-orb" style="position: absolute; border-radius: 50%; pointer-events: none; z-index: 1; top: 40%; left: 50%; transform: translate(-50%, -50%); background: rgba(192, 132, 252, 0.1); width: 600px; height: 600px; filter: blur(150px);"></div>
+
+        <div class="container" style="position: relative; z-index: 10; max-width: 1400px; margin: 0 auto;">
+            
+            <!-- Premium Header Section -->
+            <div style="text-align: center; margin-bottom: 4rem; margin-top: 2rem;">
+                <span class="badge" style="background: rgba(250, 204, 21, 0.1); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); padding: 0.5rem 1.5rem; border-radius: 100px; font-weight: 600; letter-spacing: 2px; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(250,204,21,0.2);">JOIN THE VISION</span>
+                <h1 style="font-family: var(--font-heading); font-size: 4rem; font-weight: 800; margin-bottom: 1rem;">STEP UP AS A <span style="background: linear-gradient(90deg, #facc15, #ca8a04); -webkit-background-clip: text; color: transparent;">LEADER</span></h1>
+                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.2rem; line-height: 1.6;">Help us build the premier ecosystem for engineering students. Be a part of a fast-growing tech community and accelerate your own career.</p>
+            </div>
+            <!-- Traction / Analytics Section -->
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 24px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; max-width: 1200px; margin-left: auto; margin-right: auto; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%); z-index: 0; pointer-events: none;"></div>
+                <div style="flex: 1; min-width: 300px; position: relative; z-index: 2;">
+                    <h3 style="color: #38bdf8; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; font-weight: 700;"><i class="fas fa-chart-line" style="margin-right: 8px;"></i> Unstoppable Momentum</h3>
+                    <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2;">Be part of something <span style="background: linear-gradient(90deg, #38bdf8, #c084fc); -webkit-background-clip: text; color: transparent;">Massive</span></h2>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">WHATIN is growing at an unprecedented rate. With over <strong style="color: white; font-size: 1.2rem;">18,000+ views</strong> and <strong style="color: white; font-size: 1.2rem;">48,000+ events</strong> logged, our platform is rapidly becoming the ultimate destination for engineering students.</p>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Don't just watch the revolution happen. <strong style="color: #facc15;">Join the core team</strong> and help us steer the ship.</p>
+                </div>
+                <div style="flex: 1.5; min-width: 300px; position: relative; z-index: 2;">
+                    <div style="position: absolute; inset: -5px; background: linear-gradient(45deg, #38bdf8, #c084fc, #facc15); border-radius: 16px; opacity: 0.2; filter: blur(15px); animation: premiumPulseBg 4s infinite alternate;"></div>
+                    <img src="../images/analytics.png" alt="WHATIN Growth Analytics" style="width: 100%; border-radius: 12px; position: relative; z-index: 2; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+
+
+            <!-- Benefits / Motivation Section -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; max-width: 1200px; margin-left: auto; margin-right: auto;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 20px; text-align: center; backdrop-filter: blur(10px);">
+                    <i class="fas fa-rocket" style="font-size: 2rem; color: #38bdf8; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Fast-Track Growth</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Work on real-world projects and scale a platform that impacts thousands of students.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 20px; text-align: center; backdrop-filter: blur(10px);">
+                    <i class="fas fa-certificate" style="font-size: 2rem; color: #facc15; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Official Recognition</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Receive an official Joining Letter, Certificate of Appreciation, and a strong LOR.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 20px; text-align: center; backdrop-filter: blur(10px);">
+                    <i class="fas fa-network-wired" style="font-size: 2rem; color: #c084fc; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Elite Network</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">Connect directly with founders, mentors, and top engineering talent across India.</p>
+                </div>
+            </div>
+
+            <!-- Full Screen Glassmorphic Container for Form -->
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05); position: relative; overflow: hidden; width: 100%; margin-bottom: 0;">
+                
+                <!-- Inner decorative border -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #38bdf8, #c084fc, #facc15); border-radius: 24px 24px 0 0; z-index: 20;"></div>
+
+                <!-- Microsoft Forms Embed Code -->
+                <iframe width="100%" style="height: calc(100vh - 160px); min-height: 600px; border: none; border-radius: 16px; background: transparent; display: block;" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__XyZt3xUQUNFNk41QUlaQ1RaUlVaOTFMTkpGMUk3Sy4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer style="padding: 2rem 0; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.9rem; position: relative; z-index: 10;">
+        <p>&copy; 2024 WHATIN Ecosystem. Elevating Education.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

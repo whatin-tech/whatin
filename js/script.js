@@ -231,3 +231,48 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(injectMonetagAds, 2000);
 
 });
+
+
+/* --- Hero Content Carousel --- */
+document.addEventListener("DOMContentLoaded", () => {
+    const dotsContainer = document.getElementById("hero-carousel-dots");
+    const slides = document.querySelectorAll('.carousel-slide');
+    
+    if (slides.length > 0 && dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        let currentIndex = 0;
+        
+        function changeSlide(index) {
+            // Fade out all
+            slides.forEach(slide => slide.classList.remove('active-slide'));
+            
+            // Fade in selected
+            if (slides[index]) {
+                slides[index].classList.add('active-slide');
+            }
+            currentIndex = index;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Auto change every 30 seconds (30000 ms)
+        setInterval(() => {
+            let nextIndex = (currentIndex + 1) % slides.length;
+            changeSlide(nextIndex);
+        }, 30000);
+        
+        // Make dots clickable
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                changeSlide(index);
+            });
+        });
+    }
+});
