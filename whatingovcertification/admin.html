@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHATIN Admin Console | Submission Control Hub</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --glass-bg: rgba(31, 31, 31, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --theme-color: #38bdf8;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+
+            /* Badges colors */
+            --badge-domicile: #38bdf8;
+            --badge-caste: #c084fc;
+            --badge-income: #facc15;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06), transparent 70%);
+        }
+
+        /* Fixed Node background */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--theme-color);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            z-index: 1;
+            flex: 1;
+        }
+
+        /* Header block */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1.5rem;
+        }
+
+        .logo-block {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--theme-color) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid var(--glass-border);
+            padding: 0.7rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: var(--theme-color);
+            color: #000000;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .stat-card .value {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .stat-card.domicile-stat .value {
+            color: var(--badge-domicile);
+        }
+
+        .stat-card.caste-stat .value {
+            color: var(--badge-caste);
+        }
+
+        .stat-card.income-stat .value {
+            color: var(--badge-income);
+        }
+
+        /* Filter bar */
+        .filter-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.8rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .select-filter {
+            padding: 0.75rem 1.5rem 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            font-family: var(--font-main);
+            outline: none;
+            cursor: pointer;
+            min-width: 160px;
+        }
+
+        .select-filter option {
+            background: #0c0c0c;
+        }
+
+        /* Database View: Dynamic layout */
+        .submissions-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .submission-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submission-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #ccc;
+        }
+
+        .submission-card.type-domicile::after {
+            background: var(--badge-domicile);
+        }
+
+        .submission-card.type-caste::after {
+            background: var(--badge-caste);
+        }
+
+        .submission-card.type-income::after {
+            background: var(--badge-income);
+        }
+
+        .submission-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .submissions-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+        }
+
+        .applicant-title-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .applicant-name {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .meta-timestamp {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-badge.domicile {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .type-badge.caste {
+            background: rgba(192, 132, 252, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        .type-badge.income {
+            background: rgba(250, 204, 21, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(250, 204, 21, 0.3);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .details-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .details-item .key {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .details-item .val {
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        /* Files Section */
+        .attachments-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .attachment-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .attachment-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--theme-color);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .attachment-link.photo-type i {
+            color: #f43f5e;
+        }
+
+        .attachment-link.aadhar-type i {
+            color: #38bdf8;
+        }
+
+        .attachment-link.mark-type i {
+            color: #10b981;
+        }
+
+        .attachment-link.screenshot-type i {
+            color: #facc15;
+        }
+
+        /* UTR Copy button */
+        .utr-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .copy-utr-btn {
+            background: transparent;
+            border: none;
+            color: var(--theme-color);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .copy-utr-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border: 1px dashed var(--glass-border);
+            border-radius: var(--radius-lg);
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--theme-color);
+            opacity: 0.5;
+        }
+
+        /* Contact wa buttons */
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #25d366;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .wa-btn:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Folder info display */
+        .folder-info {
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .folder-info i {
+            color: var(--theme-color);
+        }
+
+        /* Image modal viewer (Lightbox) */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars Canvas Background Animation -->
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="container animate-reveal">
+        <!-- Admin header -->
+        <header class="admin-header">
+            <div class="logo-block" onclick="window.location.href='/'">
+                <i class="fas fa-microchip"></i> WHATIN Admin Panel
+            </div>
+
+            <button class="refresh-btn" onclick="fetchData()">
+                <i class="fas fa-rotate" id="refresh-icon"></i> Refresh Database
+            </button>
+        </header>
+
+        <!-- Stats Grid counters -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="label">Total Applications</span>
+                <span class="value" id="stat-total">0</span>
+            </div>
+            <div class="stat-card domicile-stat">
+                <span class="label">Domicile (Local Niwas)</span>
+                <span class="value" id="stat-domicile">0</span>
+            </div>
+            <div class="stat-card caste-stat">
+                <span class="label">Caste (Jati)</span>
+                <span class="value" id="stat-caste">0</span>
+            </div>
+            <div class="stat-card income-stat">
+                <span class="label">Income (Aaye)</span>
+                <span class="value" id="stat-income">0</span>
+            </div>
+        </section>
+
+        <!-- Search / Filter panel -->
+        <section class="filter-panel">
+            <div class="search-input-wrapper">
+                <i class="fas fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input"
+                    placeholder="Search by Applicant Name, UTR ID, College..." oninput="handleSearch()">
+            </div>
+
+            <select id="typeFilter" class="select-filter" onchange="handleSearch()">
+                <option value="all">All Certificate Types</option>
+                <option value="domicile">Domicile</option>
+                <option value="caste">Caste</option>
+                <option value="income">Income</option>
+            </select>
+        </section>
+
+        <!-- Submissions Grid/Table List -->
+        <section class="submissions-section" id="submissions-container">
+            <!-- Dynamic Submissions will load here -->
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading application repository...</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoomed document attachment view">
+    </div>
+
+    <script>
+        let allSubmissions = [];
+
+        async function fetchData() {
+            const refreshIcon = document.getElementById('refresh-icon');
+            refreshIcon.classList.add('fa-spin');
+
+            try {
+                const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
+                const response = await fetch(`${API_BASE}/api/admin/submissions`);
+                if (!response.ok) throw new Error('Network error');
+
+                allSubmissions = await response.json();
+                updateStats(allSubmissions);
+                renderSubmissions(allSubmissions);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('submissions-container').innerHTML = `
+                    <div class="empty-state" style="border-color: #ef4444;">
+                        <i class="fas fa-circle-exclamation" style="color: #ef4444;"></i>
+                        <p style="color: #ef4444;">Failed to fetch database submissions. Ensure your local server is running on port 3000.</p>
+                    </div>
+                `;
+            } finally {
+                setTimeout(() => refreshIcon.classList.remove('fa-spin'), 600);
+            }
+        }
+
+        function updateStats(data) {
+            document.getElementById('stat-total').textContent = data.length;
+
+            const counts = { domicile: 0, caste: 0, income: 0 };
+            data.forEach(item => {
+                const lowerType = (item.type || '').toLowerCase();
+                if (lowerType.includes('domicile')) counts.domicile++;
+                else if (lowerType.includes('caste')) counts.caste++;
+                else if (lowerType.includes('income')) counts.income++;
+            });
+
+            document.getElementById('stat-domicile').textContent = counts.domicile;
+            document.getElementById('stat-caste').textContent = counts.caste;
+            document.getElementById('stat-income').textContent = counts.income;
+        }
+
+        function renderSubmissions(data) {
+            const container = document.getElementById('submissions-container');
+            container.innerHTML = '';
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No applicant registrations found in the file system.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(item => {
+                // Determine clean type
+                const lowerType = (item.type || '').toLowerCase();
+                let cleanType = 'Domicile';
+                let classType = 'domicile';
+                if (lowerType.includes('caste')) {
+                    cleanType = 'Caste';
+                    classType = 'caste';
+                } else if (lowerType.includes('income')) {
+                    cleanType = 'Income';
+                    classType = 'income';
+                }
+
+                // Render detail fields
+                let specificFieldsHTML = '';
+                if (classType === 'caste') {
+                    specificFieldsHTML = `
+                        <div class="details-item"><span class="key">Father/Mother</span><span class="val">${item.fatherName || '-'} / ${item.motherName || '-'}</span></div>
+                        <div class="details-item"><span class="key">Gender/Category</span><span class="val">${item.gender || '-'} (${item.category || '-'})</span></div>
+                        <div class="details-item"><span class="key">Caste (Up-Jati)</span><span class="val">${item.caste || '-'} (${item.subCaste || '-'})</span></div>
+                    `;
+                } else if (classType === 'income') {
+                    specificFieldsHTML = `
+                        <div class="details-item"><span class="key">Father/Mother</span><span class="val">${item.fatherName || '-'} / ${item.motherName || '-'}</span></div>
+                        <div class="details-item"><span class="key">Occupation</span><span class="val">${item.occupation || '-'}</span></div>
+                        <div class="details-item"><span class="key">Income (Source)</span><span class="val">₹${item.annualIncome || '-'} (${item.incomeSource || '-'})</span></div>
+                    `;
+                } else { // Domicile
+                    specificFieldsHTML = `
+                        <div class="details-item"><span class="key">College Name</span><span class="val">${item.collegeName || '-'}</span></div>
+                        <div class="details-item"><span class="key">Course/Branch</span><span class="val">${item.branchName || '-'}</span></div>
+                        <div class="details-item"><span class="key">Aadhar Number</span><span class="val">${item.aadharNumber || '-'}</span></div>
+                    `;
+                }
+
+                // Build attachments/files list
+                let attachmentsHTML = '';
+                if (item.files) {
+                    const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
+                    for (const key in item.files) {
+                        const fileRelativePath = item.files[key];
+                        if (!fileRelativePath) continue;
+
+                        const fileUrl = `${API_BASE}${fileRelativePath}`;
+                        let icon = 'fa-file';
+                        let linkClass = 'photo-type';
+
+                        if (key.includes('photo')) { icon = 'fa-user-tag'; linkClass = 'photo-type'; }
+                        else if (key.includes('aadhar')) { icon = 'fa-id-card'; linkClass = 'aadhar-type'; }
+                        else if (key.includes('marksheet') || key.includes('declaration') || key.includes('proof')) { icon = 'fa-file-invoice'; linkClass = 'mark-type'; }
+                        else if (key.includes('screenshot')) { icon = 'fa-money-bill-transfer'; linkClass = 'screenshot-type'; }
+
+                        const fileExt = fileRelativePath.split('.').pop().toLowerCase();
+                        const isImage = ['jpg', 'jpeg', 'png', 'webp'].includes(fileExt);
+
+                        if (isImage) {
+                            attachmentsHTML += `
+                                <a href="javascript:void(0)" class="attachment-link ${linkClass}" onclick="openLightbox('${fileUrl}')">
+                                    <i class="fas ${icon}"></i> View ${key.toUpperCase()}
+                                </a>
+                            `;
+                        } else {
+                            attachmentsHTML += `
+                                <a href="${fileUrl}" target="_blank" class="attachment-link ${linkClass}">
+                                    <i class="fas ${icon}"></i> Open ${key.toUpperCase()}
+                                </a>
+                            `;
+                        }
+                    }
+                }
+
+                const card = document.createElement('div');
+                card.className = `submission-card type-${classType}`;
+
+                const timeString = new Date(item.submittedAt || item.id).toLocaleString();
+                const waLink = item.whatsapp ? `https://wa.me/91${item.whatsapp.replace(/[^0-9]/g, '')}` : '#';
+
+                card.innerHTML = `
+                    <div class="submissions-header-row">
+                        <div class="applicant-title-info">
+                            <span class="applicant-name">${item.fullName || 'No Name'}</span>
+                            <span class="meta-timestamp"><i class="far fa-clock"></i> Submitted: ${timeString}</span>
+                        </div>
+                        
+                        <div style="display:flex; align-items:center; gap: 10px;">
+                            <span class="type-badge ${classType}">${cleanType} Application</span>
+                            <div class="utr-display">
+                                <span>UTR: ${item.utr || 'none'}</span>
+                                <button class="copy-utr-btn" onclick="copyText('${item.utr}')" title="Copy UTR ID"><i class="far fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="details-item"><span class="key">WhatsApp Contact</span><span class="val"><a href="${waLink}" target="_blank" class="wa-btn"><i class="fab fa-whatsapp"></i> ${item.whatsapp || 'No WhatsApp'}</a></span></div>
+                        <div class="details-item"><span class="key">Email Info</span><span class="val">${item.email || '-'}</span></div>
+                        <div class="details-item"><span class="key">Preferred Slot</span><span class="val" style="color:var(--theme-color); font-weight:600;"><i class="far fa-calendar-check"></i> ${item.timeSlot ? item.timeSlot.replace('T', ' ') : '-'}</span></div>
+                        
+                        ${specificFieldsHTML}
+                        
+                        <div class="details-item" style="grid-column: 1 / -1;"><span class="key">Permanent Address</span><span class="val">${item.address || 'No address logged.'}</span></div>
+                    </div>
+
+                    <div class="attachments-section">
+                        ${attachmentsHTML || '<span style="font-size:0.85rem; color:var(--text-secondary);">No attached files.</span>'}
+                    </div>
+
+                    <div class="folder-info">
+                        <i class="fas fa-folder-open"></i> Local directory: <code>uploads/${item.folderName || 'unknown'}</code> &rarr; containing all files $+ data.json$
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filterType = document.getElementById('typeFilter').value;
+
+            const filtered = allSubmissions.filter(item => {
+                // Filter by type
+                const lowerType = (item.type || '').toLowerCase();
+                let cleanType = 'domicile';
+                if (lowerType.includes('caste')) cleanType = 'caste';
+                else if (lowerType.includes('income')) cleanType = 'income';
+
+                if (filterType !== 'all' && cleanType !== filterType) {
+                    return false;
+                }
+
+                // Filter by keyword query
+                const name = (item.fullName || '').toLowerCase();
+                const utr = (item.utr || '').toLowerCase();
+                const college = (item.collegeName || '').toLowerCase();
+                const address = (item.address || '').toLowerCase();
+                const whatsapp = (item.whatsapp || '');
+
+                return name.includes(query) ||
+                    utr.includes(query) ||
+                    college.includes(query) ||
+                    address.includes(query) ||
+                    whatsapp.includes(query);
+            });
+
+            renderSubmissions(filtered);
+        }
+
+        function openLightbox(url) {
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function copyText(text) {
+            if (!text || text === 'undefined') return;
+            navigator.clipboard.writeText(text);
+            alert('UTR ID copied to clipboard: ' + text);
+        }
+
+        // Initialize Glowing Node Network background canvas
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes;
+
+        function initNodes() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            nodes = [];
+            const nodeCount = Math.min(Math.floor((width * height) / 12000), 80);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animateNodes() {
+            requestAnimationFrame(animateNodes);
+            ctx.clearRect(0, 0, width, height);
+
+            const connectionDistance = 110;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - (dist / connectionDistance)) * 0.18;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        window.addEventListener('resize', initNodes);
+        initNodes();
+        animateNodes();
+
+        // Initial fetch
+        fetchData();
+    </script>
+</body>
+
+</html>

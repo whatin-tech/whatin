@@ -1,0 +1,198 @@
+========================================================================
+             WHATIN CERTIFICATE ASSISTANCE PORTAL
+      GOOGLE SHEETS & APPS SCRIPT INTEGRATION GUIDE
+========================================================================
+
+This guide explains how to set up a 100% free cloud backend using Google Drive
+and Google Sheets for receiving applicant details, text fields, and document uploads.
+
+------------------------------------------------------------------------
+STEP 1: Create a Google Drive Storage Folder
+------------------------------------------------------------------------
+1. Go to Google Drive (https://drive.google.com).
+2. Create a new folder named "WHATIN Certificate Uploads".
+3. Open this folder, copy its folder ID from the URL:
+   Example URL: https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J...
+   Folder ID: 1A2B3C4D5E6F7G8H9I0J... (Save this ID).
+
+------------------------------------------------------------------------
+STEP 2: Create the Google Spreadsheet
+------------------------------------------------------------------------
+1. Create a new Google Spreadsheet (https://sheets.new).
+2. Name it "WHATIN Certificate Registry".
+3. The script below will automatically append rows containing fields in this order:
+   - Registration Date / Time
+   - Application Type
+   - Applicant Full Name
+   - Father's/Guardian's Name
+   - Mother's Name (Caste/Income only)
+   - WhatsApp Number
+   - Email Address
+   - Gender (Caste only)
+   - Category (Caste only)
+   - Caste (Jati)
+   - Sub-Caste (Up-Jati)
+   - Occupation (Income only)
+   - Annual Income (Income only)
+   - Income Source (Income only)
+   - College Name
+   - Branch / Course Name
+   - Preferred Calling Time Slot
+   - Address
+   - Speed/Processing Plan
+   - UTR / Transaction ID
+   - Photo File Link
+   - Aadhar File Link
+   - 10th Marksheet/File Link
+   - 12th Marksheet/Self-Dec Link
+   - Caste/Income Proof Link
+   - Payment Screenshot Link
+
+------------------------------------------------------------------------
+STEP 3: Write Google Apps Script Code
+------------------------------------------------------------------------
+1. In your newly created Google Sheet, click Extensions > Apps Script.
+2. Replace all existing code in the editor with this script:
+
+```javascript
+// Replace this with your actual Google Drive Folder ID from Step 1
+const FOLDER_ID = "YOUR_GOOGLE_DRIVE_FOLDER_ID_HERE";
+
+// OPTIONAL: If you created a standalone script from script.google.com
+// instead of Extensions > Apps Script in the sheet, paste your Google Sheet ID below:
+const SPREADSHEET_ID = ""; // e.g. "1A2B3C4D..." (Leave empty if bound)
+
+function doPost(e) {
+  try {
+    const requestData = JSON.parse(e.postData.contents);
+    
+    // 1. Get the target spreadsheet and sheet/tab safely
+    let ss;
+    if (typeof SPREADSHEET_ID !== 'undefined' && SPREADSHEET_ID && SPREADSHEET_ID !== "") {
+      ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    } else {
+      ss = SpreadsheetApp.getActiveSpreadsheet();
+    }
+    
+    if (!ss) {
+      throw new Error("Spreadsheet not found. Please bind the script to your Sheet (Extensions > Apps Script) or set your SPREADSHEET_ID.");
+    }
+    
+    let sheet = ss.getSheets()[0];
+    if (!sheet) {
+      sheet = ss.insertSheet();
+    }
+    
+    const folder = DriveApp.getFolderById(FOLDER_ID);
+    const timestamp = new Date();
+    const fileUrls = {};
+
+    // 2. Process and save base64 uploads into Google Drive folder
+    if (requestData.files) {
+      for (const key in requestData.files) {
+        try {
+          const fileInfo = requestData.files[key];
+          if (fileInfo && fileInfo.base64) {
+            const bytes = Utilities.base64Decode(fileInfo.base64);
+            const blob = Utilities.newBlob(bytes, fileInfo.mimeType, fileInfo.filename);
+            const file = folder.createFile(blob);
+            file.setSharing(DriveApp.Access.ANYONE, DriveApp.Permission.VIEW);
+            fileUrls[key] = file.getUrl();
+          } else {
+            fileUrls[key] = "";
+          }
+        } catch (fileErr) {
+          fileUrls[key] = "Error saving file: " + fileErr.toString();
+        }
+      }
+    }
+
+    // 3. Extract incoming values
+    const type = requestData.type || "Assistance";
+    const fullName = requestData.fullName || "";
+    const fatherName = requestData.fatherName || "";
+    const motherName = requestData.motherName || "";
+    const whatsapp = requestData.whatsapp || "";
+    const email = requestData.email || "";
+    const gender = requestData.gender || "";
+    const category = requestData.category || "";
+    const caste = requestData.caste || "";
+    const subCaste = requestData.subCaste || "";
+    const occupation = requestData.occupation || "";
+    const annualIncome = requestData.annualIncome || "";
+    const incomeSource = requestData.incomeSource || "";
+    const collegeName = requestData.collegeName || "";
+    const branchName = requestData.branchName || "";
+    const timeSlot = requestData.timeSlot || "";
+    const address = requestData.address || "";
+    const processingPlan = requestData.processingPlan || "";
+    const utr = requestData.utr || "";
+
+    // 4. Append to the Google Spreadsheet Row
+    sheet.appendRow([
+      timestamp,
+      type,
+      fullName,
+      fatherName,
+      motherName,
+      whatsapp,
+      email,
+      gender,
+      category,
+      caste,
+      subCaste,
+      occupation,
+      annualIncome,
+      incomeSource,
+      collegeName,
+      branchName,
+      timeSlot,
+      address,
+      processingPlan,
+      utr,
+      fileUrls.photo || "",
+      fileUrls.aadhar || "",
+      fileUrls.declaration || fileUrls.marksheet10 || "",
+      fileUrls.marksheet12 || "",
+      fileUrls.incomeproof || fileUrls.casteproof || "",
+      fileUrls.screenshot || ""
+    ]);
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      message: "Application logged successfully!"
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      error: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+
+------------------------------------------------------------------------
+STEP 4: Deploy and Obtain the Web App SCRIPT_URL
+------------------------------------------------------------------------
+1. Click the Deploy button in the top right of Apps Script, select New deployment.
+2. Select Web app as the type.
+3. Configure the settings:
+   - Description: "WHATIN Certificate Registry Web App"
+   - Execute as: "Me (your-email@gmail.com)"
+   - Who has access: "Anyone" (This is crucial, or submissions will fail).
+4. Click Deploy, authorize any permissions requested by Google.
+5. Copy the generated Web App URL (ends in `/exec`).
+6. Update the `SCRIPT_URL` variable in your site files:
+   - `domicile.html`
+   - `caste.html`
+   - `income.html`
+   - `assistance.html`
+
+------------------------------------------------------------------------
+TESTING & VERIFICATION
+------------------------------------------------------------------------
+Submit a test form from any certificate page. Upon successful submission:
+1. A new row will list the student, college name, branch, slot time, and details.
+2. The custom files will render direct view URL links to Google Drive storage.
+3. Easy filtering/sorting can be set up in Sheets to count student density by College/Branch!

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domicile Certificate Portal | WHATIN</title>
+    <!-- Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Site Styles for Header -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Shared Stylesheet -->
+    <link rel="stylesheet" href="certificate_style.css">
+
+    <style>
+        :root {
+            /* Domicile Blue Theme Customizations */
+            --theme-color: #38bdf8;
+            /* Bright Sky Blue */
+            --theme-color-rgb: 56, 189, 248;
+            /* RGB array for translucency */
+            --theme-glow: rgba(56, 189, 248, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars Canvas Background Animation -->
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="container">
+
+        <!-- Main Navigation Header -->
+        <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <div class="container header-content" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
+                <div class="logo" onclick="window.location.href='../index.html'" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; cursor: pointer;">WHATIN 💡</div>
+                <nav id="nav-menu">
+                    <ul style="display: flex; align-items: center; gap: 2rem; margin: 0; list-style: none;">
+                        <li><a href="../index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                        <li><a href="../pages/about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">About</a></li>
+                        <li><a href="../guidance.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Guidance</a></li>
+                        <li><a href="../pages/team.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Team</a></li>
+                        <li><a href="../pages/contributors.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Contributors</a></li>
+                        <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="../pages/login.html" class="admin-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-lock"></i> Admin</a></li>
+                        <li><a href="../index.html#projects" class="cta-btn-header" style="background: var(--accent-gradient); color: #000; padding: 0.6rem 1.2rem; border-radius: 100px; text-decoration: none; font-weight: 700;">Resources</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-btn" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem;">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Spacer for fixed header -->
+        <div style="margin-top: 80px;"></div>
+
+        <!-- Back Link -->
+        <div class="back-link-container animate-reveal delay-1">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Return to Dashboard</a>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header animate-reveal delay-1">
+            <h1>Domicile Certificate</h1>
+            <p>Mool Niwas Praman Patra Application & Fast-Track Assistance</p>
+        </div>
+
+        <!-- Section 1: Required Checklist & Info -->
+        <div class="card-panel animate-reveal delay-2">
+            <h2 class="card-panel-title"><i class="fas fa-clipboard-list"></i> Document Requirements Checklist</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Ensure you have clear scanned copies of these
+                documents ready before proceeding with the application form.</p>
+            <div class="checklist-grid">
+                <div class="checklist-item">
+                    <i class="fas fa-user-circle"></i>
+                    <div>
+                        <strong>Passport Size Photo</strong>
+                        <span>Recent, colored photo with a light/white background.</span>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <i class="fas fa-id-card"></i>
+                    <div>
+                        <strong>Aadhar Card</strong>
+                        <span>Front and back in one single clear document file.</span>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <i class="fas fa-scroll"></i>
+                    <div>
+                        <strong>10th Marksheet</strong>
+                        <span>Required to verify candidate date of birth and spelling.</span>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <i class="fas fa-file-signature"></i>
+                    <div>
+                        <strong>Self-Declaration Form</strong>
+                        <span>Filled and signed by self/guardian. <a
+                                href="https://edistrict.up.gov.in/edistrict/formatDownload.html"
+                                style="color: var(--theme-color); font-weight: 700; text-decoration: underline;"
+                                target="_blank">Download Format</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Pricing Details -->
+        <div class="card-panel animate-reveal delay-2" style="box-shadow: 0 0 35px var(--theme-glow);">
+            <h2 class="card-panel-title"><i class="fas fa-tags"></i> Processing Fee Details</h2>
+            <div class="pricing-card active-plan"
+                style="max-width: 480px; margin: 0 auto; border-color: var(--theme-color); box-shadow: 0 0 25px var(--theme-glow);">
+                <div class="badge" style="background: var(--theme-color); color: #000;">Flat Rate</div>
+                <h3>Standard Processing Mode</h3>
+                <div class="timeframe">Est: 3 - 7 Business Days</div>
+                <div class="price">₹99</div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check-circle"></i> Service Portal Setup Included</li>
+                    <li><i class="fas fa-check-circle"></i> Document Audit & Verification</li>
+                    <li><i class="fas fa-check-circle"></i> Digital Certificate Delivery via WhatsApp</li>
+                </ul>
+            </div>
+        </div>
+
+        <form id="applicationForm">
+            <!-- Section 3: Applicant Details Form -->
+            <div class="card-panel animate-reveal delay-3">
+                <h2 class="card-panel-title"><i class="fas fa-user-edit"></i> Applicant Information</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" name="fullName" placeholder="As per your Aadhar Card"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <div class="input-wrapper">
+                            <i class="fab fa-whatsapp"></i>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="10-digit mobile number"
+                                pattern="[0-9]{10}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="example@whatin.in" required>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="processingPlan" name="processingPlan" value="standard">
+
+                    <div class="form-group">
+                        <label for="collegeName">College Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-university"></i>
+                            <input type="text" id="collegeName" name="collegeName" placeholder="Enter College Name"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="branchName">Branch / Course Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-graduation-cap"></i>
+                            <input type="text" id="branchName" name="branchName" placeholder="e.g. B.Tech CSE, BCA"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="timeSlot">Preferred Calling / Meeting Time Slot (for OTP/verification)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="datetime-local" id="timeSlot" name="timeSlot" required
+                                style="color-scheme: dark;">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="address">Permanent Residential Address</label>
+                        <div class="input-wrapper textarea-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <textarea id="address" name="address"
+                                placeholder="House No, Village/City, Tehsil, Pincode, Uttar Pradesh"
+                                required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Document Uploads -->
+            <div class="card-panel animate-reveal delay-3">
+                <h2 class="card-panel-title"><i class="fas fa-file-upload"></i> Supporting Document Uploads</h2>
+                <div class="file-grid">
+                    <!-- Photo -->
+                    <div class="drop-zone" id="dz-photo">
+                        <i class="fas fa-camera-retro"></i>
+                        <div class="drop-zone-title">Passport Photo</div>
+                        <div class="drop-zone-desc">(JPG/PNG max 5MB)</div>
+                        <div class="file-name" id="fn-photo"></div>
+                        <input type="file" name="photo" accept="image/jpeg, image/png" required
+                            onchange="handleFile(this, 'fn-photo', 'dz-photo')">
+                    </div>
+
+                    <!-- Aadhar -->
+                    <div class="drop-zone" id="dz-aadhar">
+                        <i class="fas fa-id-card"></i>
+                        <div class="drop-zone-title">Aadhar (Front & Back)</div>
+                        <div class="drop-zone-desc">(JPG/PNG/PDF max 5MB)</div>
+                        <div class="file-name" id="fn-aadhar"></div>
+                        <input type="file" name="aadhar" accept="image/jpeg, image/png, application/pdf" required
+                            onchange="handleFile(this, 'fn-aadhar', 'dz-aadhar')">
+                    </div>
+
+                    <!-- 10th Marks -->
+                    <div class="drop-zone" id="dz-marksheet10">
+                        <i class="fas fa-file-invoice"></i>
+                        <div class="drop-zone-title">10th Marksheet</div>
+                        <div class="drop-zone-desc">(JPG/PNG/PDF max 5MB)</div>
+                        <div class="file-name" id="fn-marksheet10"></div>
+                        <input type="file" name="marksheet10" accept="image/jpeg, image/png, application/pdf" required
+                            onchange="handleFile(this, 'fn-marksheet10', 'dz-marksheet10')">
+                    </div>
+
+                    <!-- 12th Marks / Self Dec -->
+                    <div class="drop-zone" id="dz-marksheet12">
+                        <i class="fas fa-file-signature"></i>
+                        <div class="drop-zone-title">12th Marksheet / Self Dec</div>
+                        <div class="drop-zone-desc">(JPG/PNG/PDF max 5MB)</div>
+                        <div class="file-name" id="fn-marksheet12"></div>
+                        <input type="file" name="marksheet12" accept="image/jpeg, image/png, application/pdf" required
+                            onchange="handleFile(this, 'fn-marksheet12', 'dz-marksheet12')">
+                    </div>
+
+                    <!-- Payment Screenshot -->
+                    <div class="drop-zone" id="dz-screenshot">
+                        <i class="fas fa-receipt"></i>
+                        <div class="drop-zone-title">Payment Screenshot</div>
+                        <div class="drop-zone-desc">(Upload UPI payment proof JPG/PNG max 5MB)</div>
+                        <div class="file-name" id="fn-screenshot"></div>
+                        <input type="file" name="screenshot" accept="image/jpeg, image/png" required
+                            onchange="handleFile(this, 'fn-screenshot', 'dz-screenshot')">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Escrow Payment Gateway -->
+            <div class="card-panel animate-reveal delay-4">
+                <h2 class="card-panel-title"><i class="fas fa-shield-check"></i> Escrow Processing Payment</h2>
+
+                <div class="payment-placeholder">
+                    <div class="fee-badge">Required Processing Fee</div>
+                    <div class="fee-amount" id="feeAmount">₹99</div>
+
+                    <div class="qr-block-wrapper">
+                        <img id="qrImage" src="" alt="Payment QR Code">
+                        <div class="qr-block-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                            <span>Generating QR...</span>
+                        </div>
+                    </div>
+
+                    <div class="utr-input-box">
+                        <div class="form-group" style="text-align: left; margin-bottom: 2rem;">
+                            <label for="utr">UPI Refernce/Transaction Number (12-digit UTR)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-receipt"></i>
+                                <input type="text" id="utr" name="utr" placeholder="e.g. 308947593847"
+                                    pattern="[0-9]{12}" minlength="12" maxlength="12" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Pay & Submit Application</span>
+                        <div class="spinner" id="btnSpinner"></div>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Section 6: Steps Guide -->
+        <div class="card-panel animate-reveal delay-4">
+            <h2 class="card-panel-title"><i class="fas fa-road"></i> Steps of Processing Flow</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <i class="fas fa-file-edit"></i>
+                    <h4>Fill Form Details</h4>
+                    <p>Enter your correct legal particulars exactly matching your permanent address proof.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Upload Scans</h4>
+                    <p>Attach clear passport photo, Aadhar card and primary academic marksheet files.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <i class="fas fa-qrcode"></i>
+                    <h4>UPI Payment Verification</h4>
+                    <p>Scan the Dynamic QR, input standard/priority amount and copy the 12-digit UTR ID here.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">04</span>
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>Receive PDF</h4>
+                    <p>Registrar approves. A digitally verified copy gets delivered automatically on WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: FAQs Accordions -->
+        <div class="card-panel animate-reveal delay-4">
+            <h2 class="card-panel-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Who is eligible for a Domicile Certificate in UP?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>Any individual who is a permanent resident of Uttar Pradesh, or whose parents are native
+                            inhabitants of the state, or who has studied in Uttar Pradesh for at least 5 years and
+                            completed primary studies, is eligible to apply for a Domicile Certificate.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Can I apply if my current Aadhar has my college address?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>No. You must apply using the address of your permanent parental home. Your permanent native
+                            house address determines your domicile status. If your current Aadhar address differs, you
+                            must provide your father's domicile proof/registry/electricity bill as supplementary
+                            evidence.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>What is the processing fee and time?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>We charge a flat ₹99 fee for processing and assisting with your certificate. The average
+                            processing time is 3 to 7 business days depending on government desk queues.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>What is the self-declaration form?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>The UP Government requires a signed Self-Declaration Form stating that the facts given are
+                            entirely true. You can download this format PDF from the link at the top, sign it manually,
+                            snap a photo, and upload it in the fourth upload zone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="index.html#projects">Services</a>
+                <a href="assistance.html">Assistance</a>
+                <a href="pages/contact.html">Support</a>
+                <a href="pages/privacy-policy.html">Privacy</a>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Administered by Dushyant Saini & Neelesh Tiwari.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // Handle File Selection
+        function handleFile(input, labelId, zoneId) {
+            const label = document.getElementById(labelId);
+            const zone = document.getElementById(zoneId);
+            if (input.files && input.files.length > 0) {
+                const name = input.files[0].name;
+                label.textContent = name.length > 25 ? name.substring(0, 22) + '...' : name;
+                label.style.display = 'block';
+                zone.style.borderColor = 'var(--theme-color)';
+                zone.style.background = 'rgba(var(--theme-color-rgb), 0.05)';
+            } else {
+                label.style.display = 'none';
+                zone.style.borderColor = 'rgba(255,255,255,0.15)';
+                zone.style.background = 'rgba(0,0,0,0.25)';
+            }
+        }
+
+        // Accordion Toggle
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close other items
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Plan Selection Logic
+        function selectPlan(plan) {
+            const planSelector = document.getElementById('processingPlan');
+            planSelector.value = plan;
+            updateUIForSelectedPlan(plan);
+        }
+
+        function onPlanDropdownChange() {
+            const selected = document.getElementById('processingPlan').value;
+            updateUIForSelectedPlan(selected);
+        }
+
+        function updateUIForSelectedPlan(plan) {
+            const feeLabel = document.getElementById('feeAmount');
+            if (feeLabel) feeLabel.textContent = '₹99';
+            updateQRCode(plan);
+        }
+
+        // Dynamic QR Generator
+        function updateQRCode(plan) {
+            const price = 99;
+            const upiId = 'ash07682589@okaxis';
+            const payeeName = encodeURIComponent('Neelesh Tiwari');
+            const note = encodeURIComponent('WHATIN Domicile Assistance');
+            const upiString = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${price}&tn=${note}`;
+
+            const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
+            document.getElementById('qrImage').src = qrImageUrl;
+        }
+
+        // Base64 File Converter Helper
+        const fileToBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve({
+                base64: reader.result.split(',')[1],
+                filename: file.name,
+                mimeType: file.type
+            });
+            reader.onerror = error => reject(error);
+        });
+
+        // Form Submit Handler
+        document.getElementById('applicationForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const btnText = btn.querySelector('.btn-text');
+            const spinner = document.getElementById('btnSpinner');
+
+            // Apply animation and block interactions
+            btn.classList.add('shimmering');
+            setTimeout(() => btn.classList.remove('shimmering'), 500);
+
+            btn.disabled = true;
+            btnText.textContent = 'Uploading Documents...';
+            spinner.style.display = 'block';
+
+            // Google Apps Script endpoint
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVuEY8fATjrgY3xFguww4LMkP2Ot624FsuUSYmyep0zurczgc9hreymNYcq7KEM8zxrg/exec';
+
+            try {
+                const activePlanLabel = 'Standard (₹99)';
+
+                const data = {
+                    type: 'Domicile',
+                    fullName: document.getElementById('fullName').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    collegeName: document.getElementById('collegeName').value,
+                    branchName: document.getElementById('branchName').value,
+                    timeSlot: document.getElementById('timeSlot').value,
+                    address: document.getElementById('address').value,
+                    processingPlan: activePlanLabel,
+                    utr: document.getElementById('utr').value,
+                    files: {}
+                };
+
+                const fileInputs = {
+                    photo: this.elements['photo'],
+                    aadhar: this.elements['aadhar'],
+                    marksheet10: this.elements['marksheet10'],
+                    marksheet12: this.elements['marksheet12'],
+                    screenshot: this.elements['screenshot']
+                };
+
+                for (const key in fileInputs) {
+                    const input = fileInputs[key];
+                    if (input && input.files && input.files[0]) {
+                        btnText.textContent = `Encoding ${key} file...`;
+                        data.files[key] = await fileToBase64(input.files[0]);
+                    }
+                }
+
+                btnText.textContent = 'Transmitting Server Registry...';
+
+                // Send request
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                alert('Congratulations! Your Domicile Certificate Assistance Application has been logged successfully. We will notify you on WhatsApp within the selected timeframe.');
+                this.reset();
+
+                // Clear labels
+                document.querySelectorAll('.file-name').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.drop-zone').forEach(el => {
+                    el.style.borderColor = 'rgba(255,255,255,0.15)';
+                    el.style.background = 'rgba(0,0,0,0.25)';
+                });
+
+                // Default plan reset
+                updateUIForSelectedPlan('standard');
+
+            } catch (err) {
+                console.error(err);
+                alert('Server response delayed or offline. Please contact the administrator directly for emergency assistance.');
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Pay & Submit Application';
+                spinner.style.display = 'none';
+            }
+        });
+
+        // Initialize Glowing Node Network background canvas
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes;
+
+        function initNodes() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            nodes = [];
+            const nodeCount = Math.min(Math.floor((width * height) / 12000), 80);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animateNodes() {
+            requestAnimationFrame(animateNodes);
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect close nodes (constellation effect)
+            const connectionDistance = 110;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - (dist / connectionDistance)) * 0.22;
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw individual nodes
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        window.addEventListener('resize', initNodes);
+        initNodes();
+        animateNodes();
+
+        // Initial QR Code draw
+        updateQRCode('standard');
+    </script>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

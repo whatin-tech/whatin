@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Application Center | WHATIN</title>
+    <!-- Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Site Styles for Header -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        :root {
+            /* Exact whatin.in Original Dark Theme Colors */
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --accent-primary: #ffffff;
+            --accent-secondary: #a1a1aa;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(31, 31, 31, 0.62);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            --surface-light: #111111;
+
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-xxl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            /* Exact whatin background gradient */
+            background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 70%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation Canvas Placeholder (like main site) */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ----- Animations ----- */
+        @keyframes fadeInUpScale {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animate-reveal {
+            opacity: 0;
+            animation: fadeInUpScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.3s;
+        }
+
+        /* ----- Header ----- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 850;
+            margin-bottom: 0.5rem;
+            /* Gradient Text matching whatin */
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ----- Dashboard Grid & Cards ----- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-xxl);
+            padding: 3.5rem 2.2rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Specific card hover highlights and glows */
+        .dashboard-card.domicile-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.35), 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .dashboard-card.caste-card:hover {
+            transform: translateY(-8px);
+            border-color: #c084fc;
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.35), 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .dashboard-card.income-card:hover {
+            transform: translateY(-8px);
+            border-color: #facc15;
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.35), 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .dashboard-card .icon-wrapper {
+            width: 85px;
+            height: 85px;
+            border-radius: var(--radius-xl);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Target hover icon coloring */
+        .dashboard-card.domicile-card:hover .icon-wrapper {
+            background: #38bdf8;
+            border-color: #38bdf8;
+            transform: scale(1.06);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .dashboard-card.caste-card:hover .icon-wrapper {
+            background: #c084fc;
+            border-color: #c084fc;
+            transform: scale(1.06);
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+        }
+
+        .dashboard-card.income-card:hover .icon-wrapper {
+            background: #facc15;
+            border-color: #facc15;
+            transform: scale(1.06);
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+        }
+
+        .dashboard-card .icon-wrapper i {
+            font-size: 2.3rem;
+            color: var(--text-primary);
+            transition: all 0.4s ease;
+        }
+
+        .dashboard-card:hover .icon-wrapper i {
+            color: #000000;
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .dashboard-card h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: -0.5rem;
+        }
+
+        /* Individual text labels color mapping */
+        .domicile-card h4 {
+            color: #38bdf8;
+        }
+
+        .caste-card h4 {
+            color: #c084fc;
+        }
+
+        .income-card h4 {
+            color: #facc15;
+        }
+
+        .dashboard-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .dashboard-card .action-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 850;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .dashboard-card.domicile-card:hover .action-btn {
+            background: #38bdf8;
+            color: #000;
+            border-color: #38bdf8;
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .dashboard-card.caste-card:hover .action-btn {
+            background: #c084fc;
+            color: #000;
+            border-color: #c084fc;
+            box-shadow: 0 5px 20px rgba(192, 132, 252, 0.3);
+        }
+
+        .dashboard-card.income-card:hover .action-btn {
+            background: #facc15;
+            color: #000;
+            border-color: #facc15;
+            box-shadow: 0 5px 20px rgba(250, 204, 21, 0.3);
+        }
+
+
+        .gradient-text-hero {
+            background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Whatin Canvas Background (Same as main site) -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Main Navigation Header -->
+    <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container header-content" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="logo" onclick="window.location.href='../index.html'" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; cursor: pointer;">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="display: flex; align-items: center; gap: 2rem; margin: 0; list-style: none;">
+                    <li><a href="../index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                    <li><a href="../pages/about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">About</a></li>
+                    <li><a href="../guidance.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Guidance</a></li>
+                    <li><a href="../pages/team.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Team</a></li>
+                    <li><a href="../pages/contributors.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="../pages/login.html" class="admin-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header" style="background: var(--accent-gradient); color: #000; padding: 0.6rem 1.2rem; border-radius: 100px; text-decoration: none; font-weight: 700;">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container animate-reveal delay-1" style="margin-top: 80px;">
+
+        <!-- Header -->
+        <div class="page-header">
+            <h1 class="gradient-text-hero">Certificate Application Dashboard</h1>
+            <p>Select a certificate type below to proceed with your verification and online application.</p>
+        </div>
+
+        <!-- Dashboard Selection Grid -->
+        <div class="dashboard-grid animate-reveal delay-2">
+
+            <!-- Domicile Card -->
+            <a href="domicile.html" class="dashboard-card domicile-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-house-chimney"></i>
+                </div>
+                <h3>Domicile Certificate</h3>
+                <h4>Mool Niwas Praman Patra</h4>
+                <p>Apply for local residence certification. Required for state level colleges, benefits, and local
+                    domicile verification.</p>
+                <div class="action-btn">Apply for Domicile</div>
+            </a>
+
+            <!-- Caste Card -->
+            <a href="caste.html" class="dashboard-card caste-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-users-rectangle"></i>
+                </div>
+                <h3>Caste Certificate</h3>
+                <h4>Jati Praman Patra</h4>
+                <p>Apply for reserves, OBC, SC, ST category certifications for educational and government recruitment
+                    services.</p>
+                <div class="action-btn">Apply for Caste</div>
+            </a>
+
+            <!-- Income Card -->
+            <a href="income.html" class="dashboard-card income-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                </div>
+                <h3>Income Certificate</h3>
+                <h4>Aaye Praman Patra</h4>
+                <p>Apply for verifying your official annual family income. Crucial for UP scholarship applications and
+                    fee waivers.</p>
+                <div class="action-btn">Apply for Income</div>
+            </a>
+
+
+        </div>
+    </div>
+
+    <!-- Canvas Node Network Script -->
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes;
+
+        function initNodes() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            nodes = [];
+            const nodeCount = Math.min(Math.floor((width * height) / 12000), 80);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animateNodes() {
+            requestAnimationFrame(animateNodes);
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect close nodes (constellation effect)
+            const connectionDistance = 110;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - (dist / connectionDistance)) * 0.18;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw individual nodes
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        window.addEventListener('resize', initNodes);
+        initNodes();
+        animateNodes();
+    </script>
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

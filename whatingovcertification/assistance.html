@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Assistance Portal | WHATIN</title>
+    <!-- Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Site Styles for Header -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Main Style Link -->
+    <link rel="stylesheet" href="whatin_style.css">
+
+    <style>
+        /* Specific Styles overriding or supplementing whatin_style.css */
+        :root {
+            --bg-primary: #121212;
+            --container-bg: rgba(255, 255, 255, 0.03);
+            --container-border: rgba(255, 255, 255, 0.07);
+            --accent-glow: rgba(255, 255, 255, 0.15);
+            --text-secondary-rgba: rgba(255, 255, 255, 0.6);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            font-family: var(--font-main);
+            color: #ffffff;
+            background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05), transparent 70%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Canvas Background */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* Container & Glass Panels */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            margin-bottom: 2.5rem;
+        }
+
+        .glass-panel:hover {
+            border-color: #38bdf8;
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Form Styling */
+        .glass-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .glass-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary-rgba);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1.2rem;
+            color: var(--text-secondary-rgba);
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 1.1rem 1.1rem 1.1rem 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #ffffff;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+        }
+
+        input:focus+i,
+        select:focus+i {
+            color: #ffffff;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.2rem;
+            padding-right: 3rem !important;
+        }
+
+        select option {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        /* File Upload */
+        .file-upload-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .drop-zone {
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .drop-zone:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .drop-zone input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .drop-zone i {
+            font-size: 2.2rem;
+            color: var(--text-secondary-rgba);
+            transition: color 0.3s ease;
+        }
+
+        .drop-zone:hover i {
+            color: #ffffff;
+        }
+
+        .drop-zone h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .drop-zone p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary-rgba);
+        }
+
+        .file-name {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-top: 5px;
+            word-break: break-all;
+            display: none;
+        }
+
+        /* Checklist Styles */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .checklist-item i {
+            color: #ffffff;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.08);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checklist-item span {
+            font-size: 0.95rem;
+            color: var(--text-secondary-rgba);
+        }
+
+        /* Pricing Card Styles */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .pricing-card.premium-glow {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-card .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            color: #000000;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .timeframe {
+            color: var(--text-secondary-rgba);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .pricing-features li {
+            font-size: 0.95rem;
+            color: var(--text-secondary-rgba);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-features li i {
+            color: #ffffff;
+        }
+
+        /* How it Works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            line-height: 1;
+        }
+
+        .step-card i {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step-card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .step-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary-rgba);
+            margin: 0;
+        }
+
+        /* FAQ Section styling */
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .faq-header {
+            padding: 1.25rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-body {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease-out;
+            color: var(--text-secondary-rgba);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .faq-item.active .faq-header i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-body {
+            padding: 0 2rem 1.5rem;
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* Buttons & Submits styling */
+        .btn-primary {
+            background: #ffffff;
+            color: #121212 !important;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: scale(0.98);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-secondary {
+            background: rgba(31, 31, 31, 0.62);
+            color: #d1d5db;
+            border: 1px solid #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Back to Home Utility */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary-rgba);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Alert styling */
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            color: #34d399;
+            margin-top: 1rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* QR block */
+        .payment-qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .fee-badge {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Main Navigation Header -->
+    <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container header-content" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="logo" onclick="window.location.href='../index.html'" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; cursor: pointer;">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="display: flex; align-items: center; gap: 2rem; margin: 0; list-style: none;">
+                    <li><a href="../index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                    <li><a href="../pages/about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">About</a></li>
+                    <li><a href="../guidance.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Guidance</a></li>
+                    <li><a href="../pages/team.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Team</a></li>
+                    <li><a href="../pages/contributors.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="../pages/login.html" class="admin-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header" style="background: var(--accent-gradient); color: #000; padding: 0.6rem 1.2rem; border-radius: 100px; text-decoration: none; font-weight: 700;">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Spacer for fixed header -->
+    <div style="margin-top: 80px;"></div>
+
+    <main class="container" style="flex: 1; padding-top: 3rem; padding-bottom: 5rem;">
+        <!-- Back Button -->
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Main Hub</a>
+
+        <!-- Main Banner -->
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem; font-family: var(--font-heading);"
+                class="gradient-text">
+                Income / Caste / Domicile Certificate Assistance
+            </h1>
+            <p style="color: var(--text-secondary-rgba); font-size: 1.15rem; max-width: 600px; margin: 0 auto;">
+                Get professional execution of your government credentials. Verified, highly confidential, and
+                student-focused handling.
+            </p>
+        </div>
+
+        <!-- Section 1: Dynamic Selection Input Form -->
+        <section class="glass-panel">
+            <h2
+                style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem;">
+                <i class="fas fa-file-invoice" style="margin-right: 10px;"></i> Application Form
+            </h2>
+
+            <form id="assistanceForm" onsubmit="event.preventDefault(); handleAssistanceSubmit();">
+                <div class="glass-form">
+                    <!-- Dropdown for Certificate Type selector -->
+                    <div class="form-group">
+                        <label for="certificateType">Select Certificate Type</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-badge"></i>
+                            <select id="certificateType" onchange="updateCertificateFields()" required>
+                                <option value="domicile" selected>Domicile Certificate (Mool Niwas)</option>
+                                <option value="caste">Caste Certificate (Jati Praman Patra)</option>
+                                <option value="income">Income Certificate (Aaye Praman Patra)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="processingPlan" value="standard">
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" placeholder="Enter Full Name (As per Aadhar)" required>
+                        </div>
+                    </div>
+
+                    <!-- Aadhar Number -->
+                    <div class="form-group">
+                        <label for="aadharNumber">Aadhar Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="aadharNumber" placeholder="Enter 12-Digit Aadhar" pattern="[0-9]{12}"
+                                minlength="12" maxlength="12" required>
+                        </div>
+                    </div>
+
+                    <!-- Father's/Guardian's Name -->
+                    <div class="form-group full-width">
+                        <label for="fatherName">Father's / Guardian's Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user-friends"></i>
+                            <input type="text" id="fatherName" placeholder="Enter Father's or Guardian's full name"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Sub-Caste (Up-Jati) - Dynamic visibility -->
+                    <div class="form-group full-width" id="subCasteWrapper" style="display: none;">
+                        <label for="subCaste">Sub-Caste (Up-Jati)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-users-rectangle"></i>
+                            <input type="text" id="subCaste" placeholder="e.g. Ahir, Chamar, Kori">
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Number -->
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <div class="input-wrapper">
+                            <i class="fab fa-whatsapp"></i>
+                            <input type="tel" id="whatsapp" placeholder="10-digit mobile number" pattern="[0-9]{10}"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="example@whatin.in" required>
+                        </div>
+                    </div>
+
+                    <!-- Permanent Address -->
+                    <div class="form-group full-width">
+                        <label for="address">Permanent Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="address" placeholder="Enter full permanent address" required>
+                        </div>
+                    </div>
+
+                    <!-- College Details -->
+                    <div class="form-group">
+                        <label for="collegeName">College Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-university"></i>
+                            <input type="text" id="collegeName" placeholder="Enter College Name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="branchName">Branch / Course Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-graduation-cap"></i>
+                            <input type="text" id="branchName" placeholder="e.g. B.Tech CSE, BCA" required>
+                        </div>
+                    </div>
+
+                    <!-- Time Slot Booking -->
+                    <div class="form-group full-width">
+                        <label for="timeSlot">Preferred Calling / Meeting Time Slot (for OTP/verification)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="datetime-local" id="timeSlot" required style="color-scheme: dark;">
+                        </div>
+                    </div>
+
+                    <!-- Required Document Upload (Dynamic labels via Javascript) -->
+                    <div class="form-group full-width" style="margin-top: 1rem;">
+                        <label id="uploadLabel">Upload Documents (Aadhar / 10th Marksheet / Address Proof)</label>
+                        <div class="file-upload-container" style="margin-top: 0.5rem;">
+                            <!-- File 1: Aadhar Card -->
+                            <div class="drop-zone" id="dz-aadhar">
+                                <i class="fas fa-upload"></i>
+                                <h4 id="file1Label">Aadhar Card</h4>
+                                <p>(JPG/PDF format, max 5MB)</p>
+                                <div class="file-name" id="fn-aadhar"></div>
+                                <input type="file" id="fileAadhar" accept="image/jpeg, image/png, application/pdf"
+                                    required onchange="handleFileChange(this, 'fn-aadhar', 'dz-aadhar')">
+                            </div>
+
+                            <!-- File 2: 10th Marksheet / Domicile / School Certificate -->
+                            <div class="drop-zone" id="dz-marksheet">
+                                <i class="fas fa-upload"></i>
+                                <h4 id="file2Label">10th Marksheet</h4>
+                                <p>(JPG/PDF format, max 5MB)</p>
+                                <div class="file-name" id="fn-marksheet"></div>
+                                <input type="file" id="fileMarksheet" accept="image/jpeg, image/png, application/pdf"
+                                    required onchange="handleFileChange(this, 'fn-marksheet', 'dz-marksheet')">
+                            </div>
+
+                            <!-- File 3: Income proof / Land Details / Caste Proof (Self Declaration) -->
+                            <div class="drop-zone" id="dz-proof">
+                                <i class="fas fa-upload"></i>
+                                <h4 id="file3Label">Self-Declaration Form</h4>
+                                <p>(JPG/PDF format, max 5MB)</p>
+                                <div class="file-name" id="fn-proof"></div>
+                                <input type="file" id="fileProof" accept="image/jpeg, image/png, application/pdf"
+                                    required onchange="handleFileChange(this, 'fn-proof', 'dz-proof')">
+                            </div>
+
+                            <!-- File 4: Payment Screenshot -->
+                            <div class="drop-zone" id="dz-screenshot">
+                                <i class="fas fa-upload"></i>
+                                <h4 id="file4Label">Payment Screenshot</h4>
+                                <p>(JPG/PNG format, max 5MB)</p>
+                                <div class="file-name" id="fn-screenshot"></div>
+                                <input type="file" id="fileScreenshot" accept="image/jpeg, image/png" required
+                                    onchange="handleFileChange(this, 'fn-screenshot', 'dz-screenshot')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Proof UTR -->
+                    <div class="form-group full-width" style="margin-top: 1rem;">
+                        <label for="utrNumber">UPI Transaction ID / UTR Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-receipt"></i>
+                            <input type="text" id="utrNumber" placeholder="Enter 12-digit transaction ID" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-success" id="successMsg">
+                    <i class="fas fa-check-circle"></i> Application registered successfully! We will initiate processing
+                    shortly.
+                </div>
+
+                <button type="submit" class="btn-primary" id="btnSubmit">
+                    <span>Submit Application</span> <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </section>
+
+        <!-- Section 2: Required Documents Checklist Section -->
+        <section class="glass-panel">
+            <h2
+                style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem;">
+                <i class="fas fa-tasks" style="margin-right: 10px;"></i> Required Documents Checklist
+            </h2>
+            <p style="color: var(--text-secondary-rgba); font-size: 0.95rem;">
+                Please ensure you have clean scans or clear photos of the following documents before submitting:
+            </p>
+            <div class="checklist-grid" id="checklistContainer">
+                <!-- Will be dynamically populated via Javascript based on selection -->
+            </div>
+        </section>
+
+        <!-- Section 3: Pricing Details -->
+        <section class="glass-panel" style="box-shadow: 0 0 35px var(--theme-glow);">
+            <h2
+                style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem; text-align: center;">
+                <i class="fas fa-tags" style="margin-right: 10px;"></i> Processing Fee Details
+            </h2>
+            <div class="pricing-card active-plan"
+                style="max-width: 480px; margin: 0 auto 2rem auto; border-color: var(--theme-color); box-shadow: 0 0 25px var(--theme-glow); text-align: center; background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 2rem;">
+                <span class="badge"
+                    style="background: var(--theme-color); color: #000; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; text-transform: uppercase;">Flat
+                    Rate</span>
+                <h3 style="margin-top: 1rem;">Standard Mode</h3>
+                <div class="timeframe"
+                    style="color: var(--text-secondary-rgba); font-size: 0.9rem; margin-top: 0.5rem;">Est. Processing: 3
+                    - 7 Business Days</div>
+                <div class="price" style="font-size: 2.2rem; font-weight: 800; color: #fff; margin: 1rem 0;">₹99</div>
+                <ul class="pricing-features"
+                    style="list-style: none; padding: 0; text-align: left; max-width: 320px; margin: 0 auto; color: var(--text-secondary-rgba);">
+                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                            style="color: var(--theme-color); margin-right: 8px;"></i> Standard government queue
+                        processing</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                            style="color: var(--theme-color); margin-right: 8px;"></i> Basic status updates on WhatsApp
+                    </li>
+                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                            style="color: var(--theme-color); margin-right: 8px;"></i> Digital PDF copy dispatched via
+                        Email</li>
+                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                            style="color: var(--theme-color); margin-right: 8px;"></i> Document optimization included
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Payment QR Section -->
+            <div class="payment-qr-container">
+                <div class="fee-badge">Scan QR to Complete Payment</div>
+                <div class="qr-placeholder">
+                    <img src="" id="paymentQR" alt="UPI Payment QR Code">
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary-rgba); text-align: center;">
+                    Please scan using Google Pay, PhonePe, Paytm, or BHIM. Save your Transaction ID/UTR and input it
+                    above.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: How It Works 4-Step Process -->
+        <section class="glass-panel">
+            <h2
+                style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem; text-align: center;">
+                <i class="fas fa-route" style="margin-right: 10px;"></i> How It Works
+            </h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <i class="fas fa-list-ul"></i>
+                    <h4>Select credentials</h4>
+                    <p>Choose Domicile, Caste, or Income Certificate from the dropdown menu.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <i class="fas fa-file-upload"></i>
+                    <h4>Upload documents</h4>
+                    <p>Provide authentic, clean, and legible scans of files listed in the checklist.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <i class="fas fa-wallet"></i>
+                    <h4>Complete Payment</h4>
+                    <p>Pay fee via Scan QR option & write your UPI Transaction ID in the input box.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <i class="fas fa-award"></i>
+                    <h4>Instant Delivery</h4>
+                    <p>Receive your completely verified, printable PDF certificate directly on WhatsApp.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: FAQ Accordion Section -->
+        <section class="glass-panel" style="margin-bottom: 0;">
+            <h2
+                style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem;">
+                <i class="fas fa-question-circle" style="margin-right: 10px;"></i> Frequently Asked Questions
+            </h2>
+            <div class="faq-accordion">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Which certificate should I choose?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        Choose <strong>Domicile</strong> to confirm state residence (essential for UP Scholarship),
+                        <strong>Caste</strong> for reservation benefits, or <strong>Income</strong> to prove eligibility
+                        for financial allowances and fee waivers.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>How is the application handled?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        Our student-centric coordination team reviews your uploaded documents for standard compliance,
+                        formats them to government criteria, files the application, and retrieves the verified public
+                        PDF resource for you.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>What if my application gets rejected?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        If the state department raises an objection (e.g. blur scans), our Fast Track program features
+                        an immediate objection correction. Standard applications are notified for re-uploading
+                        documents.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Are my documents secure?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        Yes, WHATIN adheres to strict confidentiality rules. Once the credential department releases
+                        your certificate, local instances of uploaded private applicant files are removed from our
+                        storage systems.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="pages/about.html">About Us</a>
+                <a href="pages/contact.html">Contact</a>
+                <a href="pages/privacy-policy.html">Privacy Policy</a>
+                <a href="pages/terms-conditions.html">Terms & Conditions</a>
+                <a href="pages/disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright" style="color: var(--text-secondary-rgba); font-size: 0.85rem; margin-top: 1rem;">
+                &copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini & Neelesh Tiwari.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Canvas Node Network Script -->
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes;
+
+        function initNodes() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            nodes = [];
+            const nodeCount = Math.min(Math.floor((width * height) / 12000), 80);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animateNodes() {
+            requestAnimationFrame(animateNodes);
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect close nodes (constellation effect)
+            const connectionDistance = 110;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - (dist / connectionDistance)) * 0.22;
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw individual nodes
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        window.addEventListener('resize', initNodes);
+        initNodes();
+        animateNodes();
+    </script>
+
+    <!-- App Logic Script -->
+    <script>
+        // Document content map based on selected certificate
+        const documentsMap = {
+            domicile: [
+                { name: "Applicant Passport Photo", desc: "Recent, colored photo, white/light background" },
+                { name: "Aadhar Card", desc: "Front and back scans together in one file" },
+                { name: "10th Marksheet / Transfer Certificate", desc: "To verify date of birth and spelling" },
+                { name: "Self-Declaration Form", desc: "Completed and signed by applicant/guardian" },
+                { name: "Electricity Bill / Rashan Card", desc: "If Aadhar address is outside Uttar Pradesh" }
+            ],
+            caste: [
+                { name: "Applicant Passport Photo", desc: "Recent colored passport photo" },
+                { name: "Aadhar Card", desc: "For ID proof check" },
+                { name: "Father's Caste Certificate", desc: "Alternative proof of caste lineage (optional)" },
+                { name: "Self-Declaration Form", desc: "Required standard declaration form signed" },
+                { name: "10th Marksheet", desc: "To verify name spelling & father's name matches" }
+            ],
+            income: [
+                { name: "Applicant Passport Photo", desc: "Recent passport photo" },
+                { name: "Aadhar Card & PAN Card", desc: "Required identity credentials" },
+                { name: "Salary Slip / Bank Statement", desc: "From working guardian or family head" },
+                { name: "Self-Declaration Form", desc: "Confirming annual family earnings details" },
+                { name: "Electricity Bill / Land Ownership proof", desc: "Helpful supporting records (optional)" }
+            ]
+        };
+
+        // File upload field labels map
+        const labelsMap = {
+            domicile: {
+                file1: "Passport Photo",
+                file2: "Aadhar Card (Front & Back)",
+                file3: "10th Marksheet / Transfer Cert"
+            },
+            caste: {
+                file1: "Passport Photo",
+                file2: "Aadhar Card (ID Proof)",
+                file3: "Father's Caste Cert / Self Decl"
+            },
+            income: {
+                file1: "Passport Photo",
+                file2: "Aadhar Card & PAN Card",
+                file3: "Salary Slip / Income Declaration"
+            }
+        };
+
+        function updateCertificateFields() {
+            const certType = document.getElementById("certificateType").value;
+
+            // Toggle Sub-Caste field based on certType
+            const subCasteWrapper = document.getElementById("subCasteWrapper");
+            const subCasteInput = document.getElementById("subCaste");
+            if (certType === "caste") {
+                subCasteWrapper.style.display = "block";
+                subCasteInput.required = true;
+            } else {
+                subCasteWrapper.style.display = "none";
+                subCasteInput.required = false;
+                subCasteInput.value = "";
+            }
+
+            // 1. Update checklist UI
+            const checklistContainer = document.getElementById("checklistContainer");
+            checklistContainer.innerHTML = "";
+
+            const docsList = documentsMap[certType];
+            docsList.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "checklist-item animate-reveal";
+                div.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    <div>
+                        <strong style="display:block; color:#fff; font-size:0.95rem;">${item.name}</strong>
+                        <span style="font-size:0.82rem; color:var(--text-secondary-rgba);">${item.desc}</span>
+                    </div>
+                `;
+                checklistContainer.appendChild(div);
+            });
+
+            // 2. Update upload label and drop zones
+            const labels = labelsMap[certType];
+            document.getElementById("file1Label").textContent = labels.file1;
+            document.getElementById("file2Label").textContent = labels.file2;
+            document.getElementById("file3Label").textContent = labels.file3;
+
+            // 3. Update payment QR config with Neelesh Tiwari details
+            const amt = 99;
+
+            // Build UPI QR code URL linking to Neelesh Tiwari: ash07682589@okaxis
+            const upiUrl = `upi://pay?pa=ash07682589@okaxis&pn=Neelesh Tiwari&am=${amt}&tn=WHATIN ${certType.toUpperCase()} Certificate Assistance`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
+            document.getElementById("paymentQR").src = qrUrl;
+        }
+
+        // Handle file change display updates
+        function handleFileChange(input, nameId, zoneId) {
+            const fileNameEl = document.getElementById(nameId);
+            const zone = document.getElementById(zoneId);
+
+            if (input.files.length > 0) {
+                const file = input.files[0];
+                if (file.size > 5 * 1024 * 1024) {
+                    alert("File size exceeds 5MB. Please choose a compressed folder or file.");
+                    input.value = "";
+                    fileNameEl.style.display = "none";
+                    return;
+                }
+                fileNameEl.textContent = file.name;
+                fileNameEl.style.display = "block";
+                zone.style.borderColor = "#ffffff";
+                zone.style.background = "rgba(255, 255, 255, 0.05)";
+            } else {
+                fileNameEl.style.display = "none";
+                zone.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                zone.style.background = "rgba(0, 0, 0, 0.2)";
+            }
+        }
+
+        // Toggle FAQ accordion sections
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains("active");
+
+            // Close all items
+            document.querySelectorAll(".faq-item").forEach(el => {
+                el.classList.remove("active");
+            });
+
+            // Toggle selected item
+            if (!isActive) {
+                item.classList.add("active");
+            }
+        }
+
+        // Helper to convert file to base64
+        const fileToBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve({
+                base64: reader.result.split(',')[1],
+                filename: file.name,
+                mimeType: file.type
+            });
+            reader.onerror = error => reject(error);
+        });
+
+        // Handle submission
+        async function handleAssistanceSubmit() {
+            const btn = document.getElementById("btnSubmit");
+            const success = document.getElementById("successMsg");
+
+            btn.disabled = true;
+            btn.querySelector("span").textContent = "Registering...";
+
+            // Google Apps Script endpoint
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVuEY8fATjrgY3xFguww4LMkP2Ot624FsuUSYmyep0zurczgc9hreymNYcq7KEM8zxrg/exec';
+
+            try {
+                const rawCertType = document.getElementById("certificateType").value;
+                const type = rawCertType.charAt(0).toUpperCase() + rawCertType.slice(1);
+                const activePlanLabel = 'Standard (₹99)';
+
+                const data = {
+                    type: type + ' (Assistance Portal)',
+                    fullName: document.getElementById('fullName').value,
+                    aadharNumber: document.getElementById('aadharNumber').value,
+                    fatherName: document.getElementById('fatherName').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    collegeName: document.getElementById('collegeName').value,
+                    branchName: document.getElementById('branchName').value,
+                    timeSlot: document.getElementById('timeSlot').value,
+                    address: document.getElementById('address').value,
+                    processingPlan: activePlanLabel,
+                    utr: document.getElementById('utrNumber').value,
+                    files: {}
+                };
+
+                if (rawCertType === 'caste') {
+                    data.subCaste = document.getElementById('subCaste').value;
+                }
+
+                // Add files
+                const fileInputs = {
+                    aadhar: document.getElementById('fileAadhar'),
+                    marksheet10: document.getElementById('fileMarksheet'),
+                    screenshot: document.getElementById('fileScreenshot')
+                };
+
+                if (rawCertType === 'domicile') {
+                    fileInputs.declaration = document.getElementById('fileProof');
+                } else if (rawCertType === 'caste') {
+                    fileInputs.casteproof = document.getElementById('fileProof');
+                } else if (rawCertType === 'income') {
+                    fileInputs.incomeproof = document.getElementById('fileProof');
+                }
+
+                for (const key in fileInputs) {
+                    const input = fileInputs[key];
+                    if (input && input.files && input.files[0]) {
+                        btn.querySelector("span").textContent = `Encoding ${key} file...`;
+                        data.files[key] = await fileToBase64(input.files[0]);
+                    }
+                }
+
+                btn.querySelector("span").textContent = "Transmitting to Server...";
+
+                // Send request
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                btn.querySelector("span").textContent = "Submit Application";
+                success.style.display = "flex";
+                document.getElementById("assistanceForm").reset();
+
+                // Clear drop zones
+                document.querySelectorAll(".file-name").forEach(el => el.style.display = "none");
+                document.querySelectorAll(".drop-zone").forEach(el => {
+                    el.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                    el.style.background = "rgba(0, 0, 0, 0.2)";
+                });
+
+                setTimeout(() => {
+                    success.style.display = "none";
+                }, 5000);
+
+            } catch (err) {
+                console.error(err);
+                alert("Server response delayed or offline. Please contact the administrator directly for emergency assistance.");
+            } finally {
+                btn.disabled = false;
+                btn.querySelector("span").textContent = "Submit Application";
+            }
+        }
+
+        // Initial setup on window load
+        window.addEventListener("DOMContentLoaded", () => {
+            updateCertificateFields();
+        });
+    </script>
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
