@@ -76,6 +76,127 @@
             margin: 1rem 0;
             font-weight: 800;
         }
+    
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            animation: fadeInTeam 0.6s ease-out backwards;
+            z-index: 1;
+        }
+
+        /* Glowing Edge Effect */
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent, var(--card-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .team-card::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at top left, var(--card-color), transparent 70%);
+            opacity: 0;
+            z-index: -2;
+            transition: opacity 0.5s ease;
+            filter: blur(20px);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .team-card:hover::before {
+            opacity: 1;
+            background: linear-gradient(135deg, var(--card-color), transparent, var(--card-color));
+        }
+
+        .team-card:hover::after {
+            opacity: 0.15;
+        }
+
+        .card-image-box, .card-icon-box {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--card-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .team-card:hover .card-image-box, .team-card:hover .card-icon-box {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px var(--card-color);
+        }
+
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .team-card h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--card-color);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        @keyframes fadeInTeam {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
     
     
@@ -288,65 +409,131 @@
                 50% { transform: translateY(-12px); }
                 100% { transform: translateY(0px); }
             }
-        </style>
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            animation: fadeInTeam 0.6s ease-out backwards;
+            z-index: 1;
+        }
+
+        /* Glowing Edge Effect */
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent, var(--card-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .team-card::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at top left, var(--card-color), transparent 70%);
+            opacity: 0;
+            z-index: -2;
+            transition: opacity 0.5s ease;
+            filter: blur(20px);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .team-card:hover::before {
+            opacity: 1;
+            background: linear-gradient(135deg, var(--card-color), transparent, var(--card-color));
+        }
+
+        .team-card:hover::after {
+            opacity: 0.15;
+        }
+
+        .card-image-box, .card-icon-box {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--card-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .team-card:hover .card-image-box, .team-card:hover .card-icon-box {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px var(--card-color);
+        }
+
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .team-card h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--card-color);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        @keyframes fadeInTeam {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
 
         <section class="jigsaw-container">
-            <div class="desktop-puzzle"><svg viewBox="-50 -50 1100 700" width="100%" class="jigsaw-svg" id="desktop">
-<defs>
-  <clipPath id="desktop-clip-0">
-    <path d="M 0,0 L 200,0 L 200,75 C 240,75 250,85 250,100 C 250,115 240,125 200,125 L 200,200 L 125,200 C 125,240 115,250 100,250 C 85,250 75,240 75,200 L 0,200 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-1">
-    <path d="M 200,0 L 400,0 L 400,75 C 360,75 350,85 350,100 C 350,115 360,125 400,125 L 400,200 L 325,200 C 325,160 315,150 300,150 C 285,150 275,160 275,200 L 200,200 L 200,125 C 240,125 250,115 250,100 C 250,85 240,75 200,75 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-2">
-    <path d="M 400,0 L 600,0 L 600,75 C 640,75 650,85 650,100 C 650,115 640,125 600,125 L 600,200 L 525,200 C 525,240 515,250 500,250 C 485,250 475,240 475,200 L 400,200 L 400,125 C 360,125 350,115 350,100 C 350,85 360,75 400,75 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-3">
-    <path d="M 600,0 L 800,0 L 800,75 C 760,75 750,85 750,100 C 750,115 760,125 800,125 L 800,200 L 725,200 C 725,160 715,150 700,150 C 685,150 675,160 675,200 L 600,200 L 600,125 C 640,125 650,115 650,100 C 650,85 640,75 600,75 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-4">
-    <path d="M 800,0 L 1000,0 L 1000,200 L 925,200 C 925,240 915,250 900,250 C 885,250 875,240 875,200 L 800,200 L 800,125 C 760,125 750,115 750,100 C 750,85 760,75 800,75 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-5">
-    <path d="M 0,200 L 75,200 C 75,240 85,250 100,250 C 115,250 125,240 125,200 L 200,200 L 200,275 C 160,275 150,285 150,300 C 150,315 160,325 200,325 L 200,400 L 125,400 C 125,360 115,350 100,350 C 85,350 75,360 75,400 L 0,400 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-6">
-    <path d="M 200,200 L 275,200 C 275,160 285,150 300,150 C 315,150 325,160 325,200 L 400,200 L 400,275 C 440,275 450,285 450,300 C 450,315 440,325 400,325 L 400,400 L 325,400 C 325,440 315,450 300,450 C 285,450 275,440 275,400 L 200,400 L 200,325 C 160,325 150,315 150,300 C 150,285 160,275 200,275 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-7">
-    <path d="M 400,200 L 475,200 C 475,240 485,250 500,250 C 515,250 525,240 525,200 L 600,200 L 600,275 C 560,275 550,285 550,300 C 550,315 560,325 600,325 L 600,400 L 525,400 C 525,360 515,350 500,350 C 485,350 475,360 475,400 L 400,400 L 400,325 C 440,325 450,315 450,300 C 450,285 440,275 400,275 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-8">
-    <path d="M 600,200 L 675,200 C 675,160 685,150 700,150 C 715,150 725,160 725,200 L 800,200 L 800,275 C 840,275 850,285 850,300 C 850,315 840,325 800,325 L 800,400 L 725,400 C 725,440 715,450 700,450 C 685,450 675,440 675,400 L 600,400 L 600,325 C 560,325 550,315 550,300 C 550,285 560,275 600,275 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-9">
-    <path d="M 800,200 L 875,200 C 875,240 885,250 900,250 C 915,250 925,240 925,200 L 1000,200 L 1000,400 L 925,400 C 925,360 915,350 900,350 C 885,350 875,360 875,400 L 800,400 L 800,325 C 840,325 850,315 850,300 C 850,285 840,275 800,275 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-10">
-    <path d="M 0,400 L 75,400 C 75,360 85,350 100,350 C 115,350 125,360 125,400 L 200,400 L 200,475 C 240,475 250,485 250,500 C 250,515 240,525 200,525 L 200,600 L 0,600 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-11">
-    <path d="M 200,400 L 275,400 C 275,440 285,450 300,450 C 315,450 325,440 325,400 L 400,400 L 400,475 C 360,475 350,485 350,500 C 350,515 360,525 400,525 L 400,600 L 200,600 L 200,525 C 240,525 250,515 250,500 C 250,485 240,475 200,475 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-12">
-    <path d="M 400,400 L 475,400 C 475,360 485,350 500,350 C 515,350 525,360 525,400 L 600,400 L 600,475 C 640,475 650,485 650,500 C 650,515 640,525 600,525 L 600,600 L 400,600 L 400,525 C 360,525 350,515 350,500 C 350,485 360,475 400,475 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-13">
-    <path d="M 600,400 L 675,400 C 675,440 685,450 700,450 C 715,450 725,440 725,400 L 800,400 L 800,475 C 760,475 750,485 750,500 C 750,515 760,525 800,525 L 800,600 L 600,600 L 600,525 C 640,525 650,515 650,500 C 650,485 640,475 600,475 Z"></path>
-  </clipPath>
-  <clipPath id="desktop-clip-14">
-    <path d="M 800,400 L 875,400 C 875,360 885,350 900,350 C 915,350 925,360 925,400 L 1000,400 L 1000,600 L 800,600 L 800,525 C 760,525 750,515 750,500 C 750,485 760,475 800,475 Z"></path>
-  </clipPath>
-</defs>
-
-        <g class="jigsaw-group" data-idx="0">
-            <path d="M 0,0 L 200,0 L 200,75 C 240,75 250,85 250,100 C 250,115 240,125 200,125 L 200,200 L 125,200 C 125,240 115,250 100,250 C 85,250 75,240 75,200 L 0,200 Z" class="jigsaw-shadow" fill="#050505" stroke="rgba(255,255,255,0.15)" stroke-width="2"></path>
-            
-            <foreignObject x="-55" y="-55" width="310" height="310" clip-path="url(#desktop-clip-0)" style="pointer-events: none;">
-                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);">
-                    <div id="inner-desktop-0" style="width: 200px; height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding-top: 10px;">
-                    </div>
+            <div id="team-grid" class="team-grid"></div>
                 </div>
             </foreignObject>
             
@@ -536,65 +723,7 @@
         </g>
 
 </svg></div>
-            <div class="mobile-puzzle"><svg viewBox="-50 -50 500 1700" width="100%" class="jigsaw-svg" id="mobile">
-<defs>
-  <clipPath id="mobile-clip-0">
-    <path d="M 0,0 L 200,0 L 200,75 C 240,75 250,85 250,100 C 250,115 240,125 200,125 L 200,200 L 125,200 C 125,240 115,250 100,250 C 85,250 75,240 75,200 L 0,200 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-1">
-    <path d="M 200,0 L 400,0 L 400,200 L 325,200 C 325,160 315,150 300,150 C 285,150 275,160 275,200 L 200,200 L 200,125 C 240,125 250,115 250,100 C 250,85 240,75 200,75 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-2">
-    <path d="M 0,200 L 75,200 C 75,240 85,250 100,250 C 115,250 125,240 125,200 L 200,200 L 200,275 C 160,275 150,285 150,300 C 150,315 160,325 200,325 L 200,400 L 125,400 C 125,360 115,350 100,350 C 85,350 75,360 75,400 L 0,400 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-3">
-    <path d="M 200,200 L 275,200 C 275,160 285,150 300,150 C 315,150 325,160 325,200 L 400,200 L 400,400 L 325,400 C 325,440 315,450 300,450 C 285,450 275,440 275,400 L 200,400 L 200,325 C 160,325 150,315 150,300 C 150,285 160,275 200,275 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-4">
-    <path d="M 0,400 L 75,400 C 75,360 85,350 100,350 C 115,350 125,360 125,400 L 200,400 L 200,475 C 240,475 250,485 250,500 C 250,515 240,525 200,525 L 200,600 L 125,600 C 125,640 115,650 100,650 C 85,650 75,640 75,600 L 0,600 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-5">
-    <path d="M 200,400 L 275,400 C 275,440 285,450 300,450 C 315,450 325,440 325,400 L 400,400 L 400,600 L 325,600 C 325,560 315,550 300,550 C 285,550 275,560 275,600 L 200,600 L 200,525 C 240,525 250,515 250,500 C 250,485 240,475 200,475 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-6">
-    <path d="M 0,600 L 75,600 C 75,640 85,650 100,650 C 115,650 125,640 125,600 L 200,600 L 200,675 C 160,675 150,685 150,700 C 150,715 160,725 200,725 L 200,800 L 125,800 C 125,760 115,750 100,750 C 85,750 75,760 75,800 L 0,800 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-7">
-    <path d="M 200,600 L 275,600 C 275,560 285,550 300,550 C 315,550 325,560 325,600 L 400,600 L 400,800 L 325,800 C 325,840 315,850 300,850 C 285,850 275,840 275,800 L 200,800 L 200,725 C 160,725 150,715 150,700 C 150,685 160,675 200,675 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-8">
-    <path d="M 0,800 L 75,800 C 75,760 85,750 100,750 C 115,750 125,760 125,800 L 200,800 L 200,875 C 240,875 250,885 250,900 C 250,915 240,925 200,925 L 200,1000 L 125,1000 C 125,1040 115,1050 100,1050 C 85,1050 75,1040 75,1000 L 0,1000 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-9">
-    <path d="M 200,800 L 275,800 C 275,840 285,850 300,850 C 315,850 325,840 325,800 L 400,800 L 400,1000 L 325,1000 C 325,960 315,950 300,950 C 285,950 275,960 275,1000 L 200,1000 L 200,925 C 240,925 250,915 250,900 C 250,885 240,875 200,875 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-10">
-    <path d="M 0,1000 L 75,1000 C 75,1040 85,1050 100,1050 C 115,1050 125,1040 125,1000 L 200,1000 L 200,1075 C 160,1075 150,1085 150,1100 C 150,1115 160,1125 200,1125 L 200,1200 L 125,1200 C 125,1160 115,1150 100,1150 C 85,1150 75,1160 75,1200 L 0,1200 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-11">
-    <path d="M 200,1000 L 275,1000 C 275,960 285,950 300,950 C 315,950 325,960 325,1000 L 400,1000 L 400,1200 L 325,1200 C 325,1240 315,1250 300,1250 C 285,1250 275,1240 275,1200 L 200,1200 L 200,1125 C 160,1125 150,1115 150,1100 C 150,1085 160,1075 200,1075 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-12">
-    <path d="M 0,1200 L 75,1200 C 75,1160 85,1150 100,1150 C 115,1150 125,1160 125,1200 L 200,1200 L 200,1275 C 240,1275 250,1285 250,1300 C 250,1315 240,1325 200,1325 L 200,1400 L 125,1400 C 125,1440 115,1450 100,1450 C 85,1450 75,1440 75,1400 L 0,1400 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-13">
-    <path d="M 200,1200 L 275,1200 C 275,1240 285,1250 300,1250 C 315,1250 325,1240 325,1200 L 400,1200 L 400,1400 L 325,1400 C 325,1360 315,1350 300,1350 C 285,1350 275,1360 275,1400 L 200,1400 L 200,1325 C 240,1325 250,1315 250,1300 C 250,1285 240,1275 200,1275 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-14">
-    <path d="M 0,1400 L 75,1400 C 75,1440 85,1450 100,1450 C 115,1450 125,1440 125,1400 L 200,1400 L 200,1475 C 160,1475 150,1485 150,1500 C 150,1515 160,1525 200,1525 L 200,1600 L 0,1600 Z"></path>
-  </clipPath>
-  <clipPath id="mobile-clip-15">
-    <path d="M 200,1400 L 275,1400 C 275,1360 285,1350 300,1350 C 315,1350 325,1360 325,1400 L 400,1400 L 400,1600 L 200,1600 L 200,1525 C 160,1525 150,1515 150,1500 C 150,1485 160,1475 200,1475 Z"></path>
-  </clipPath>
-</defs>
-
-        <g class="jigsaw-group" data-idx="0">
-            <path d="M 0,0 L 200,0 L 200,75 C 240,75 250,85 250,100 C 250,115 240,125 200,125 L 200,200 L 125,200 C 125,240 115,250 100,250 C 85,250 75,240 75,200 L 0,200 Z" class="jigsaw-shadow" fill="#050505" stroke="rgba(255,255,255,0.15)" stroke-width="2"></path>
             
-            <foreignObject x="-55" y="-55" width="310" height="310" clip-path="url(#mobile-clip-0)" style="pointer-events: none;">
-                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);">
-                    <div id="inner-mobile-0" style="width: 200px; height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding-top: 10px;">
-                    </div>
                 </div>
             </foreignObject>
             
@@ -825,6 +954,8 @@
     linkedin: 'https://www.linkedin.com/in/kalpana-yadav-663414331?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     insta: 'https://www.instagram.com/ydv_kalpana249/?utm_source=ig_web_button_share_sheet'
 },
+
+ { id: 'm11', name: 'Jagesh Chaudhary', role: 'Section Coordinator', icon: '', img: '../images/jagesh.jpg', bio: 'As a Section Coordinator, Jagesh manages community discussions and ensures smooth operations within his sections.', color: '#fbbf24', s: [], linkedin: 'https://www.linkedin.com/in/jagesh-chaudhary-512a81404', insta: '' },
 {
     id: 'p4',
     name: 'Samriddhi Agrawal',
@@ -843,76 +974,67 @@
             { id: 'p7', name: 'Parth Agrawal', role: 'GLA Head', icon: '', img: '../images/parth_agrawal.jpg', bio: 'As the GLA Head, Parth takes charge of all WHATIN initiatives at GLA University. He handles campus operations and drives student engagement.', color: '#38bdf8', s: [], linkedin: 'https://www.linkedin.com/in/parth-agrawal-217193322?utm_source=share_via&utm_content=profile&utm_medium=member_android', insta: 'https://www.instagram.com/itzurparth_?utm_source=qr&igsh=ODBseTk1M2FtN3Fy' },
             { id: 'p8', name: 'Uma Saini', role: 'BSA Head', icon: 'fa-headset', img: '../images/uma.jpeg', bio: 'As the BSA Head, Uma spearheads the Brand Strategy and Acquisition for WHATIN. She is responsible for driving growth initiatives and managing strategic partnerships.', color: '#a855f7', s: [] },
             { id: 'p9', name: 'Chetan Bansal', role: 'Video Editing', icon: '', img: '../images/chetan.jpg', bio: 'As the Video Editor, Chetan brings stories to life through creative and engaging video content, ensuring high-quality visual experiences for the WHATIN community.', color: '#34d399', s: [] },
-            { id: 'm11', name: 'Jagesh Chaudhary', role: 'Section Coordinator', icon: '', img: '../images/jagesh.jpg', bio: 'As a Section Coordinator, Jagesh manages community discussions and ensures smooth operations within his sections.', color: '#fbbf24', s: [], linkedin: 'https://www.linkedin.com/in/jagesh-chaudhary-512a81404', insta: '' },
-            { id: 'm12', name: 'Member 13', role: 'Team Member', icon: 'fa-user-astronaut', img: '', bio: 'Bio for member 13 will be updated soon.', color: '', s: [] },
+
+
+{
+    id: 'p4',
+    name: 'Mradul Tiwari',
+    role: ' Academic Division Head',
+    icon: '',
+    img: '../images/mradul.jpg',
+    bio: 'As the 2nd Academic Division Head, Mradul Tiwari leads the second-year academic team, ensuring effective coordination, student support, and smooth academic operations.',
+    color: '#38bdf8',
+    s: [],
+    linkedin: 'https://www.linkedin.com/in/mradul-tiwari',
+    insta: ''
+},
+
+           
+            
             { id: 'm13', name: 'Member 14', role: 'Team Member', icon: 'fa-user-astronaut', img: '', bio: 'Bio for member 14 will be updated soon.', color: '', s: [] },
             { id: 'm14', name: 'Member 15', role: 'Team Member', icon: 'fa-user-astronaut', img: '', bio: 'Bio for member 15 will be updated soon.', color: '', s: [] }
         ];
 
         const colors = ['#38bdf8', '#a855f7', '#34d399', '#fbbf24'];
 
-                        const renderInner = (data, index) => {
-            const pieceColor = colors[index % 4];
-            
-            // Adjust visual center based on puzzle piece shape
-            const shifts = [6, -14, 6, -14, 6, 14, -6, 14, -6, 14, 6, -14, 6, -14, 6, 14, -6, 14, -6, 14];
-            const yShift = shifts[index] || 0;
-            
-            // Organic staggered animation delay
-            const delay = (index % 5) * 0.4;
-            
-            let innerHTML = '';
-            
-            if(data.img) {
-                innerHTML = `<img src="${data.img}" style="width:60px; height:60px; border-radius:50%; margin-bottom:4px; object-fit:cover; border: 3px solid ${pieceColor}; filter: contrast(1.1);">` + 
-                       `<div style="font-weight:800; font-size:0.95rem; color:#fff; text-shadow: 0 2px 5px rgba(0,0,0,0.8); line-height: 1.1; margin-bottom: 2px; max-width: 120px; text-align: center; word-wrap: break-word;">${data.name}</div>` +
-                       `<div style="font-size:0.65rem; font-weight:700; color:${pieceColor}; text-transform:uppercase; letter-spacing:0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); max-width: 110px; text-align: center; word-wrap: break-word; line-height: 1.2;">${data.role}</div>`;
-            } else {
-                innerHTML = `<div style="font-size:2rem; color:${pieceColor}; margin-bottom:4px; filter: drop-shadow(0 0 10px ${pieceColor}66);"><i class="fas ${data.icon}"></i></div>` +
-                       `<div style="font-weight:800; font-size:0.95rem; color:#fff; text-shadow: 0 2px 5px rgba(0,0,0,0.8); line-height: 1.1; margin-bottom: 2px; max-width: 120px; text-align: center; word-wrap: break-word;">${data.name}</div>` +
-                       `<div style="font-size:0.65rem; font-weight:700; color:${pieceColor}; text-transform:uppercase; letter-spacing:0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); max-width: 110px; text-align: center; word-wrap: break-word; line-height: 1.2;">${data.role}</div>`;
-            }
-            
-            return `<div style="transform: translateY(${yShift}px); display: flex; flex-direction: column; align-items: center; width: 100%;">` + 
-                   `<div style="display: flex; flex-direction: column; align-items: center; animation: floatTeamContent 2.5s ease-in-out infinite ${delay}s;">` + 
-                   innerHTML + 
-                   `</div></div>`;
-        };
-
-        membersData.forEach((data, index) => {
-            const elDesktop = document.getElementById('inner-desktop-' + index);
-            const elMobile = document.getElementById('inner-mobile-' + index);
-            if(elDesktop) elDesktop.innerHTML = renderInner(data, index);
-            if(elMobile) elMobile.innerHTML = renderInner(data, index);
-        });
-
-        const modal = document.getElementById('teamModal');
-        const mContent = document.getElementById('modalContent');
+        const teamGrid = document.getElementById('team-grid');
         
-        document.querySelectorAll('.jigsaw-group').forEach(group => {
-            group.addEventListener('click', () => {
-                const idx = group.getAttribute('data-idx');
-                const data = membersData[idx];
-                const pieceColor = colors[idx % 4];
-                if(!data) return;
+        membersData.forEach((data, index) => {
+            const pieceColor = colors[index % 4];
+            const delay = (index % 5) * 0.1;
+            
+            const card = document.createElement('div');
+            card.className = 'team-card';
+            card.style.animationDelay = `${delay}s`;
+            card.style.setProperty('--card-color', pieceColor);
+            
+            let mediaHTML = data.img ? 
+                `<div class="card-image-box"><img src="${data.img}" alt="${data.name}"></div>` :
+                `<div class="card-icon-box" style="color: ${pieceColor};"><i class="fas ${data.icon}"></i></div>`;
 
-                let mediaHTML = data.img ? 
+            card.innerHTML = `
+                ${mediaHTML}
+                <h3>${data.name}</h3>
+                <h5>${data.role}</h5>
+            `;
+            
+            card.addEventListener('click', () => {
+                const modal = document.getElementById('teamModal');
+                const mContent = document.getElementById('modalContent');
+                
+                let modalMedia = data.img ? 
                     `<div style="width:120px; height:120px; margin:0 auto 1.5rem; padding:4px; background:linear-gradient(135deg, ${pieceColor}, transparent); border-radius:50%; box-shadow: 0 10px 30px ${pieceColor}44;"><img src="${data.img}" style="width:100%; height:100%; border-radius:50%; object-fit:cover; cursor:pointer;" onclick="openFullImage('${data.img}', event)" title="Click to view full image"></div>` : 
                     `<div style="width:100px; height:100px; margin:0 auto 1.5rem; display:flex; align-items:center; justify-content:center; font-size:3.5rem; color:${pieceColor}; background:rgba(255,255,255,0.03); border:2px solid rgba(255,255,255,0.1); border-radius:50%; box-shadow:0 15px 35px ${pieceColor}33;"><i class="fas ${data.icon}"></i></div>`;
 
                 let socialLinksHTML = '';
                 if(data.linkedin || data.insta) {
                     socialLinksHTML = `<div class="social-links" style="display:flex; justify-content:center; gap:2rem; margin-top:0.5rem; margin-bottom: 2rem;">`;
-                    if(data.linkedin) {
-                        socialLinksHTML += `<a href="${data.linkedin}" target="_blank" style="color:var(--accent-primary); font-size:1.8rem; transition:transform 0.3s ease;"><i class="fab fa-linkedin"></i></a>`;
-                    }
-                    if(data.insta) {
-                        socialLinksHTML += `<a href="${data.insta}" target="_blank" style="color:var(--accent-primary); font-size:1.8rem; transition:transform 0.3s ease;"><i class="fab fa-instagram"></i></a>`;
-                    }
+                    if(data.linkedin) socialLinksHTML += `<a href="${data.linkedin}" target="_blank" style="color:var(--accent-primary); font-size:1.8rem; transition:transform 0.3s ease;"><i class="fab fa-linkedin"></i></a>`;
+                    if(data.insta) socialLinksHTML += `<a href="${data.insta}" target="_blank" style="color:var(--accent-primary); font-size:1.8rem; transition:transform 0.3s ease;"><i class="fab fa-instagram"></i></a>`;
                     socialLinksHTML += `</div>`;
                 }
 
-                mContent.innerHTML = mediaHTML + 
+                mContent.innerHTML = modalMedia + 
                     `<div style="font-size:2rem; font-weight:800; color:#fff;">${data.name}</div>` +
                     `<div style="font-size:1rem; color:${pieceColor}; text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:1.5rem;">${data.role}</div>` +
                     `<div style="font-size:1.05rem; line-height:1.7; color:#cbd5e1; margin-bottom:1.5rem;">${data.bio}</div>` +
@@ -920,8 +1042,13 @@
                 
                 modal.classList.add('active');
             });
+            
+            if(teamGrid) {
+                teamGrid.appendChild(card);
+            }
         });
 
+        const modal = document.getElementById('teamModal');
         function closeTeamModal() { modal.classList.remove('active'); }
         window.onclick = function(e) { if(e.target == modal) closeTeamModal(); }
         document.addEventListener('keydown', function(e) { if(e.key === "Escape") closeTeamModal(); });
