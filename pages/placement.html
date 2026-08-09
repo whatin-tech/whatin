@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Content | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Premium placement preparation material, interview experiences, and technical guides.">
+    <meta name="author" content="Dushyant Saini">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../animations/animations.css">
+    <link rel="stylesheet" href="../css/placement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="placement-hero">
+            <div class="container">
+                <span class="premium-badge"><i class="fas fa-crown"></i> EXCLUSIVE</span>
+                <h1 class="hero-title pop-in">Placement <span class="gradient-text-silver">Content</span></h1>
+                <p class="hero-subtitle pop-in" style="max-width: 700px; margin: 0 auto;">Top-tier placement preparation material, interview questions, and comprehensive technical guides designed to help you secure your dream job.</p>
+            </div>
+        </section>
+
+        <section class="placement-content-section">
+            <div class="container">
+                <div id="loadingState" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i> Fetching premium content...
+                </div>
+                
+                <div id="placementGrid" class="placement-grid" style="display: none;">
+                    <!-- Cards will be injected here dynamically -->
+                </div>
+                
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Content coming soon</h3>
+                    <p>We are currently curating the best materials. Check back later!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="roadmap-section">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+                    <h2 class="section-title pop-in">The Placement <span class="gradient-text-silver">Roadmap</span></h2>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Your step-by-step master plan to secure a top-tier tech job.</p>
+                </div>
+                
+                <div class="roadmap-container">
+                    <div class="roadmap-step pop-scale">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Foundation & DSA</h3>
+                            <p>Master a programming language (C++, Java, or Python) and build a strong grasp of Data Structures and Algorithms. This is the core of your technical interviews.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step pop-scale">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Core Subjects Mastery</h3>
+                            <p>Revise OOPS, Operating Systems (OS), Database Management Systems (DBMS), and Computer Networks (CN). Almost every interview will test these concepts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step pop-scale">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Development & Projects</h3>
+                            <p>Build 2-3 solid projects (Web, App, or AI/ML). Real-world projects show your ability to apply logic and learn modern frameworks (MERN, Firebase, etc.).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step pop-scale">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>Aptitude & Soft Skills</h3>
+                            <p>Practice Quantitative Aptitude, Logical Reasoning, and Verbal Ability for the initial screening rounds. Prepare your introduction and HR answers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                    <h2 class="section-title pop-in">Frequently Asked <span class="gradient-text-silver">Questions</span></h2>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Everything you need to know about our premium placement resources.</p>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item pop-scale">
+                        <div class="faq-question">
+                            <span><i class="fas fa-question-circle" style="margin-right: 0.8rem; color: #38bdf8;"></i> Are these resources free?</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="faq-answer">Yes, all placement preparation materials curated here are completely free for students in the WHATIN ecosystem.</div>
+                    </div>
+                    <div class="faq-item pop-scale">
+                        <div class="faq-question">
+                            <span><i class="fas fa-question-circle" style="margin-right: 0.8rem; color: #38bdf8;"></i> Which companies are covered?</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="faq-answer">We provide material targeting both service-based (TCS, Infosys, Wipro) and product-based companies (Amazon, Microsoft, Google), covering aptitude, coding, and interview rounds.</div>
+                    </div>
+                    <div class="faq-item pop-scale">
+                        <div class="faq-question">
+                            <span><i class="fas fa-question-circle" style="margin-right: 0.8rem; color: #38bdf8;"></i> How often is the content updated?</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="faq-answer">Our admins constantly update the drive links with the latest interview experiences, questions, and guides collected from recent placement drives.</div>
+                    </div>
+                    <div class="faq-item pop-scale">
+                        <div class="faq-question">
+                            <span><i class="fas fa-question-circle" style="margin-right: 0.8rem; color: #38bdf8;"></i> Have doubts or need specific material?</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="faq-answer">If you have specific doubts or need material for a particular company, you can reach out to our team via the Guidance page or join our WhatsApp community for quick help.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini & Neelesh Tiwari.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/nav-auth.js"></script>
+    <script type="module" src="../js/placement.js"></script>
+</body>
+</html>
