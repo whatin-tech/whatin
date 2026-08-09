@@ -1,0 +1,1 @@
+import{n as e,t}from"./script-B8465DUt.js";/* empty css                   */import{t as n}from"./animations-BeR1pb4y.js";import{c as r,d as i,f as a,i as o,l as s,p as c,r as l}from"./firebase-config-BpXY52D3.js";var u=e((()=>{r(),window.firebaseDB={db:o,collection:l,onSnapshot:i,query:c,limit:s,orderBy:a},window.dispatchEvent(new Event(`firebaseReady`))}));t(),n(),u();

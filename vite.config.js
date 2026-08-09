@@ -26,12 +26,7 @@ export default defineConfig({
         terms: 'pages/terms-conditions.html',
         topper: 'pages/topper.html',
         unitwise: 'pages/unitwise.html',
-      },
-      external: [
-        'js/script.js?v=3.0',
-        'animations/animations.js',
-        'react/app.jsx'
-      ]
+      }
     }
   }
 });
