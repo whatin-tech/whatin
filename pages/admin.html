@@ -567,7 +567,10 @@
 
         // Auth Check
         onAuthStateChanged(auth, (user) => {
-            if (!user) window.location.href = 'login.html';
+            if (!user) {
+                alert("You are not logged in or session expired. Redirecting to login page...");
+                window.location.href = 'login.html';
+            }
         });
 
         // Real-time Listeners
