@@ -1,6 +1,6 @@
 import { db, collection, getDocs, query, where } from './firebase-config.js';
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function initPlacement() {
     const loadingState = document.getElementById('loadingState');
     const emptyState = document.getElementById('emptyState');
     const placementGrid = document.getElementById('placementGrid');
@@ -53,4 +53,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("Error loading placement content: " + error.message);
         loadingState.innerHTML = `<i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i> Failed to load content. Please try again later.`;
     }
-});
+}
+
+initPlacement();

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit-Wise Important Questions | WHATIN Ecosystem</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Access subject-specific, unit-wise important questions for AKTU B.Tech. High-probability questions curated for exam success.">
+    <meta name="keywords" content="AKTU Important Questions, Unit Wise Questions, B.Tech CSE Hub, WHATIN Question Bank">
+
+    
+    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E97CV891FV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E97CV891FV');
+    </script>
+
+    
+    <!--  -->
+
+    <meta name="author" content="Dushyant Saini">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .unit-hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        /* Year Navigation Tabs */
+        .year-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(255, 195, 0, 0.2);
+        }
+
+        /* Subject Cards & Units */
+        .year-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .subject-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .subject-item-v3 {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .subject-item-v3:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .subject-trigger {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .sub-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .sub-title-wrap i {
+            font-size: 1.4rem;
+            color: var(--accent-primary);
+            width: 40px;
+        }
+
+        .sub-title-wrap h3 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .chevron-icon {
+            transition: transform 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .subject-item-v3.open .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .units-drawer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-item-v3.open .units-drawer {
+            max-height: 500px;
+        }
+
+        .units-list {
+            padding: 1.5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .unit-box-link {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: 0.3s;
+            display: block;
+        }
+
+        .unit-box-link:hover {
+            background: rgba(255, 195, 0, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        /* Premium Topper Styles */
+        .year-navigator { margin-top: 3rem; }
+        .year-block {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .year-header {
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .year-header h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .year-header i {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .year-block.collapsed .year-content {
+            display: none;
+        }
+
+        .year-block.collapsed .year-header {
+            border-bottom: none;
+        }
+
+        .year-block.collapsed .year-header i {
+            transform: rotate(-90deg);
+        }
+
+        .year-content {
+            padding: 2.5rem;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .subject-card-v2 {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .subject-card-v2:hover {
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .subject-card-v2 h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #fff;
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 1rem;
+        }
+
+        .units-strip {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .unit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .unit-item a {
+            color: var(--accent-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border: 1px solid var(--accent-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .unit-item a:hover {
+            background: var(--accent-primary);
+            color: #000;
+        }
+        
+        /* Premium Weightage Section */
+        .premium-weightage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .weightage-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .weightage-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+        .weightage-card.high::before { background: #ff4757; }
+        .weightage-card.medium::before { background: #ffa502; }
+        .weightage-card.low::before { background: #2ed573; }
+        
+        .weightage-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .weightage-card.high:hover { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 15px 35px rgba(255, 71, 87, 0.15); }
+        .weightage-card.medium:hover { border-color: rgba(255, 165, 2, 0.5); box-shadow: 0 15px 35px rgba(255, 165, 2, 0.15); }
+        .weightage-card.low:hover { border-color: rgba(46, 213, 115, 0.5); box-shadow: 0 15px 35px rgba(46, 213, 115, 0.15); }
+
+        .w-level {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .weightage-card.high .w-level { color: #ff4757; }
+        .weightage-card.medium .w-level { color: #ffa502; }
+        .weightage-card.low .w-level { color: #2ed573; }
+
+        .weightage-card h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .w-marks {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin: 1.5rem 0;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        .w-marks span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            display: block;
+            text-shadow: none;
+        }
+        .weightage-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.2);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        /* Premium Author Box */
+        .premium-author-box {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0, 240, 255, 0.05));
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 30px;
+            padding: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .premium-author-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 60%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .premium-author-box { flex-direction: column; text-align: center; padding: 2rem; gap: 2rem; }
+        }
+
+        .author-3d-image {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            perspective: 1000px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        .author-3d-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            transform: rotateX(15deg) rotateY(-15deg);
+            transition: 0.5s;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: -10px 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        .author-3d-image:hover img {
+            transform: rotateX(0) rotateY(0) scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+            border-color: rgba(0, 240, 255, 0.5);
+        }
+
+        .author-info {
+            z-index: 2;
+        }
+        .author-info h4 {
+            color: var(--accent-primary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .author-info h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .mission-badge {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.2rem;
+            border-radius: 0 12px 12px 0;
+            color: #fff;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .mission-badge { border-left: none; border-top: 4px solid var(--accent-primary); border-radius: 0 0 12px 12px; }
+        }
+    </style>
+
+    <!-- Monetag Ads -->
+    
+    
+    
+    
+    <!-- Adsterra Popunder -->
+    <!-- Adsterra Popunder (Removed) -->
+
+    
+    
+    
+    <!-- End Favicon -->
+
+    
+    
+    
+
+    
+    
+    
+
+
+    <!-- Favicon for Browser & Google Search -->
+    <link rel="icon" type="image/png" href="/assets/favicon-D-oYOsiX.png">
+    <link rel="apple-touch-icon" href="/assets/favicon-D-oYOsiX.png">
+
+    <!-- Google AdSense Integration -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" crossorigin href="/assets/main-CYHu_3dj.css">
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='index.html'">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                    
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="unit-hero">
+                <h1 class="hero-title">Unit-Wise <span class="gradient-text">Mastery</span> Hub</h1>
+                <div class="last-updated"><i class="fas fa-calendar-alt"></i> Last Updated: March 2026</div>
+                <p class="hero-subtitle">Targeted learning for higher scores. Access modular question banks and
+                    resources for every engineering unit.</p>
+
+                
+
+                
+                <div class="year-navigator">
+                    <!-- 1st Year Section -->
+                    <div class="year-block collapsed">
+                        <div class="year-header" onclick="toggleYear(this)">
+                            <h2>1st Year Archive</h2>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="year-content">
+                            <div class="subjects-grid">
+                                <div class="subject-card-v2">
+                                    <h3>Mechanical Engineering</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="UNIT-1.png" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="UNIT-2.png" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="UNIT-3.png" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="UNIT-4.png" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="UNIT-5.png" target="_blank">Access PDF</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2nd Year Section -->
+                    <div class="year-block collapsed">
+                        <div class="year-header" onclick="toggleYear(this)">
+                            <h2>2nd Year Archive</h2>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="year-content">
+                            <div class="subjects-grid">
+                                <div class="subject-card-v2">
+                                    <h3>Cyber Security</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="https://drive.google.com/file/d/1xbHteIJPgJJgBSpbNguTech58WulI_Xl/view?usp=drive_link" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="https://drive.google.com/file/d/197UCbUzttkBOXU8Lh5B1Yo9lYFU_l5qR/view?usp=drive_link" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="https://drive.google.com/file/d/1xnXggL0TyctGkYEUxpZN3m9Uwkejm3If/view?usp=drive_link" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="https://drive.google.com/file/d/1n7_tMnrRX6Yet672CGLd7Zek7Sox_3We/view?usp=drive_link" target="_blank">Access PDF</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="https://drive.google.com/file/d/1NPdwyYa5Jf4JstGlbOtvuPcWwFmzwWtG/view?usp=drive_link" target="_blank">Access PDF</a></div>
+                                    </div>
+                                </div>
+                                <div class="subject-card-v2">
+                                    <h3>Database Management</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                    </div>
+                                </div>
+                                <div class="subject-card-v2">
+                                    <h3>Operating Systems</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                    </div>
+                                </div>
+                                <div class="subject-card-v2">
+                                    <h3>Computer Organization</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                    </div>
+                                </div>
+                                <div class="subject-card-v2">
+                                    <h3>Mathematics-4</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                    </div>
+                                </div>
+                                <div class="subject-card-v2">
+                                    <h3>TUFLE</h3>
+                                    <div class="units-strip">
+                                        <div class="unit-item"><span>Unit 1</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 2</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 3</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 4</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                        <div class="unit-item"><span>Unit 5</span><a href="#" target="_blank" style="opacity: 0.5; pointer-events: none;">Coming Soon</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3rd Year Section -->
+                    <div class="year-block collapsed">
+                        <div class="year-header" onclick="toggleYear(this)">
+                            <h2>3rd Year Archive</h2>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="year-content">
+                            <div style="padding: 4rem; text-align: center; background: rgba(255,195,0,0.05); border-radius: 30px; border: 1px dashed var(--accent-primary);">
+                                <i class="fas fa-rocket" style="font-size: 3rem; color: var(--accent-primary); margin-bottom: 1rem;"></i>
+                                <p style="color: var(--text-secondary);">Advanced modules for 3rd Year are launching soon. Stay tuned!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- Marks Weightage Premium Cards -->
+                <section class="weightage-section" style="margin-top: 6rem;">
+                    <h2 class="section-title">Unit-Wise <span class="gradient-text">Weightage</span></h2>
+                    <p class="hero-subtitle" style="text-align: center; margin-bottom: 3rem;">Standard AKTU B.Tech Marks Distribution (approximate)</p>
+                    <div class="premium-weightage-grid">
+                        <div class="weightage-card medium">
+                            <div class="w-level">Foundational</div>
+                            <h3>Unit 1</h3>
+                            <div class="w-marks">14 <span>Marks</span></div>
+                            <p>2-Mark Qs: 2 | 10-Mark Qs: 1</p>
+                        </div>
+                        <div class="weightage-card high">
+                            <div class="w-level">Core Concept <i class="fas fa-fire"></i></div>
+                            <h3>Unit 2 & 3</h3>
+                            <div class="w-marks">20-24 <span>Marks</span></div>
+                            <p>2-Mark Qs: 2 | 10-Mark Qs: 2</p>
+                        </div>
+                        <div class="weightage-card low">
+                            <div class="w-level">Advanced Application</div>
+                            <h3>Unit 4 & 5</h3>
+                            <div class="w-marks">10-14 <span>Marks</span></div>
+                            <p>2-Mark Qs: 1 | 10-Mark Qs: 1</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Driven Insight Section -->
+                <section class="deep-content-section">
+                    <div class="info-box-highlight">
+                        <h4><i class="fas fa-search-plus"></i> Module Success Rate</h4>
+                        <p>Students who focus on <strong>Unit 3 and Unit 5</strong> first often have a <strong>25%
+                                higher success rate</strong> in clearing carryover papers. This is because these units
+                            often contain the most direct and high-scoring numerical problems.</p>
+                    </div>
+                </section>
+
+
+                
+                <!-- About the Author Premium Section -->
+                <section class="author-outer" style="margin-top: 5rem;">
+                    <div class="premium-author-box">
+                        <div class="author-3d-image">
+                            <img src="/assets/dushyant_profile-Dp40xHO8.png" alt="Dushyant Saini">
+                        </div>
+                        <div class="author-info">
+                            <h4>✍️ About the Author</h4>
+                            <h3>Dushyant Saini</h3>
+                            <p>
+                                I am a <strong>B.Tech Computer Science Engineering</strong> student and an active member of the AKTU student community. My mission is to build a comprehensive "Student Help Ecosystem" that provides high-quality, verified resources to help my peers excel in their academic journey.
+                            </p>
+                            <div class="mission-badge">
+                                <strong><i class="fas fa-rocket"></i> My Mission:</strong> Helping 10,000+ students navigate engineering with clarity and confidence.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="trust-badge-container" style="justify-content: center; margin-bottom: 4rem;">
+                    <div class="trust-badge"><i class="fas fa-layer-group"></i> Categorized Units</div>
+                    <div class="trust-badge"><i class="fas fa-chart-bar"></i> Priority Sorted</div>
+                    <div class="trust-badge"><i class="fas fa-map-marker-alt"></i> Uttar Pradesh, India</div>
+                </div>
+            </section>
+
+
+            <section class="deep-content-section">
+                <div class="content-card-premium">
+                    <h2 class="section-title" style="text-align: left;">Strategic Question Banks for AKTU B.Tech</h2>
+                    <p>Success in engineering is not just about understanding the theory; it's about being able to apply
+                        it under exam conditions. The <strong>Unit-Wise Important Questions</strong> provided by
+                        <strong>WHATIN</strong> are carefully curated to mirror the difficulty level and priority of
+                        <strong>AKTU University</strong> standards.
+                    </p>
+
+                    <h3>The Power of Targeted Questioning</h3>
+                    <p>A "Targeted Question Bank" helps in identifying the core themes of a subject. For instance, in
+                        <em>Operating Systems</em>, questions on <em>Scheduling Algorithms</em> or <em>Deadlock
+                            Prevention</em> are almost guaranteed to appear. By practicing these unit-wise, you ensure
+                        that no part of the syllabus is left unaddressed.
+                    </p>
+
+                    <div class="info-box-highlight">
+                        <h4>Why Unit-Wise is Better?</h4>
+                        <p>Scanning through the entire syllabus at once can be daunting. By breaking it into units, you
+                            can track your progress more effectively and gain confidence as you check off each section
+                            of the curriculum.</p>
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">Unit-Wise Mastery: A Step-by-Step Guide</h3>
+                    <p>To get the most out of our question banks, we recommend a "Module Master" approach:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 2rem; color: var(--text-secondary);">
+                        <li><strong>Conceptual Foundation:</strong> Read the theoretical aspect from our topper notes
+                            for a specific unit.</li>
+                        <li><strong>Question Selection:</strong> Pick 3-4 high-priority questions from our unit-wise
+                            bank.</li>
+                        <li><strong>Self-Assessment:</strong> Write the answers without referencing the material. This
+                            builds the muscle memory needed for long exam hours.</li>
+                    </ul>
+
+                    <h3 style="margin-top: 2rem;">Understanding AKTU's Internal Marking Pattern</h3>
+                    <p>Unit-wise preparation is especially critical for Sessional Tests (ST-1, ST-2) and Pre-University
+                        Tests (PUT). Since these tests focus on specific portions of the syllabus (e.g., Units 1 & 2 for
+                        ST-1), having a dedicated question bank allows you to focus your energy precisely where it's
+                        needed, ensuring top marks in internals which directly impact your CGPA.</p>
+
+                    <h3 style="margin-top: 2rem;">Empowering Your Academic Journey</h3>
+                    <p>At <strong>WHATIN</strong>, our goal is to provide you with the exact tools you need to excel.
+                        Our curated question banks are more than just a list of items; they are a roadmap to academic
+                        excellence, designed and compiled by <strong>Dushyant Saini</strong> to help every student
+                        succeed. We are committed to updating these banks after every semester to reflect the latest
+                        shifts in university exam patterns.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    
+<footer>
+        <div class="container footer-content">
+            <div class="logo">WHATIN 💡</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Architected by Dushyant Saini.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function switchYear(yearId, btn) {
+            document.querySelectorAll('.year-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(yearId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function toggleSubject(btn) {
+            const card = btn.parentElement;
+            card.classList.toggle('open');
+        }
+    </script>
+    <style>
+        .ad-floating { position: fixed; bottom: 20px; right: 20px; z-index: 9999; border-radius: 8px; background: transparent; }
+        @media (max-width: 768px) { .ad-floating { display: none; } }
+    </style>
+    
+
+<script>
+    function toggleYear(headerElement) {
+        const block = headerElement.parentElement;
+        block.classList.toggle('collapsed');
+    }
+</script>
+
+
+
+    <!-- Firebase Analytics SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+    <script>
+      const firebaseAnalyticsConfig = {
+        apiKey: "AIzaSyAQFEioBcwIrhDzOcPf7lMleVKGHHjba_8",
+        authDomain: "whatin-analytic-dabfa.firebaseapp.com",
+        databaseURL: "https://whatin-analytic-dabfa-default-rtdb.firebaseio.com",
+        projectId: "whatin-analytic-dabfa",
+        storageBucket: "whatin-analytic-dabfa.firebasestorage.app",
+        messagingSenderId: "649111328567",
+        appId: "1:649111328567:web:acdf7d5f9a52b76526ecb2"
+      };
+
+      // Ensure we don't initialize twice if another script initializes a different firebase app
+      let analyticsApp;
+      if (!firebase.apps.length) {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig);
+      } else {
+          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
+      }
+      
+      const db = analyticsApp.database();
+
+      // ---- 1. Total Visitors Count (har page load par +1) ----
+      const visitorsRef = db.ref('stats/totalVisitors');
+      visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
+
+      // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
+      visitorsRef.on('value', (snapshot) => {
+        const el = document.getElementById('visitorCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+
+      // ---- 3. Total Clicks Count (har click par +1) ----
+      const clicksRef = db.ref('stats/totalClicks');
+      document.addEventListener('click', () => {
+        clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
+      });
+
+      // ---- 4. Live Click Count page par dikhana (if elements exist) ----
+      clicksRef.on('value', (snapshot) => {
+        const el = document.getElementById('clickCount');
+        if (el) el.innerText = snapshot.val() || 0;
+      });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+import{_ as e,c as t,d as n,f as r,i,l as a,p as o,r as s}from"./firebase-config-CPLHD94k.js";/* empty css                   */e((()=>{t(),window.firebaseDB={db:i,collection:s,onSnapshot:n,query:o,limit:a,orderBy:r},window.dispatchEvent(new Event(`firebaseReady`))}))();

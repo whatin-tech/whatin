@@ -1,1 +1,0 @@
-import{c as e,d as t,f as n,g as r,i,l as a,p as o,r as s}from"./firebase-config-Dhjpa17D.js";/* empty css                   */r((()=>{e(),window.firebaseDB={db:i,collection:s,onSnapshot:t,query:o,limit:a,orderBy:n},window.dispatchEvent(new Event(`firebaseReady`))}))();
