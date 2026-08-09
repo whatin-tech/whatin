@@ -175,7 +175,7 @@
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 
-  <script type="module" crossorigin src="/assets/admin-CFEuS2g8.js"></script>
+  <script type="module" crossorigin src="/assets/admin-CGuEHXmm.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/firebase-config-Dhjpa17D.js">
   <link rel="modulepreload" crossorigin href="/assets/nav-auth-cgdUL366.js">
   <link rel="stylesheet" crossorigin href="/assets/main-CYHu_3dj.css">
@@ -431,10 +431,6 @@
                                 <label>Google Drive Link</label>
                                 <input type="url" id="plLink" class="form-control" placeholder="https://drive.google.com/..." required>
                             </div>
-                            <div class="form-group">
-                                <label>Display Order</label>
-                                <input type="number" id="plOrder" class="form-control" placeholder="e.g. 1" required>
-                            </div>
                             <button type="submit" class="btn btn-primary"
                                 style="width: 100%; border-color: #ffd700; background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%); color: #000;">Upload Box</button>
                         </form>
@@ -484,6 +480,7 @@
             const aktu = document.getElementById('aktuManager');
             const college = document.getElementById('collegeManager');
             const bsa = document.getElementById('bsaManager');
+            const placement = document.getElementById('placementManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -495,16 +492,24 @@
                 aktu.style.display = 'block';
                 college.style.display = 'none';
                 if(bsa) bsa.style.display = 'none';
+                if(placement) placement.style.display = 'none';
             } else if (type === 'college') {
                 college.style.display = 'block';
                 aktu.style.display = 'none';
                 if(bsa) bsa.style.display = 'none';
+                if(placement) placement.style.display = 'none';
                 updateSubjects();
             } else if (type === 'bsa') {
                 if(bsa) bsa.style.display = 'block';
                 college.style.display = 'none';
                 aktu.style.display = 'none';
+                if(placement) placement.style.display = 'none';
                 updateBsaSubjects();
+            } else if (type === 'placement') {
+                if(placement) placement.style.display = 'block';
+                college.style.display = 'none';
+                aktu.style.display = 'none';
+                if(bsa) bsa.style.display = 'none';
             }
         }
 
@@ -514,6 +519,7 @@
             document.getElementById('aktuManager').style.display = 'none';
             document.getElementById('collegeManager').style.display = 'none';
             const bm = document.getElementById('bsaManager'); if(bm) bm.style.display = 'none';
+            const pm = document.getElementById('placementManager'); if(pm) pm.style.display = 'none';
         }
 
         function updateSubjects() {
