@@ -1,0 +1,26 @@
+{
+  "name": "whatin",
+  "version": "1.0.0",
+  "description": "**The Premier Digital Academic Hub for B.Tech CSE Students** *Founded & Architected by Dushyant Saini | Co-Architected & Managed by Neelesh Tiwari*",
+  "main": "add_affidavit_faq.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatin-tech/whatin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/whatin-tech/whatin/issues"
+  },
+  "homepage": "https://github.com/whatin-tech/whatin#readme",
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}

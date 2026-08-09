@@ -1,24 +1,24 @@
 // Firebase Configuration
 // NOTE: Replace the config object below with your actual Firebase project config from Firebase Console
 const firebaseConfig = {
-    apiKey: "AIzaSyAI-_MmGMULmM0qsZK5SoQ4fOaSREbJStw",
-    authDomain: "whatin-98232.firebaseapp.com",
-    projectId: "whatin-98232",
-    storageBucket: "whatin-98232.firebasestorage.app",
-    messagingSenderId: "773750592727",
-    appId: "1:773750592727:web:f87f02cc5edad550fccc92",
-    measurementId: "G-5VQBV2928T"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy, where, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export { db, auth, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy, signInWithEmailAndPassword, onAuthStateChanged, signOut, where };
+export { db, auth, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy, signInWithEmailAndPassword, onAuthStateChanged, signOut, where, limit };
 
 

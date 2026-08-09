@@ -227,12 +227,20 @@
                         <h3>College GL Bajaj</h3>
                         <p>Manage internal papers (ST-1, ST-2, PUT) and branch-specific resources.</p>
                     </div>
-                    <div id="btnBsa" class="rev-card choice-card" onclick="switchSection('bsa')"
+                                        <div id="btnBsa" class="rev-card choice-card" onclick="switchSection('bsa')"
                         style="cursor: pointer; background: rgba(52, 211, 153, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid var(--glass-border);">
                         <i class="fas fa-school"
                             style="font-size: 3rem; color: #34d399; margin-bottom: 1.5rem;"></i>
                         <h3>BSA College</h3>
                         <p>Manage BSA PYPs (STs, PUT, UT).</p>
+                    </div>
+                    
+                    <div id="btnPlacement" class="rev-card choice-card" onclick="switchSection('placement')"
+                        style="cursor: pointer; background: rgba(255, 215, 0, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid var(--glass-border);">
+                        <i class="fas fa-briefcase"
+                            style="font-size: 3rem; color: #ffd700; margin-bottom: 1.5rem;"></i>
+                        <h3>Placement Content</h3>
+                        <p>Manage premium placement prep material.</p>
                     </div>
                 </div>
             </div>
@@ -389,7 +397,46 @@
                         <div id="bsaContainer"></div>
                     </div>
                 </div>
-            </div> <!-- End of BSA Manager -->
+                        </div> <!-- End of BSA Manager -->
+
+            <!-- Placement Manager Section (Initially Hidden) -->
+            <div id="placementManager" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
+                            class="fas fa-arrow-left" onclick="showChoice()"
+                            style="cursor: pointer; font-size: 1.5rem; margin-right: 1rem; opacity: 0.5;"></i> Placement <span class="gradient-text" style="background: linear-gradient(90deg, #ffd700, #ffb300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Content</span>
+                    </h1>
+                    <div class="stats-badge"
+                        style="background: rgba(255, 215, 0, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #ffd700;">
+                        <span id="totalPlacement">0</span> Resources
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="upload-card">
+                        <h3>Add Placement Box</h3>
+                        <form id="placementForm" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>Topic Name</label>
+                                <input type="text" id="plTitle" class="form-control" placeholder="e.g. TCS Interview Questions" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="plDesc" class="form-control" rows="3" placeholder="Short description..." required style="resize: vertical;"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Google Drive Link</label>
+                                <input type="url" id="plLink" class="form-control" placeholder="https://drive.google.com/..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; border-color: #ffd700; background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%); color: #000;">Upload Box</button>
+                        </form>
+                    </div>
+                    <div class="data-list-card">
+                        <div id="placementContainer"></div>
+                    </div>
+                </div>
+            </div> <!-- End of Placement Manager -->
 
         </div> <!-- End of Container -->
     </main>
@@ -430,6 +477,7 @@
             const aktu = document.getElementById('aktuManager');
             const college = document.getElementById('collegeManager');
             const bsa = document.getElementById('bsaManager');
+            const placement = document.getElementById('placementManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -441,16 +489,24 @@
                 aktu.style.display = 'block';
                 college.style.display = 'none';
                 if(bsa) bsa.style.display = 'none';
+                if(placement) placement.style.display = 'none';
             } else if (type === 'college') {
                 college.style.display = 'block';
                 aktu.style.display = 'none';
                 if(bsa) bsa.style.display = 'none';
+                if(placement) placement.style.display = 'none';
                 updateSubjects();
             } else if (type === 'bsa') {
                 if(bsa) bsa.style.display = 'block';
                 college.style.display = 'none';
                 aktu.style.display = 'none';
+                if(placement) placement.style.display = 'none';
                 updateBsaSubjects();
+            } else if (type === 'placement') {
+                if(placement) placement.style.display = 'block';
+                college.style.display = 'none';
+                aktu.style.display = 'none';
+                if(bsa) bsa.style.display = 'none';
             }
         }
 
@@ -460,6 +516,7 @@
             document.getElementById('aktuManager').style.display = 'none';
             document.getElementById('collegeManager').style.display = 'none';
             const bm = document.getElementById('bsaManager'); if(bm) bm.style.display = 'none';
+            const pm = document.getElementById('placementManager'); if(pm) pm.style.display = 'none';
         }
 
         function updateSubjects() {
@@ -648,6 +705,72 @@
                 } catch (err) { alert(err.message); }
                 btn.disabled = false;
                 btn.innerText = 'Add to BSA Portal';
+            };
+        }
+
+                // Placement Content Form Handlers and Listener
+        const placementContainer = document.getElementById('placementContainer');
+        const totalPlacement = document.getElementById('totalPlacement');
+
+        const qPlacement = query(collection(db, "resources"), where("category", "==", "placement"));
+        onSnapshot(qPlacement, (snap) => {
+            let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            if(totalPlacement) totalPlacement.innerText = data.length;
+            if(placementContainer) {
+                if (data.length === 0) {
+                    placementContainer.innerHTML = `<div style="opacity: 0.3; text-align: center; padding: 3rem;">
+                        <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>No items added yet</p>
+                    </div>`;
+                    return;
+                }
+                placementContainer.innerHTML = data.map(item => `
+                    <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; color: #fff;">${item.title}</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 50)}...</span>
+                        </div>
+                        <div class="action-btns">
+                            <button class="btn btn-delete btn-sm delete-btn" onclick="handlePlacementDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }, (err) => console.error("Placement Listener Error:", err));
+
+        window.handlePlacementDelete = async (id) => {
+            if (confirm('Are you sure you want to delete this placement box?')) {
+                await deleteDoc(doc(db, "resources", id));
+            }
+        };
+
+        const placementForm = document.getElementById('placementForm');
+        if(placementForm) {
+            placementForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const title = document.getElementById('plTitle').value.trim();
+                const desc = document.getElementById('plDesc').value.trim();
+                const link = document.getElementById('plLink').value.trim();
+
+                if (!title || !link) return alert('Title and Link are required');
+
+                btn.disabled = true;
+                btn.innerText = 'Processing...';
+                try {
+                    await addDoc(collection(db, "resources"), {
+                        category: 'placement',
+                        title: title,
+                        description: desc,
+                        driveLink: link,
+                        createdAt: new Date()
+                    });
+                    e.target.reset();
+                    alert('Success! Placement Box added.');
+                } catch (err) { alert(err.message); }
+                btn.disabled = false;
+                btn.innerText = 'Upload Box';
             };
         }
 

@@ -230,9 +230,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Slight delay to simulate natural load
     setTimeout(injectMonetagAds, 2000);
 
+    // Intersection Observer for Animations (.fired)
+    const animObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fired');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const observeAnimElements = () => {
+        document.querySelectorAll('.pop-in, .pop-left, .pop-right, .pop-scale, .pop-flip, .pop-word, .pop-num').forEach(el => {
+            if (!el.classList.contains('fired') && !el.dataset.observed) {
+                animObserver.observe(el);
+                el.dataset.observed = 'true';
+            }
+        });
+    };
+    
+    observeAnimElements();
+
+    // Observe dynamically added elements
+    const domObserver = new MutationObserver((mutations) => {
+        let shouldObserve = false;
+        mutations.forEach(m => { if (m.addedNodes.length) shouldObserve = true; });
+        if (shouldObserve) observeAnimElements();
+    });
+    domObserver.observe(document.body, { childList: true, subtree: true });
+
 });
-
-
 /* --- Hero Content Carousel --- */
 document.addEventListener("DOMContentLoaded", () => {
     const dotsContainer = document.getElementById("hero-carousel-dots");
