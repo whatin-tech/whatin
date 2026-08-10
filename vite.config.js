@@ -5,6 +5,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        guidance: 'guidance.html',
         admin: 'pages/admin.html',
         placement: 'pages/placement.html',
         login: 'pages/login.html',
