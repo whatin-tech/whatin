@@ -175,7 +175,7 @@
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 
-  <script type="module" crossorigin src="/assets/admin-D5wjob8v.js"></script>
+  <script type="module" crossorigin src="/assets/admin-CSjVDPXi.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/script-B8465DUt.js">
   <link rel="modulepreload" crossorigin href="/assets/firebase-config-BpXY52D3.js">
   <link rel="modulepreload" crossorigin href="/assets/nav-auth-CR9bqec-.js">
@@ -245,6 +245,14 @@
                             style="font-size: 3rem; color: #ffd700; margin-bottom: 1.5rem;"></i>
                         <h3>Placement Content</h3>
                         <p>Manage premium placement prep material.</p>
+                    </div>
+
+                    <div id="btnNotes" class="rev-card choice-card" onclick="switchSection('notes')"
+                        style="cursor: pointer; background: rgba(255, 107, 107, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid var(--glass-border);">
+                        <i class="fas fa-book-open"
+                            style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1.5rem;"></i>
+                        <h3>All Subject Notes</h3>
+                        <p>Upload PDFs grouped by Subject and Year.</p>
                     </div>
                 </div>
             </div>
@@ -442,6 +450,58 @@
                 </div>
             </div> <!-- End of Placement Manager -->
 
+            <!-- Notes Manager Section (Initially Hidden) -->
+            <div id="notesManager" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
+                            class="fas fa-arrow-left" onclick="showChoice()"
+                            style="cursor: pointer; font-size: 1.5rem; margin-right: 1rem; opacity: 0.5;"></i> All <span class="gradient-text" style="background: linear-gradient(90deg, #ff6b6b, #ff8787); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Subject Notes</span>
+                    </h1>
+                    <div class="stats-badge"
+                        style="background: rgba(255, 107, 107, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #ff6b6b;">
+                        <span id="totalNotes">0</span> Resources
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="upload-card">
+                        <h3>Add Subject Note</h3>
+                        <form id="notesForm" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>Year</label>
+                                <select id="noteYear" class="form-control" required>
+                                    <option value="year1">1st Year</option>
+                                    <option value="year2">2nd Year</option>
+                                    <option value="year3">3rd Year</option>
+                                    <option value="year4">Final Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject Name</label>
+                                <input type="text" id="noteSubject" class="form-control" placeholder="e.g. Physics" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject Description</label>
+                                <textarea id="noteDesc" class="form-control" rows="2" placeholder="Short description for the subject box..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>PDF Title</label>
+                                <input type="text" id="noteTitle" class="form-control" placeholder="e.g. Unit 1 Notes" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Google Drive Link</label>
+                                <input type="url" id="noteLink" class="form-control" placeholder="https://drive.google.com/..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; border-color: #ff6b6b; background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%); color: #fff;">Upload Note</button>
+                        </form>
+                    </div>
+                    <div class="data-list-card">
+                        <div id="notesContainer"></div>
+                    </div>
+                </div>
+            </div> <!-- End of Notes Manager -->
+
         </div> <!-- End of Container -->
     </main>
 
@@ -481,6 +541,7 @@
             const college = document.getElementById('collegeManager');
             const bsa = document.getElementById('bsaManager');
             const placement = document.getElementById('placementManager');
+            const notes = document.getElementById('notesManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -488,38 +549,35 @@
             }
 
             choice.style.display = 'none';
+            if (aktu) aktu.style.display = 'none';
+            if (college) college.style.display = 'none';
+            if (bsa) bsa.style.display = 'none';
+            if (placement) placement.style.display = 'none';
+            if (notes) notes.style.display = 'none';
+
             if (type === 'aktu') {
-                aktu.style.display = 'block';
-                college.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (aktu) aktu.style.display = 'block';
             } else if (type === 'college') {
-                college.style.display = 'block';
-                aktu.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (college) college.style.display = 'block';
                 updateSubjects();
             } else if (type === 'bsa') {
-                if(bsa) bsa.style.display = 'block';
-                college.style.display = 'none';
-                aktu.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (bsa) bsa.style.display = 'block';
                 updateBsaSubjects();
             } else if (type === 'placement') {
-                if(placement) placement.style.display = 'block';
-                college.style.display = 'none';
-                aktu.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
+                if (placement) placement.style.display = 'block';
+            } else if (type === 'notes') {
+                if (notes) notes.style.display = 'block';
             }
         }
 
         function showChoice() {
             console.log("Showing choice screen");
             document.getElementById('adminChoice').style.display = 'block';
-            document.getElementById('aktuManager').style.display = 'none';
-            document.getElementById('collegeManager').style.display = 'none';
-            const bm = document.getElementById('bsaManager'); if(bm) bm.style.display = 'none';
-            const pm = document.getElementById('placementManager'); if(pm) pm.style.display = 'none';
+            const aktu = document.getElementById('aktuManager'); if(aktu) aktu.style.display = 'none';
+            const college = document.getElementById('collegeManager'); if(college) college.style.display = 'none';
+            const bsa = document.getElementById('bsaManager'); if(bsa) bsa.style.display = 'none';
+            const placement = document.getElementById('placementManager'); if(placement) placement.style.display = 'none';
+            const notes = document.getElementById('notesManager'); if(notes) notes.style.display = 'none';
         }
 
         function updateSubjects() {

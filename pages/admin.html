@@ -242,6 +242,14 @@
                         <h3>Placement Content</h3>
                         <p>Manage premium placement prep material.</p>
                     </div>
+
+                    <div id="btnNotes" class="rev-card choice-card" onclick="switchSection('notes')"
+                        style="cursor: pointer; background: rgba(255, 107, 107, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid var(--glass-border);">
+                        <i class="fas fa-book-open"
+                            style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1.5rem;"></i>
+                        <h3>All Subject Notes</h3>
+                        <p>Upload PDFs grouped by Subject and Year.</p>
+                    </div>
                 </div>
             </div>
 
@@ -438,6 +446,60 @@
                 </div>
             </div> <!-- End of Placement Manager -->
 
+            <!-- Notes Manager Section (Initially Hidden) -->
+            <div id="notesManager" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
+                            class="fas fa-arrow-left" onclick="showChoice()"
+                            style="cursor: pointer; font-size: 1.5rem; margin-right: 1rem; opacity: 0.5;"></i> All <span class="gradient-text" style="background: linear-gradient(90deg, #ff6b6b, #ff8787); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Subject Notes</span>
+                    </h1>
+                    <div class="stats-badge"
+                        style="background: rgba(255, 107, 107, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #ff6b6b;">
+                        <span id="totalNotes">0</span> Resources
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="upload-card">
+                        <h3>Add Subject Note</h3>
+                        <form id="notesForm" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>Year</label>
+                                <select id="noteYear" class="form-control" required>
+                                    <option value="year1">1st Year</option>
+                                    <option value="year2">2nd Year</option>
+                                    <option value="year3">3rd Year</option>
+                                    <option value="year4">Final Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject Name</label>
+                                <select id="noteSubject" class="form-control" required>
+                                    <!-- Options populated via JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject Description (Optional)</label>
+                                <textarea id="noteDesc" class="form-control" rows="2" placeholder="Short description for the subject box..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>PDF Title</label>
+                                <input type="text" id="noteTitle" class="form-control" placeholder="e.g. Unit 1 Notes" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Google Drive Link</label>
+                                <input type="url" id="noteLink" class="form-control" placeholder="https://drive.google.com/..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; border-color: #ff6b6b; background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%); color: #fff;">Upload Note</button>
+                        </form>
+                    </div>
+                    <div class="data-list-card">
+                        <div id="notesContainer"></div>
+                    </div>
+                </div>
+            </div> <!-- End of Notes Manager -->
+
         </div> <!-- End of Container -->
     </main>
 
@@ -478,6 +540,7 @@
             const college = document.getElementById('collegeManager');
             const bsa = document.getElementById('bsaManager');
             const placement = document.getElementById('placementManager');
+            const notes = document.getElementById('notesManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -485,38 +548,35 @@
             }
 
             choice.style.display = 'none';
+            if (aktu) aktu.style.display = 'none';
+            if (college) college.style.display = 'none';
+            if (bsa) bsa.style.display = 'none';
+            if (placement) placement.style.display = 'none';
+            if (notes) notes.style.display = 'none';
+
             if (type === 'aktu') {
-                aktu.style.display = 'block';
-                college.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (aktu) aktu.style.display = 'block';
             } else if (type === 'college') {
-                college.style.display = 'block';
-                aktu.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (college) college.style.display = 'block';
                 updateSubjects();
             } else if (type === 'bsa') {
-                if(bsa) bsa.style.display = 'block';
-                college.style.display = 'none';
-                aktu.style.display = 'none';
-                if(placement) placement.style.display = 'none';
+                if (bsa) bsa.style.display = 'block';
                 updateBsaSubjects();
             } else if (type === 'placement') {
-                if(placement) placement.style.display = 'block';
-                college.style.display = 'none';
-                aktu.style.display = 'none';
-                if(bsa) bsa.style.display = 'none';
+                if (placement) placement.style.display = 'block';
+            } else if (type === 'notes') {
+                if (notes) notes.style.display = 'block';
             }
         }
 
         function showChoice() {
             console.log("Showing choice screen");
             document.getElementById('adminChoice').style.display = 'block';
-            document.getElementById('aktuManager').style.display = 'none';
-            document.getElementById('collegeManager').style.display = 'none';
-            const bm = document.getElementById('bsaManager'); if(bm) bm.style.display = 'none';
-            const pm = document.getElementById('placementManager'); if(pm) pm.style.display = 'none';
+            const aktu = document.getElementById('aktuManager'); if(aktu) aktu.style.display = 'none';
+            const college = document.getElementById('collegeManager'); if(college) college.style.display = 'none';
+            const bsa = document.getElementById('bsaManager'); if(bsa) bsa.style.display = 'none';
+            const placement = document.getElementById('placementManager'); if(placement) placement.style.display = 'none';
+            const notes = document.getElementById('notesManager'); if(notes) notes.style.display = 'none';
         }
 
         function updateSubjects() {
@@ -774,6 +834,106 @@
                 } catch (err) { alert(err.message); }
                 btn.disabled = false;
                 btn.innerText = 'Upload Box';
+            };
+        }
+
+        // Notes Manager Form Handlers and Listener
+        const notesContainer = document.getElementById('notesContainer');
+        const totalNotes = document.getElementById('totalNotes');
+
+        const qNotes = query(collection(db, "resources"), where("category", "==", "notes"));
+        onSnapshot(qNotes, (snap) => {
+            let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            if (totalNotes) totalNotes.innerText = data.length;
+            if (notesContainer) {
+                if (data.length === 0) {
+                    notesContainer.innerHTML = `<div style="opacity: 0.3; text-align: center; padding: 3rem;">
+                        <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>No notes added yet</p>
+                    </div>`;
+                    return;
+                }
+                notesContainer.innerHTML = data.map(item => `
+                    <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; color: #fff;">${item.subjectName} <span style="color: #ff6b6b; font-size: 0.8rem; margin-left: 5px;">[${item.year.replace('year', 'Year ')}]</span></h4>
+                            <span style="font-size: 0.85rem; color: #ff8787;">${item.pdfTitle}</span>
+                            <br>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 50)}...</span>
+                        </div>
+                        <div class="action-btns">
+                            <button class="btn btn-delete btn-sm delete-btn" onclick="handleNoteDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }, (err) => console.error("Notes Listener Error:", err));
+
+        window.handleNoteDelete = async (id) => {
+            if (confirm('Are you sure you want to delete this note?')) {
+                await deleteDoc(doc(db, "resources", id));
+            }
+        };
+
+        const subjectsByYear = {
+            'year1': ['Physics', 'Math 1', 'Math 2', 'Chemistry', 'Mechanical', 'Electrical', 'Electronics', 'PPS', 'Soft Skills'],
+            'year2': ['COA', 'DSTL', 'TAFL', 'OS', 'DS', 'Math 4', 'Python', 'OOPS', 'CS', 'DE'],
+            'year3': ['COI', 'DAA', 'OOSD', 'DBMS', 'MLT', 'WT'],
+            'year4': ['Major Project', 'Internship'] 
+        };
+
+        const noteYearSelect = document.getElementById('noteYear');
+        const noteSubjectSelect = document.getElementById('noteSubject');
+
+        function updateNoteSubjects() {
+            if(!noteYearSelect || !noteSubjectSelect) return;
+            const year = noteYearSelect.value;
+            const subjects = subjectsByYear[year] || [];
+            noteSubjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+
+        if(noteYearSelect) {
+            noteYearSelect.addEventListener('change', updateNoteSubjects);
+            // We need to call it when Notes tab is shown, or just call it once initially
+            updateNoteSubjects(); 
+        }
+
+        const notesForm = document.getElementById('notesForm');
+        if(notesForm) {
+            notesForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                
+                const year = document.getElementById('noteYear').value;
+                const subject = document.getElementById('noteSubject').value.trim();
+                const desc = document.getElementById('noteDesc').value.trim();
+                const title = document.getElementById('noteTitle').value.trim();
+                const link = document.getElementById('noteLink').value.trim();
+
+                if (!subject || !title || !link) return alert('Subject, Title and Link are required');
+
+                btn.disabled = true;
+                btn.innerText = 'Processing...';
+                try {
+                    await addDoc(collection(db, "resources"), {
+                        category: 'notes',
+                        year: year,
+                        subjectName: subject,
+                        description: desc,
+                        pdfTitle: title,
+                        driveLink: link,
+                        createdAt: new Date()
+                    });
+                    
+                    // Reset only title and link, keep subject and desc for easy multiple uploads
+                    document.getElementById('noteTitle').value = '';
+                    document.getElementById('noteLink').value = '';
+                    
+                    alert('Success! Note added.');
+                } catch (err) { alert(err.message); }
+                btn.disabled = false;
+                btn.innerText = 'Upload Note';
             };
         }
 

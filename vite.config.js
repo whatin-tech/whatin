@@ -7,6 +7,7 @@ export default defineConfig({
         main: 'index.html',
         guidance: 'guidance.html',
         admin: 'pages/admin.html',
+        notes: 'pages/notes.html',
         placement: 'pages/placement.html',
         login: 'pages/login.html',
         about: 'pages/about.html',

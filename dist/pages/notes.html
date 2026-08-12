@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Subject Notes | Premium Study Materials by WHATIN</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Access premium hand-written notes and study materials for all engineering subjects in one place. Categorized by year and subject for easy access.">
+    <meta name="keywords"
+        content="engineering notes, aktu notes, gl bajaj notes, btech notes, study materials, whatin notes">
+    <meta name="author" content="Dushyant Saini">
+    <meta name="robots" content="index, follow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            padding: 1rem 0;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: -2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "›";
+            margin-left: 0.5rem;
+            color: var(--accent-primary);
+        }
+
+        .pyp-hero {
+            padding: 10rem 0 3rem;
+            text-align: center;
+        }
+
+        .year-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .year-tab {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .year-tab.active {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .branch-badge {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: 0.3s;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .sub-icon {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .subject-card h4 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .subject-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .pdf-links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .pdf-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .pdf-link-btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.3);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .pdf-link-btn i {
+            color: #ff6b6b;
+            margin-right: 0.5rem;
+        }
+
+        .year-section {
+            display: none;
+        }
+
+        .year-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Skeleton */
+        .skeleton-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .skeleton-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skeleton-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+
+        .skeleton-title {
+            width: 150px;
+            height: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+        }
+
+        .skeleton-desc {
+            width: 100%;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-btn {
+            width: 100%;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+
+    <link rel="icon" type="image/png" href="/assets/favicon-D-oYOsiX.png">
+    <link rel="apple-touch-icon" href="/assets/favicon-D-oYOsiX.png">
+  <script type="module" crossorigin src="/assets/notes-CTsCCh3f.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/script-B8465DUt.js">
+  <link rel="modulepreload" crossorigin href="/assets/firebase-config-BpXY52D3.js">
+  <link rel="modulepreload" crossorigin href="/assets/nav-auth-CR9bqec-.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-CYHu_3dj.css">
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="align-items: center; margin: 0;">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="../guidance.html">Guidance</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contributors.html">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <nav aria-label="Breadcrumb" style="padding-top: 2rem;">
+                <ul class="breadcrumb">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Resources</a></li>
+                    <li style="color: #ff6b6b;">All Subject Notes</li>
+                </ul>
+            </nav>
+            <section class="pyp-hero">
+                <h1 class="hero-title"><span class="gradient-text" style="background: linear-gradient(90deg, #ff6b6b, #ff8787); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Premium</span> Subject Notes</h1>
+                <p class="hero-subtitle">High-quality handwritten notes and study materials covering your entire engineering curriculum.</p>
+
+                <div class="branch-badge">B.Tech | All Branches</div>
+
+                <div class="year-tabs">
+                    <div class="year-tab active" data-year="year1">1st Year</div>
+                    <div class="year-tab" data-year="year2">2nd Year</div>
+                    <div class="year-tab" data-year="year3">3rd Year</div>
+                    <div class="year-tab" data-year="year4">Final Year</div>
+                </div>
+
+                <div id="notesContainerWrapper">
+                    <!-- Loading Skeletons will show initially, then replaced by JS -->
+                    <div class="subjects-grid" id="notesSkeleton">
+                        <div class="skeleton-card">
+                            <div class="skeleton-header">
+                                <div class="skeleton-icon"></div>
+                                <div class="skeleton-title"></div>
+                            </div>
+                            <div class="skeleton-desc"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                        <div class="skeleton-card">
+                            <div class="skeleton-header">
+                                <div class="skeleton-icon"></div>
+                                <div class="skeleton-title"></div>
+                            </div>
+                            <div class="skeleton-desc"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                        <div class="skeleton-card">
+                            <div class="skeleton-header">
+                                <div class="skeleton-icon"></div>
+                                <div class="skeleton-title"></div>
+                            </div>
+                            <div class="skeleton-desc"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(255,255,255,0.02); border-top: 1px solid var(--glass-border); padding: 3rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center;">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">WHATIN 💡</div>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">Empowering engineering students with premium resources.</p>
+            <p style="color: var(--text-secondary); font-size: 0.8rem; opacity: 0.6;">&copy; 2026 WHATIN. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+</body>
+
+</html>
