@@ -1,195 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Govt. Certificates | WHATIN Ecosystem</title>
+    <title>Govt. Certificates Dashboard | WHATIN</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Get your Caste, Income, and Domicile certificates easily through WHATIN. Fast, clear, and designed for students.">
+    <meta name="description" content="Apply for essential Caste, Income, and Domicile certificates easily through WHATIN. Fast-track digital verification and delivery.">
     <meta name="author" content="Dushyant Saini">
 
-    <!-- Fonts -->
+    <!-- Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/certificate_style.css">
     <link rel="stylesheet" href="../animations/animations.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        .document-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .doc-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .doc-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-gradient);
-        }
-
-        .doc-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.4);
-        }
-
-        .doc-card h4 {
-            color: var(--accent-primary);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .doc-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .process-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .step-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-gradient);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-        }
-
-        .step-content h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .step-content p {
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        .cta-container {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 3rem;
-            background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(0, 0, 0, 0.2));
-            border-radius: 30px;
-            border: 1px dashed var(--accent-primary);
-        }
-    </style>
-
-    
-    
-    
-    <!-- End Favicon -->
-
-    
-    
-    
-
-    
-    
-    
-
-
-    
-    
-    
-
-
-    <!-- Favicon for Browser & Google Search -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/favicon.png">
 
-    <!-- Google AdSense Integration -->
-    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
+    <style>
+        .gradient-text-hero {
+            font-size: 3rem;
+            font-weight: 850;
+            background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+            margin-bottom: 0.8rem;
+        }
 
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Whatin Canvas Background -->
     <canvas id="bgCanvas"></canvas>
 
-    <header id="main-header">
-        <div class="container header-content">
-            <div class="logo" onclick="window.location.href='../index.html'">WHATIN 💡</div>
-                                    <nav id="nav-menu">
-                <ul style="align-items: center; margin: 0;">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="../guidance.html">Guidance</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="contributors.html">Contributors</a></li>
-                    
-                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
-                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
-                    <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
+    <!-- Main Navigation Header -->
+    <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container header-content" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="logo" onclick="window.location.href='../index.html'" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; cursor: pointer;">WHATIN 💡</div>
+            <nav id="nav-menu">
+                <ul style="display: flex; align-items: center; gap: 2rem; margin: 0; list-style: none;">
+                    <li><a href="../index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Home</a></li>
+                    <li><a href="about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">About</a></li>
+                    <li><a href="../guidance.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Guidance</a></li>
+                    <li><a href="team.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Team</a></li>
+                    <li><a href="contributors.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Contributors</a></li>
+                    <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="login.html" class="admin-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li><a href="../index.html#projects" class="cta-btn-header" style="background: var(--accent-gradient); color: #000; padding: 0.6rem 1.2rem; border-radius: 100px; text-decoration: none; font-weight: 700;">Resources</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <div class="mobile-menu-btn" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem;">
                 <i class="fas fa-bars"></i>
-            </button>
+            </div>
         </div>
     </header>
 
-    <main>
-        <div class="container" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-            <!-- The page is intentionally blank for now -->
-            <div class="coming-soon" style="padding: 5rem; text-align: center; border: 1px dashed var(--glass-border); border-radius: 20px; width: 100%; margin-top: 4rem;">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-hammer"></i> Work In Progress</h2>
-                <p style="color: var(--text-secondary);">This page is currently being built. Check back later!</p>
-            </div>
-        </div>
-    </main>
+    <div class="container animate-reveal delay-1" style="margin-top: 120px; min-height: 70vh;">
 
+        <!-- Header -->
+        <div class="page-header" style="text-align: center; margin-bottom: 3.5rem;">
+            <h1 class="gradient-text-hero">Certificate Application Dashboard</h1>
+            <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto; font-size: 1.15rem;">Select a certificate type below to proceed with your verification and online application.</p>
+        </div>
+
+        <!-- Dashboard Selection Grid -->
+        <div class="dashboard-grid animate-reveal delay-2">
+
+            <!-- Domicile Card -->
+            <a href="domicile.html" class="dashboard-card domicile-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-house-chimney"></i>
+                </div>
+                <h3>Domicile Certificate</h3>
+                <h4>Mool Niwas Praman Patra</h4>
+                <p>Apply for local residence certification. Required for state level colleges, benefits, and local domicile verification.</p>
+                <div class="action-btn">Apply for Domicile</div>
+            </a>
+
+            <!-- Caste Card -->
+            <a href="caste.html" class="dashboard-card caste-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-users-rectangle"></i>
+                </div>
+                <h3>Caste Certificate</h3>
+                <h4>Jati Praman Patra</h4>
+                <p>Apply for reserves, OBC, SC, ST category certifications for educational and government recruitment services.</p>
+                <div class="action-btn">Apply for Caste</div>
+            </a>
+
+            <!-- Income Card -->
+            <a href="income.html" class="dashboard-card income-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                </div>
+                <h3>Income Certificate</h3>
+                <h4>Aaye Praman Patra</h4>
+                <p>Apply for verifying your official annual family income. Crucial for UP scholarship applications and fee waivers.</p>
+                <div class="action-btn">Apply for Income</div>
+            </a>
+
+            <!-- General Assistance Card -->
+            <!-- <a href="assistance.html" class="dashboard-card assistance-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-handshake-angle"></i>
+                </div>
+                <h3>Custom Assistance</h3>
+                <h4>General Certificate Portal</h4>
+                <p>Need custom guidance or multi-document verification assistance? Reach out to our dedicated support team.</p>
+                <div class="action-btn">Get Assistance</div>
+            </a> -->
+
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <div class="logo">WHATIN 💡</div>
@@ -200,7 +144,6 @@
                 <a href="terms-conditions.html">Terms & Conditions</a>
             </div>
             <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/dushyant-saini-6384a532b" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.instagram.com/thedushyant_saini?igsh=Z2sybHAzcTI2eTA2" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
@@ -208,59 +151,71 @@
         </div>
     </footer>
 
-    <!-- Vanilla JS Animation Logic -->
-    <script type="module" src="../animations/animations.js"></script>
-    <script type="module" src="../js/script.js"></script>
-    <script type="module" src="../js/nav-auth.js"></script>
-
-
-
-    <!-- Firebase Analytics SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
-
+    <!-- Canvas Node Network Script -->
     <script>
-      const firebaseAnalyticsConfig = {
-        apiKey: "AIzaSyAQFEioBcwIrhDzOcPf7lMleVKGHHjba_8",
-        authDomain: "whatin-analytic-dabfa.firebaseapp.com",
-        databaseURL: "https://whatin-analytic-dabfa-default-rtdb.firebaseio.com",
-        projectId: "whatin-analytic-dabfa",
-        storageBucket: "whatin-analytic-dabfa.firebasestorage.app",
-        messagingSenderId: "649111328567",
-        appId: "1:649111328567:web:acdf7d5f9a52b76526ecb2"
-      };
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes;
 
-      // Ensure we don't initialize twice if another script initializes a different firebase app
-      let analyticsApp;
-      if (!firebase.apps.length) {
-          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig);
-      } else {
-          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
-      }
-      
-      const db = analyticsApp.database();
+        function initNodes() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            nodes = [];
+            const nodeCount = Math.min(Math.floor((width * height) / 12000), 80);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
 
-      // ---- 1. Total Visitors Count (har page load par +1) ----
-      const visitorsRef = db.ref('stats/totalVisitors');
-      visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
+        function animateNodes() {
+            requestAnimationFrame(animateNodes);
+            ctx.clearRect(0, 0, width, height);
 
-      // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
-      visitorsRef.on('value', (snapshot) => {
-        const el = document.getElementById('visitorCount');
-        if (el) el.innerText = snapshot.val() || 0;
-      });
+            const connectionDistance = 110;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
 
-      // ---- 3. Total Clicks Count (har click par +1) ----
-      const clicksRef = db.ref('stats/totalClicks');
-      document.addEventListener('click', () => {
-        clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
-      });
+                    if (dist < connectionDistance) {
+                        const alpha = (1 - (dist / connectionDistance)) * 0.18;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
 
-      // ---- 4. Live Click Count page par dikhana (if elements exist) ----
-      clicksRef.on('value', (snapshot) => {
-        const el = document.getElementById('clickCount');
-        if (el) el.innerText = snapshot.val() || 0;
-      });
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            nodes.forEach(n => {
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        window.addEventListener('resize', initNodes);
+        initNodes();
+        animateNodes();
     </script>
+    <!-- Scripts -->
+    <script type="module" src="../js/script.js"></script>
 </body>
+
 </html>
