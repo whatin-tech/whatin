@@ -175,11 +175,11 @@
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 
-  <script type="module" crossorigin src="/assets/admin-CSjVDPXi.js"></script>
+  <script type="module" crossorigin src="/assets/admin-BQakkbRs.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/script-B8465DUt.js">
   <link rel="modulepreload" crossorigin href="/assets/firebase-config-BpXY52D3.js">
   <link rel="modulepreload" crossorigin href="/assets/nav-auth-CR9bqec-.js">
-  <link rel="stylesheet" crossorigin href="/assets/main-CYHu_3dj.css">
+  <link rel="stylesheet" crossorigin href="/assets/main-bsquem6Q.css">
 </head>
 
 <body>
@@ -478,11 +478,13 @@
                             </div>
                             <div class="form-group">
                                 <label>Subject Name</label>
-                                <input type="text" id="noteSubject" class="form-control" placeholder="e.g. Physics" required>
+                                <select id="noteSubject" class="form-control" required>
+                                    <!-- Options populated via JS -->
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Subject Description</label>
-                                <textarea id="noteDesc" class="form-control" rows="2" placeholder="Short description for the subject box..." required></textarea>
+                                <label>Subject Description (Optional)</label>
+                                <textarea id="noteDesc" class="form-control" rows="2" placeholder="Short description for the subject box..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>PDF Title</label>
@@ -516,8 +518,8 @@
 
         
         const bsaSubjectsData = {
-            year1: ["Mathematics-1", "Mathematics-2", "Physics", "Chemistry", "PPS", "Mechanical", "Electrical", "EVS"],
-            year2: ["Data Structures", "Operating System", "COA", "Python", "Cyber Security"],
+            year1: ["Physics", "Chemistry", "PPS", "Mechanical", "Electrical", "Electronics", "Mathematics-1", "Mathematics-2", "EVS", "Soft Skills"],
+            year2: ["Strength of Material", "Material Testing and C Project Management", "Technical Communication", "Cyber Security", "Mathematics-3", "Hydraulic Machine", "Fluid Mechanics", "Engineering Mechanics", "Human Value", "Surveying", "Energy Science"],
             year3: ["DAA", "DBMS", "Computer Networks", "Software Engineering"],
             year4: ["Machine Learning", "Cloud Computing", "AI"]
         };
