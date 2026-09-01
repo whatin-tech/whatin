@@ -139,7 +139,6 @@
     <!-- Google AdSense Integration -->
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
-
 </head>
 <body>
     <header id="main-header">
@@ -285,8 +284,9 @@
                 <!-- Creative Director -->
                 <!-- Creative Director -->
                 <div class="contributor-card">
-                    <div class="profile-image-container" style="position: relative; width: 140px; height: 140px; margin: 0 auto 2rem;">
-                        <div class="profile-image-box" style="width: 100%; height: 100%; position: relative; z-index: 1; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); overflow: hidden; cursor: pointer;" onclick="openImageModal('../images/riya.jpg')">
+                    <div class="profile-image-container" style="position: relative; width: 180px; height: 180px; margin: 0 auto 2rem; perspective: 1000px;">
+                        <div style="position: absolute; inset: -10px; background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary)); border-radius: 50%; opacity: 0.3; filter: blur(20px); animation: premiumPulseBg 4s ease-in-out infinite;"></div>
+                        <div class="profile-image-box" style="width: 100%; height: 100%; position: relative; z-index: 1; border-radius: 30px; border: 2px solid rgba(255,255,255,0.2); overflow: hidden; animation: premiumFloatGlow 3s ease-in-out infinite; transform-style: preserve-3d; cursor: pointer;" onclick="openImageModal('../images/riya.jpg')">
                             <img src="../images/riya.jpg" alt="Riya Saini" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
                         </div>
                     </div>
@@ -301,7 +301,23 @@
                     </div>
                 </div>
 
-
+ <div class="contributor-card premium-card">
+                     <div class="profile-image-container" style="position: relative; width: 180px; height: 180px; margin: 0 auto 2rem; perspective: 1000px;">
+                        <div style="position: absolute; inset: -10px; background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary)); border-radius: 50%; opacity: 0.3; filter: blur(20px); animation: premiumPulseBg 4s ease-in-out infinite;"></div>
+                        <div class="profile-image-box" style="width: 100%; height: 100%; position: relative; z-index: 1; border-radius: 30px; border: 2px solid rgba(255,255,255,0.2); overflow: hidden; animation: premiumFloatGlow 3s ease-in-out infinite; transform-style: preserve-3d; cursor: pointer;" onclick="openImageModal('../images/radhika.jpeg')">
+                            <img src="../images/radhika.jpeg" alt="Riya Saini" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+                        </div>
+                    </div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Radhika Saini</h2>
+                    <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;">Head of Community & Engagement</h4>
+                    <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 2rem;">
+                        As the Head of Community & Engagement, Radhika drives student interaction, peer-to-peer collaboration, and active discussions across all WHATIN community channels. She manages study groups, organizes interactive academic sessions, and ensures a vibrant, supportive ecosystem for engineering students.
+                    </p>
+                    <div class="social-links" style="margin-top: auto;">
+                        <!-- <a href="https://www.linkedin.com/in/riya-saini-0ab4b841a/" target="_blank" class="linkedin-btn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/riyasaini_06?igsh=aWg0aWlnd3EzYTVw" target="_blank" class="insta-btn"><i class="fab fa-instagram"></i></a> -->
+                    </div>
+                </div>
 
                 <!-- Parth Agrawal (GLA Head) -->
                 <div class="contributor-card premium-card">
@@ -420,7 +436,6 @@
         }
     </script>
     <script type="module" src="../js/script.js"></script>
-<script type="module" src="../js/nav-auth.js"></script>
 
     <!-- Firebase Analytics SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
