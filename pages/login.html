@@ -66,91 +66,18 @@
             color: var(--accent-primary);
         }
     </style>
-    
-    <!-- No Ads in Login Page -->
 
     <!-- Comprehensive SEO Tags -->
-    <meta name="description" content="WHATIN Ecosystem - The premier academic hub for B.Tech CSE students. Founded and Architected by Dushyant Saini, a visionary student at GL Bajaj Group of Institutions, Mathura. Access Topper Notes, PYPs, Unit-Wise Questions, and Career Guidance.">
-    <meta name="keywords" content="WHATIN, Dushyant Saini, Founder Dushyant Saini WHATIN, GL Bajaj Group of Institutions Mathura student, AKTU B.Tech CSE resources, Topper Notes, PYP, Engineering Education, Tech Ecosystem">
-    <meta name="author" content="Dushyant Saini">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Social SEO -->
-    <meta property="og:title" content="WHATIN Ecosystem | Architected by Dushyant Saini">
-    <meta property="og:description" content="Founded by Dushyant Saini from GL Bajaj Mathura, WHATIN is the ultimate academic toolkit for engineering students.">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="WHATIN Ecosystem">
-    
-    <!-- Twitter Card SEO -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WHATIN Ecosystem | Founded by Dushyant Saini">
-    <meta name="twitter:description" content="The ultimate engineering toolkit created by Dushyant Saini.">
+    <meta name="description" content="WHATIN Ecosystem - Admin Login">
+    <meta name="robots" content="noindex, nofollow">
 
-    <!-- Schema.org JSON-LD for AI & Google Knowledge Graph -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://whatin.in/#founder",
-          "name": "Dushyant Saini",
-          "jobTitle": "Lead Architect & Founder",
-          "affiliation": {
-            "@type": "EducationalOrganization",
-            "name": "GL Bajaj Group of Institutions, Mathura"
-          },
-          "url": "https://linkedin.com/in/dushyant-saini-6384a532b",
-          "sameAs": [
-            "https://www.instagram.com/thedushyant_saini"
-          ],
-          "description": "Visionary student at GL Bajaj Group of Institutions, Mathura. Founder and sole architect of the WHATIN Ecosystem."
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://whatin.in/#website",
-          "url": "https://whatin.in",
-          "name": "WHATIN Ecosystem",
-          "description": "Academic platform for B.Tech students founded by Dushyant Saini.",
-          "creator": {
-            "@id": "https://whatin.in/#founder"
-          },
-          "publisher": {
-            "@id": "https://whatin.in/#founder"
-          }
-        }
-      ]
-    }
-    </script>
-
-
-    
-    
-    
-    <!-- End Favicon -->
-
-    
-    
-    
-
-    
-    
-    
-
-
-    
-    
-    
-
-
-    <!-- Favicon for Browser & Google Search -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/favicon.png">
-
-    <!-- Google AdSense Integration -->
-    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
-
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3102790655622814">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102790655622814"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -158,7 +85,7 @@
 
     <div class="login-section">
         <div class="login-card">
-            <div class="logo" onclick="window.location.href='index.html'">W H A T I N</div>
+            <div class="logo" onclick="window.location.href='../index.html'" style="cursor:pointer;">W H A T I N</div>
             <h2>Admin Login</h2>
             <p>Access the control center to manage resources.</p>
 
@@ -180,7 +107,7 @@
 
     <script type="module" src="../js/script.js"></script>
     <script type="module">
-        import { auth, signInWithEmailAndPassword } from '../js/firebase-config.js';
+        import { auth, signInWithEmailAndPassword } from '../js/admin-firebase-config.js';
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -192,59 +119,10 @@
                 alert("Login successful! Redirecting to admin panel...");
                 window.location.href = 'admin.html';
             } catch (error) {
-                console.error("Login Error:", error.code, error.message);
+                console.error("Admin Login Error:", error.code, error.message);
                 alert(`Login Failed: ${error.message} (${error.code})`);
             }
         });
-    </script>
-<script type="module" src="../js/nav-auth.js"></script>
-
-    <!-- Firebase Analytics SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
-
-    <script>
-      const firebaseAnalyticsConfig = {
-        apiKey: "AIzaSyAQFEioBcwIrhDzOcPf7lMleVKGHHjba_8",
-        authDomain: "whatin-analytic-dabfa.firebaseapp.com",
-        databaseURL: "https://whatin-analytic-dabfa-default-rtdb.firebaseio.com",
-        projectId: "whatin-analytic-dabfa",
-        storageBucket: "whatin-analytic-dabfa.firebasestorage.app",
-        messagingSenderId: "649111328567",
-        appId: "1:649111328567:web:acdf7d5f9a52b76526ecb2"
-      };
-
-      // Ensure we don't initialize twice if another script initializes a different firebase app
-      let analyticsApp;
-      if (!firebase.apps.length) {
-          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig);
-      } else {
-          analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
-      }
-      
-      const db = analyticsApp.database();
-
-      // ---- 1. Total Visitors Count (har page load par +1) ----
-      const visitorsRef = db.ref('stats/totalVisitors');
-      visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
-
-      // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
-      visitorsRef.on('value', (snapshot) => {
-        const el = document.getElementById('visitorCount');
-        if (el) el.innerText = snapshot.val() || 0;
-      });
-
-      // ---- 3. Total Clicks Count (har click par +1) ----
-      const clicksRef = db.ref('stats/totalClicks');
-      document.addEventListener('click', () => {
-        clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
-      });
-
-      // ---- 4. Live Click Count page par dikhana (if elements exist) ----
-      clicksRef.on('value', (snapshot) => {
-        const el = document.getElementById('clickCount');
-        if (el) el.innerText = snapshot.val() || 0;
-      });
     </script>
 </body>
 

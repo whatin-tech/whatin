@@ -171,14 +171,13 @@
     <link rel="icon" type="image/png" href="/assets/favicon-D-oYOsiX.png">
     <link rel="apple-touch-icon" href="/assets/favicon-D-oYOsiX.png">
 
-    <!-- Google AdSense Integration -->
-    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
-
-  <script type="module" crossorigin src="/assets/admin-BQakkbRs.js"></script>
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3102790655622814">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102790655622814"
+     crossorigin="anonymous"></script>
+  <script type="module" crossorigin src="/assets/admin-DytMqpET.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/script-B8465DUt.js">
-  <link rel="modulepreload" crossorigin href="/assets/firebase-config-BpXY52D3.js">
-  <link rel="modulepreload" crossorigin href="/assets/nav-auth-CR9bqec-.js">
+  <link rel="modulepreload" crossorigin href="/assets/admin-firebase-config-BEsY7YdG.js">
   <link rel="stylesheet" crossorigin href="/assets/main-bsquem6Q.css">
 </head>
 
@@ -616,7 +615,7 @@
             box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
         }
     </style>
-
+
 
     <!-- Firebase Analytics SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
@@ -641,10 +640,10 @@
           analyticsApp = firebase.initializeApp(firebaseAnalyticsConfig, 'AnalyticsApp');
       }
       
-      const db = analyticsApp.database();
+      const analyticsDb = analyticsApp.database();
 
       // ---- 1. Total Visitors Count (har page load par +1) ----
-      const visitorsRef = db.ref('stats/totalVisitors');
+      const visitorsRef = analyticsDb.ref('stats/totalVisitors');
       visitorsRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Visitor Track Error:", err));
 
       // ---- 2. Live Visitor Count page par dikhana (if elements exist) ----
@@ -654,7 +653,7 @@
       });
 
       // ---- 3. Total Clicks Count (har click par +1) ----
-      const clicksRef = db.ref('stats/totalClicks');
+      const clicksRef = analyticsDb.ref('stats/totalClicks');
       document.addEventListener('click', () => {
         clicksRef.transaction((current) => (current || 0) + 1).catch(err => console.error("Firebase Click Track Error:", err));
       });

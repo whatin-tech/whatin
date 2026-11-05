@@ -1,4 +1,4 @@
-import { db, collection, getDocs, query, where } from './firebase-config.js';
+import { db, collection, getDocs, query, where } from './admin-firebase-config.js';
 
 async function initPlacement() {
     const loadingState = document.getElementById('loadingState');

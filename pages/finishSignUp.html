@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completing Sign-In | GL Bajaj Group</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== BACKGROUND (matches site exactly) ========== */
+        body {
+            min-height: 100vh;
+            background-color: #000000;
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.09), transparent 65%),
+                radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.04), transparent 60%);
+            color: #fff;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+        #bgCanvas { display: none; }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 460px;
+            z-index: 5;
+        }
+
+        /* ========== GLASS CARD — same rgba(31,31,31,0.62) as the site ========== */
+        .login-card {
+            background: rgba(31, 31, 31, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+            pointer-events: none;
+        }
+        .login-card {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: cardRise 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 80ms;
+        }
+        @keyframes cardRise { to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .login-card { animation: none; opacity: 1; transform: none; }
+        }
+
+        /* ========== BRANDING ========== */
+        .auth-logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+        }
+        .eyebrow {
+            margin-top: 1.25rem;
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #a0a5b0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* ========== STATE ICONS ========== */
+        .state-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px; height: 80px;
+            border-radius: 24px;
+            margin: 1.5rem 0 1.5rem;
+        }
+        /* LOADING */
+        .icon-loading {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(20, 184, 166, 0.1));
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+        .ring {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(45, 212, 191, 0.25);
+            border-top-color: #2dd4bf;
+            border-right-color: #14b8a6;
+            border-radius: 50%;
+            animation: spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* SUCCESS */
+        .icon-success {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.22), rgba(20, 184, 166, 0.15));
+            border: 1px solid rgba(45, 212, 191, 0.4);
+            animation: pop 0.9s ease-out;
+        }
+        @keyframes pop {
+            0% { transform: scale(0.7); opacity: 0; }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .icon-success i {
+            font-size: 2.1rem;
+            color: #2dd4bf;
+            animation: popCheck 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s backwards;
+        }
+        @keyframes popCheck { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* ERROR */
+        .icon-error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(251, 146, 60, 0.1));
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+        .icon-error i { font-size: 2.1rem; color: #f87171; }
+
+        /* ========== HEADINGS + TEXT ========== */
+        h2.heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+        p.desc {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .redirect-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.6rem 1rem;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.25);
+            border-radius: 50px;
+            color: #5eead4;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .dots::after {
+            content: '';
+            animation: dots 1.4s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0%   { content: ''; }
+            25%  { content: '.'; }
+            50%  { content: '..'; }
+            75%  { content: '...'; }
+            100% { content: ''; }
+        }
+
+        /* ========== EMAIL RE-ENTRY FORM ========== */
+        .form-card {
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        .form-card label {
+            display: block;
+            margin-bottom: 0.55rem;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+        .input-with-icon { position: relative; }
+        .input-with-icon .mail-icon {
+            position: absolute;
+            left: 1.1rem; top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.35);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .site-input {
+            width: 100%;
+            padding: 1.25rem 1.1rem 1.25rem 3rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .site-input::placeholder { color: rgba(255,255,255,0.35); }
+        .site-input:focus {
+            border-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.08);
+        }
+        .site-input.err { border-color: rgba(239,68,68,0.55); background: rgba(239,68,68,0.07); }
+        .helper-row {
+            min-height: 1.25rem;
+            margin: 0.5rem 0.15rem 1.25rem;
+            text-align: left;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+        }
+        .helper-row.is-error { color: #f87171; }
+        .helper-row.is-ok    { color: #34d399; }
+
+        /* ========== BUTTONS (same teal gradient pill as signin page) ========== */
+        .btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.3);
+        }
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 15px 30px rgba(45, 212, 191, 0.45);
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        .btn-primary:active:not(:disabled) { transform: scale(0.98); }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: saturate(0.5);
+        }
+        .btn-secondary {
+            margin-top: 0.75rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.8);
+            box-shadow: none;
+        }
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border-color: rgba(255,255,255,0.3);
+            transform: none;
+            filter: none;
+        }
+        .spinner-mini {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .back-home:hover { color: #fff; }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 560px) {
+            .login-card { padding: 2.5rem 1.5rem; border-radius: 24px; }
+            .auth-logo { font-size: 1.4rem; }
+            h2.heading { font-size: 1.35rem; }
+        }
+    </style>
+
+    <!-- FONTS — exactly what the site loads: Inter + Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3102790655622814">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102790655622814"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="login-card">
+            <!-- Branding -->
+            <div class="auth-logo" onclick="window.location.href='../index.html'" style="cursor:pointer;">W H A T I N</div>
+            <div class="eyebrow"><i class="fas fa-building-columns" style="margin-right:6px;"></i> GL BAJAJ GROUP</div>
+
+            <!-- ===== LOADING STATE ===== -->
+            <div id="loadingState">
+                <div class="state-icon icon-loading"><div class="ring" aria-hidden="true"></div></div>
+                <h2 class="heading">Completing your sign-in</h2>
+                <p class="desc">Please wait while we verify your secure link and log you into the ecosystem...</p>
+            </div>
+
+            <!-- ===== SUCCESS STATE ===== -->
+            <div id="successState" class="hidden">
+                <div class="state-icon icon-success"><i class="fas fa-check"></i></div>
+                <h2 class="heading">Sign-in successful</h2>
+                <p class="desc">Welcome back. You are now signed into the GL Bajaj Group portal.</p>
+                <div class="redirect-chip">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Redirecting<span class="dots"></span></span>
+                </div>
+            </div>
+
+            <!-- ===== ERROR STATE ===== -->
+            <div id="errorState" class="hidden">
+                <div class="state-icon icon-error"><i class="fas fa-link-slash"></i></div>
+                <h2 class="heading" id="errorHeading">Link expired or invalid</h2>
+                <p class="desc" id="errorDescription">
+                    This sign-in link has expired, was already used, or is invalid. Links are valid for 10 minutes and can only be used once.
+                </p>
+
+                <!-- Email re-entry form (if localStorage missing) -->
+                <form id="retryForm" class="form-card hidden">
+                    <label for="retryEmailInput">Your organization email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope mail-icon"></i>
+                        <input
+                            type="email"
+                            id="retryEmailInput"
+                            class="site-input"
+                            placeholder="you@glbajajgroup.org"
+                            autocomplete="email"
+                        >
+                    </div>
+                    <div id="retryHelper" class="helper-row">
+                        Enter your <strong>@glbajajgroup.org</strong> email to request a fresh link.
+                    </div>
+                    <button type="submit" id="retrySubmit" class="btn btn-primary" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                        <span id="retryLabel">Request New Link</span>
+                    </button>
+                </form>
+
+                <!-- Simple actions (if localStorage had the email) -->
+                <div id="simpleActions" style="margin-top: 1.5rem;">
+                    <button type="button" id="goSignIn" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Sign-In</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="clear:both;"></div>
+            <a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> &nbsp;Back to Ecosystem</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import {
+            auth,
+            ALLOWED_EMAIL_DOMAIN,
+            isAllowedEmailDomain,
+            isValidEmailSyntax,
+            sendSignInLinkToEmail,
+            isSignInWithEmailLink,
+            signInWithEmailLink,
+            updatePassword,
+            onAuthStateChanged
+        } from '../js/firebase-config.js';
+
+        const DOMAIN_ERROR_MSG = `Only ${ALLOWED_EMAIL_DOMAIN} email addresses are allowed.`;
+
+        const loadingState = document.getElementById('loadingState');
+        const successState = document.getElementById('successState');
+        const errorState   = document.getElementById('errorState');
+        const errorHeading = document.getElementById('errorHeading');
+        const errorDesc    = document.getElementById('errorDescription');
+        const retryForm    = document.getElementById('retryForm');
+        const retryEmail   = document.getElementById('retryEmailInput');
+        const retryHelper  = document.getElementById('retryHelper');
+        const retrySubmit  = document.getElementById('retrySubmit');
+        const retryLabel   = document.getElementById('retryLabel');
+        const simpleActions = document.getElementById('simpleActions');
+        const goSignIn     = document.getElementById('goSignIn');
+
+        function show(s) {
+            loadingState.classList.add('hidden');
+            successState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            if (s === 'loading') loadingState.classList.remove('hidden');
+            if (s === 'success') successState.classList.remove('hidden');
+            if (s === 'error')   errorState.classList.remove('hidden');
+        }
+
+        function redirectAfter() {
+            const target = sessionStorage.getItem('postLoginRedirect') || 'collegepyp.html';
+            sessionStorage.removeItem('postLoginRedirect');
+            setTimeout(() => window.location.replace(target), 1500);
+        }
+
+        let authReady = false;
+        onAuthStateChanged(auth, (u) => { if (authReady && u) redirectAfter(); });
+
+        // ==================== MAIN ====================
+        async function attemptSignIn() {
+            if (!isSignInWithEmailLink(auth, window.location.href)) {
+                show('error');
+                errorHeading.textContent = 'Not a sign-in link';
+                errorDesc.textContent = 'This page is only accessible via a valid sign-in email link. Please start from the sign-in page.';
+                simpleActions.classList.remove('hidden');
+                retryForm.classList.add('hidden');
+                authReady = true;
+                return;
+            }
+
+            let email = window.localStorage.getItem('emailForSignIn');
+
+            if (!email) {
+                // Missing localStorage (different device) → ask for email
+                show('error');
+                errorHeading.textContent = 'Verify your email';
+                errorDesc.textContent = `We couldn't locate your email in this browser session (sign-in links complete on the same device they were requested from). Enter your ${ALLOWED_EMAIL_DOMAIN} email below to request a fresh link.`;
+                simpleActions.classList.remove('hidden');
+                retryForm.classList.remove('hidden');
+                wireRetryForm();
+                authReady = true;
+                return;
+            }
+
+            simpleActions.classList.remove('hidden');
+            retryForm.classList.add('hidden');
+
+            // HARD STOP — domain check before signInWithEmailLink
+            if (!isAllowedEmailDomain(email)) {
+                show('error');
+                errorHeading.textContent = 'Domain not allowed';
+                errorDesc.textContent = DOMAIN_ERROR_MSG;
+                authReady = true;
+                return;
+            }
+
+            try {
+                show('loading');
+                const userCredential = await signInWithEmailLink(auth, email, window.location.href);
+                window.localStorage.removeItem('emailForSignIn');
+
+                // If user registered with a password on Create Account tab, save it now!
+                const pendingPassword = window.localStorage.getItem('pendingPasswordForSignIn');
+                if (pendingPassword && userCredential.user) {
+                    try {
+                        await updatePassword(userCredential.user, pendingPassword);
+                        window.localStorage.removeItem('pendingPasswordForSignIn');
+                    } catch (passErr) {
+                        console.log('Password set note:', passErr);
+                    }
+                }
+
+                show('success');
+                authReady = true;
+                redirectAfter();
+            } catch (err) {
+                console.error('signInWithEmailLink:', err.code, err.message);
+                authReady = true;
+                let h = 'Sign-in failed';
+                let d = 'Something went wrong while completing sign-in. Please try again.';
+                let showSimple = true;
+                switch (err.code) {
+                    case 'auth/invalid-action-code':
+                    case 'auth/expired-action-code':
+                        h = 'Link expired or already used';
+                        d = 'This sign-in link has expired or was already used. Links are valid for 10 minutes and work only once. Request a fresh one.';
+                        break;
+                    case 'auth/user-disabled':
+                        h = 'Account disabled';
+                        d = 'This account has been disabled. Contact your GL Bajaj Group administrator.';
+                        showSimple = true;
+                        break;
+                    case 'auth/invalid-email':
+                        h = 'Invalid email';
+                        d = DOMAIN_ERROR_MSG;
+                        break;
+                    case 'auth/network-request-failed':
+                        h = 'Network error';
+                        d = 'Please check your internet connection and try again.';
+                        break;
+                    case 'auth/credential-already-in-use':
+                    case 'auth/email-already-in-use':
+                        h = 'Link already used';
+                        d = 'This sign-in link was already used. Each link works once — please request a new one.';
+                        break;
+                    default:
+                        d += ` (${err.code})`;
+                }
+                errorHeading.textContent = h;
+                errorDesc.textContent   = d;
+                show('error');
+                if (!showSimple) { /* placeholder for future branches */ }
+            }
+        }
+
+        // ==================== RETRY FORM ====================
+        function wireRetryForm() {
+            const validate = () => {
+                const v = retryEmail.value;
+                if (!v.trim()) {
+                    retryHelper.classList.remove('is-error','is-ok');
+                    retryHelper.innerHTML = `Enter your <strong>${ALLOWED_EMAIL_DOMAIN}</strong> email to request a fresh link.`;
+                    retrySubmit.disabled = true; return false;
+                }
+                if (!isValidEmailSyntax(v)) {
+                    retryHelper.classList.add('is-error'); retryHelper.classList.remove('is-ok');
+                    retryHelper.textContent = 'Please enter a valid email address.';
+                    retrySubmit.disabled = true; return false;
+                }
+                if (!isAllowedEmailDomain(v)) {
+                    retryHelper.classList.add('is-error'); retryHelper.classList.remove('is-ok');
+                    retryHelper.textContent = DOMAIN_ERROR_MSG;
+                    retrySubmit.disabled = true; return false;
+                }
+                retryHelper.classList.add('is-ok'); retryHelper.classList.remove('is-error');
+                retryHelper.innerHTML = '<i class="fas fa-check-circle"></i> Ready to send.';
+                retrySubmit.disabled = false;
+                return true;
+            };
+            let t;
+            retryEmail.addEventListener('input', () => { clearTimeout(t); t = setTimeout(validate, 180); });
+            retryEmail.addEventListener('blur', validate);
+
+            retryForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const em = retryEmail.value.trim();
+                if (!isValidEmailSyntax(em) || !isAllowedEmailDomain(em)) {
+                    retryHelper.classList.add('is-error'); retryHelper.textContent = DOMAIN_ERROR_MSG;
+                    retrySubmit.disabled = true; return;
+                }
+                retrySubmit.disabled = true;
+                const origIcon = retrySubmit.querySelector('i');
+                const origText = retryLabel.textContent;
+                if (origIcon) { origIcon.className = 'spinner-mini'; }
+                retryLabel.textContent = 'Sending link...';
+
+                try {
+                    const origin = window.location.origin;
+                    await sendSignInLinkToEmail(auth, em, {
+                        url: `${origin}/pages/finishSignUp.html`,
+                        handleCodeInApp: true
+                    });
+                    window.localStorage.setItem('emailForSignIn', em);
+                    errorHeading.textContent = 'New link sent';
+                    errorDesc.textContent = `A fresh sign-in link has been emailed to ${em}. Please check your inbox and click the link to continue.`;
+                    simpleActions.classList.remove('hidden');
+                    retryForm.classList.add('hidden');
+                } catch (err) {
+                    console.error('retry sendLink:', err.code, err.message);
+                    let m = 'Failed to send. Please try again.';
+                    switch (err.code) {
+                        case 'auth/too-many-requests':     m = 'Too many requests. Please wait a few minutes and try again.'; break;
+                        case 'auth/network-request-failed': m = 'Network error — please check your connection.'; break;
+                        default: m += ` (${err.code})`;
+                    }
+                    retryHelper.classList.add('is-error'); retryHelper.textContent = m;
+                } finally {
+                    retrySubmit.disabled = !validate();
+                    if (origIcon) { origIcon.className = 'fas fa-paper-plane'; }
+                    retryLabel.textContent = origText;
+                }
+            });
+        }
+
+        goSignIn.addEventListener('click', () => window.location.replace('signin.html'));
+
+        attemptSignIn();
+    </script>
+</body>
+</html>

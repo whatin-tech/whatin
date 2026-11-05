@@ -1,0 +1,60 @@
+## ============================================
+## 🎯 ALLOWED DOMAIN CONFIGURATION — CHANGE HERE
+## ============================================
+## This value is used by Firestore security rules to check that the
+## authenticated user's email matches the required organization domain.
+##
+## KEEP THIS IN SYNC with the same constant in:
+##   - js/firebase-config.js         (client)
+##   - functions/index.js            (server blocking functions)
+ALLOWED_DOMAIN = "@glbajajgroup.org"
+## ============================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================
+    // ✅ Helper: user is authenticated AND on the allowed domain
+    // ============================================================
+    function isOrgMember() {
+      return request.auth != null
+          && request.auth.token.email_verified == true
+          && request.auth.token.email.matches('.*' + ALLOWED_DOMAIN + '$');
+    }
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ============================================================
+    // 👤 /users/{uid} — per-user profile documents
+    //    Only the user themselves can read/write their own doc.
+    //    Org membership is enforced by isOrgMember().
+    // ============================================================
+    match /users/{uid} {
+      allow read:  if isOwner(uid) && isOrgMember();
+      allow write: if isOwner(uid) && isOrgMember();
+    }
+
+    // ============================================================
+    // 📚 Example: /resources/{document} — site-wide read once
+    //    you are in the org; write restricted to admins.
+    //    (Customize per your app's actual collections!)
+    // ============================================================
+    match /resources/{document=**} {
+      allow read:  if isOrgMember();
+      allow write: if isOrgMember()
+                   && request.auth.token.admin == true;  // optional custom claim
+    }
+
+    // ============================================================
+    // 🔒 Default: DENY everything
+    //    No one (even logged-in users) can touch collections that
+    //    haven't been explicitly allowed above.
+    // ============================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

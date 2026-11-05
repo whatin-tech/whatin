@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 function processFile(filePath) {
+    const fileName = path.basename(filePath);
+    if (fileName !== 'collegepyp.html' && fileName !== 'signin.html' && fileName !== 'finishSignUp.html') {
+        return;
+    }
     let content = fs.readFileSync(filePath, 'utf8');
     
     const isRoot = !filePath.replace(/\\/g, '/').includes('/pages/');

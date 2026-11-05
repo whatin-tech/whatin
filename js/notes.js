@@ -1,4 +1,4 @@
-import { db, collection, query, where, onSnapshot } from './firebase-config.js';
+import { db, collection, query, where, onSnapshot } from './admin-firebase-config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Tab switching logic

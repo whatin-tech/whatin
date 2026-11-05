@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | GL Bajaj Group</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== BACKGROUND  ==========
+           Matches site: #000000 + subtle white radial
+           =================================== */
+        body {
+            min-height: 100vh;
+            background-color: #000000;
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.09), transparent 65%),
+                radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.04), transparent 60%);
+            color: #fff;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+
+        #bgCanvas { display: none; }
+
+        /* ========== AUTH WRAPPER ========== */
+        .auth-wrapper {
+            width: 100%;
+            max-width: 460px;
+            z-index: 5;
+        }
+
+        /* ========== GLASS CARD — matches site's rgba(31,31,31,0.62) + 1px rgba(255,255,255,0.1) ========== */
+        .login-card {
+            background: rgba(31, 31, 31, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* subtle top sheen — same as existing project-card::after feel */
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+            pointer-events: none;
+        }
+
+        /* Fade-up entrance (max 400ms @ reduced-motion safe) */
+        .login-card {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: cardRise 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 80ms;
+        }
+        @keyframes cardRise { to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .login-card { animation: none; opacity: 1; transform: none; }
+        }
+
+        /* ========== BRANDING ========== */
+        .brand-row {
+            margin-bottom: 2.5rem;
+        }
+
+        /* matches existing `.logo` font — gradient white→a1a1aa, 900 weight, letter-spacing 2px ========== */
+        .auth-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .brand-tag {
+            margin-top: 0.85rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .brand-sub {
+            margin-top: 0.6rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ========== HERO-OVERLINE style eyebrow (site pattern) ========== */
+        .eyebrow {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #a0a5b0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* ========== AUTH TABS (Create Account vs Sign In) ========== */
+        .auth-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 4px;
+            margin: 1.5rem 0 1.25rem;
+            position: relative;
+        }
+
+        .auth-tab-btn {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .auth-tab-btn:hover {
+            color: #fff;
+        }
+
+        .auth-tab-btn.active {
+            background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+        }
+
+        /* ========== FORM ========== */
+        .auth-form { margin-top: 2rem; }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.55rem;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon .mail-icon,
+        .input-with-icon .lock-icon {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.35);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: color 0.2s ease;
+        }
+
+        .input-with-icon .eye-icon {
+            position: absolute;
+            right: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.45);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            z-index: 2;
+        }
+        .input-with-icon .eye-icon:hover { color: #fff; }
+
+        /* Matches site's .form-control: 1.25rem pad, rgba(15,23,42,0.6) bg, 12px radius */
+        .site-input {
+            width: 100%;
+            padding: 1.25rem 1.1rem 1.25rem 3rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .site-input::placeholder { color: rgba(255,255,255,0.35); }
+        .site-input:hover { border-color: rgba(255,255,255,0.18); }
+        .site-input:focus {
+            border-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.08);
+        }
+        .site-input.err {
+            border-color: rgba(239,68,68,0.55);
+            background: rgba(239,68,68,0.07);
+        }
+
+        .helper-row {
+            min-height: 1.25rem;
+            margin: 0.25rem 0.15rem 0;
+            text-align: left;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+        }
+        .helper-row strong { color: inherit; font-weight: 500; }
+        .helper-row.is-error { color: #f87171; }
+        .helper-row.is-ok { color: #34d399; }
+
+        /* ========== BUTTON — matches .btn pill style + gradient-teal feel ==========
+           Site uses pill radius 50px, font-weight 600, scale(0.98) press ========== */
+        .submit-btn {
+            width: 100%;
+            margin-top: 0.75rem;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.3);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+        }
+        .submit-btn:hover:not(:disabled) {
+            box-shadow: 0 15px 30px rgba(45, 212, 191, 0.45);
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        .submit-btn:active:not(:disabled) { transform: scale(0.98); }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: saturate(0.5);
+        }
+        .spinner-mini {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ========== CONFIRMATION STATE ========== */
+        .confirmation {
+            padding: 0.5rem 0 1rem;
+        }
+        .mail-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(20, 184, 166, 0.12));
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            margin-bottom: 1.5rem;
+        }
+        .mail-badge i {
+            font-size: 1.8rem;
+            color: #2dd4bf;
+        }
+        .confirmation h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        .confirmation p {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .email-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50px;
+            margin: 0.5rem 0 1.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            word-break: break-all;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 1.5rem 0;
+        }
+        .resend {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .resend:hover:not(:disabled) {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+        .resend:disabled {
+            color: rgba(255,255,255,0.3);
+            cursor: not-allowed;
+        }
+
+        /* ========== BACK LINK — matches existing .back-home ========== */
+        .back-home {
+            display: inline-block;
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .back-home:hover { color: #fff; }
+
+        /* ========== MOBILE ========== */
+        @media (max-width: 560px) {
+            .login-card { padding: 2.5rem 1.5rem; border-radius: 24px; }
+            .auth-logo { font-size: 1.5rem; }
+        }
+
+        .hidden { display: none !important; }
+    </style>
+
+    <!-- ============== FONTS ============== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Exactly what the site loads: Inter + Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3102790655622814">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102790655622814"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="login-card">
+            <!-- BRANDING -->
+            <div class="brand-row" style="margin-bottom: 1.25rem;">
+                <!-- Exact `.logo` treatment (matches WHATIN home) -->
+                <div class="auth-logo" onclick="window.location.href='../index.html'" style="cursor:pointer;">W H A T I N</div>
+
+                <div style="margin-top:1.25rem;">
+                    <span class="eyebrow"><i class="fas fa-building-columns" style="margin-right:6px;"></i> GL BAJAJ GROUP</span>
+                </div>
+            </div>
+
+            <!-- ===== AUTH MODE TABS ===== -->
+            <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab-btn active" id="tabSignIn" role="tab" aria-selected="true">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                <button type="button" class="auth-tab-btn" id="tabCreate" role="tab" aria-selected="false">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </div>
+
+            <h2 class="brand-tag" id="mainHeading">Sign In to continue</h2>
+            <p class="brand-sub" id="mainSubtext">Enter your organization email and password to log in directly.</p>
+
+            <!-- ===== SIGN-IN / SIGN-UP FORM ===== -->
+            <form id="signInForm" class="auth-form" novalidate>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="emailInput">Organization Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope mail-icon"></i>
+                        <input
+                            type="email"
+                            id="emailInput"
+                            class="site-input"
+                            placeholder="you@glbajajgroup.org"
+                            autocomplete="email"
+                            autofocus
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group" id="passwordGroup">
+                    <label for="passwordInput" id="passwordLabel">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock lock-icon"></i>
+                        <input
+                            type="password"
+                            id="passwordInput"
+                            class="site-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            style="padding-right: 2.8rem;"
+                        >
+                        <i class="fas fa-eye eye-icon" id="togglePasswordVisibility" title="Show / Hide Password"></i>
+                    </div>
+                    <div id="helperText" class="helper-row">
+                        Only <strong>@glbajajgroup.org</strong> email addresses are allowed.
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-btn" disabled>
+                    <i class="fas fa-sign-in-alt" id="btnIcon"></i>
+                    <span id="btnLabel">Sign In</span>
+                </button>
+
+                <div id="toggleModeWrapper" style="margin-top:1.25rem; font-size:0.88rem; color:rgba(255,255,255,0.65);">
+                    <span id="toggleQuestion">Don't have an account?</span>
+                    <a href="#" id="toggleModeBtn" style="color:#2dd4bf; text-decoration:none; font-weight:600; margin-left:4px;">Create Account</a>
+                </div>
+            </form>
+
+            <!-- ===== CONFIRMATION STATE ===== -->
+            <div id="confirmationState" class="confirmation hidden">
+                <div class="mail-badge"><i class="fas fa-paper-plane"></i></div>
+                <h3 id="confirmationTitle">Verify your email inbox</h3>
+                <p id="confirmationDesc">A secure account verification link has been sent to your email address below.</p>
+                <div class="email-pill"><i class="fas fa-envelope"></i>
+                    <span id="confirmationEmail">email@glbajajgroup.org</span>
+                </div>
+                <p style="margin-bottom:0.5rem;">Click the link in your email to verify your ID & activate your account.<br>Links expire after 10 minutes.</p>
+                <p style="font-size:0.85rem; color:rgba(255,255,255,0.65); margin-top:0.5rem;"><i class="fas fa-info-circle" style="color:#2dd4bf; margin-right:4px;"></i> Don't see the email? Please check your <strong>Spam / Junk / Promotions</strong> folder.</p>
+
+                <div style="height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);margin:1.5rem 0 1.25rem;"></div>
+
+                <button type="button" id="resendBtn" class="resend" disabled>
+                    <i class="fas fa-redo" style="margin-right:6px;"></i><span id="resendText">Resend link in 30s</span>
+                </button>
+            </div>
+
+            <div style="clear:both;"></div>
+            <a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> &nbsp;Back to Ecosystem</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import {
+            auth,
+            ALLOWED_EMAIL_DOMAIN,
+            isAllowedEmailDomain,
+            isValidEmailSyntax,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            sendEmailVerification,
+            signOut,
+            onAuthStateChanged
+        } from '../js/firebase-config.js';
+
+        const DOMAIN_ERROR_MSG = `Only ${ALLOWED_EMAIL_DOMAIN} email addresses are allowed.`;
+
+        const emailInput        = document.getElementById('emailInput');
+        const passwordInput     = document.getElementById('passwordInput');
+        const togglePassword    = document.getElementById('togglePasswordVisibility');
+        const helperText      = document.getElementById('helperText');
+        const submitBtn       = document.getElementById('submitBtn');
+        const btnLabel        = document.getElementById('btnLabel');
+        const btnIcon         = document.getElementById('btnIcon');
+        const signInForm     = document.getElementById('signInForm');
+        const confirmationState = document.getElementById('confirmationState');
+        const confirmationEmail = document.getElementById('confirmationEmail');
+        const resendBtn      = document.getElementById('resendBtn');
+        const resendText     = document.getElementById('resendText');
+
+        const tabCreate       = document.getElementById('tabCreate');
+        const tabSignIn       = document.getElementById('tabSignIn');
+        const mainHeading     = document.getElementById('mainHeading');
+        const mainSubtext     = document.getElementById('mainSubtext');
+        const toggleQuestion  = document.getElementById('toggleQuestion');
+        const toggleModeBtn   = document.getElementById('toggleModeBtn');
+
+        let currentMode = 'signin'; // 'signin' or 'signup'
+
+        // Show / Hide password toggle
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                togglePassword.className = isPassword ? 'fas fa-eye-slash eye-icon' : 'fas fa-eye eye-icon';
+            });
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            if (mode === 'signin') {
+                tabSignIn.classList.add('active');
+                tabSignIn.setAttribute('aria-selected', 'true');
+                tabCreate.classList.remove('active');
+                tabCreate.setAttribute('aria-selected', 'false');
+
+                if (mainHeading) mainHeading.textContent = 'Sign In to continue';
+                if (mainSubtext) mainSubtext.textContent = 'Enter your organization email and password to log in directly.';
+                if (btnIcon) btnIcon.className = 'fas fa-sign-in-alt';
+                if (btnLabel) btnLabel.textContent = 'Sign In';
+                if (toggleQuestion) toggleQuestion.textContent = "Don't have an account?";
+                if (toggleModeBtn) toggleModeBtn.textContent = 'Create Account';
+                document.title = 'Sign In | GL Bajaj Group';
+            } else {
+                tabCreate.classList.add('active');
+                tabCreate.setAttribute('aria-selected', 'true');
+                tabSignIn.classList.remove('active');
+                tabSignIn.setAttribute('aria-selected', 'false');
+
+                if (mainHeading) mainHeading.textContent = 'Create your Account';
+                if (mainSubtext) mainSubtext.textContent = 'Set an email & password to register your GL Bajaj account.';
+                if (btnIcon) btnIcon.className = 'fas fa-user-plus';
+                if (btnLabel) btnLabel.textContent = 'Verify Email & Create Account';
+                if (toggleQuestion) toggleQuestion.textContent = 'Already have an account?';
+                if (toggleModeBtn) toggleModeBtn.textContent = 'Sign In';
+                document.title = 'Create Account | GL Bajaj Group';
+            }
+            validate();
+        }
+
+        if (tabCreate) tabCreate.addEventListener('click', () => setMode('signup'));
+        if (tabSignIn) tabSignIn.addEventListener('click', () => setMode('signin'));
+        if (toggleModeBtn) toggleModeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setMode(currentMode === 'signin' ? 'signup' : 'signin');
+        });
+
+        // If user is already signed in and verified → bounce to target page.
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.emailVerified) {
+                const r = sessionStorage.getItem('postLoginRedirect') || 'collegepyp.html';
+                sessionStorage.removeItem('postLoginRedirect');
+                window.location.replace(r);
+            }
+        });
+
+        function setHelper(kind, html) {
+            helperText.classList.remove('is-error', 'is-ok');
+            if (kind === 'error') helperText.classList.add('is-error');
+            if (kind === 'ok')    helperText.classList.add('is-ok');
+            helperText.innerHTML = html;
+        }
+
+        function validate() {
+            const emailVal = emailInput.value.trim();
+            const passVal = passwordInput ? passwordInput.value : '';
+
+            if (!emailVal) {
+                emailInput.classList.remove('err');
+                setHelper('', `Only <strong>${ALLOWED_EMAIL_DOMAIN}</strong> email addresses are allowed.`);
+                submitBtn.disabled = true;
+                return false;
+            }
+            if (!isValidEmailSyntax(emailVal)) {
+                emailInput.classList.add('err');
+                setHelper('error', 'Please enter a valid email address.');
+                submitBtn.disabled = true;
+                return false;
+            }
+            if (!isAllowedEmailDomain(emailVal)) {
+                emailInput.classList.add('err');
+                setHelper('error', DOMAIN_ERROR_MSG);
+                submitBtn.disabled = true;
+                return false;
+            }
+
+            emailInput.classList.remove('err');
+
+            if (!passVal || passVal.length < 6) {
+                setHelper('', '<i class="fas fa-info-circle"></i> Password must be at least 6 characters.');
+                submitBtn.disabled = true;
+                return false;
+            }
+
+            setHelper('ok', '<i class="fas fa-check-circle"></i> Inputs valid — click button to continue.');
+            submitBtn.disabled = false;
+            return true;
+        }
+
+        let t;
+        emailInput.addEventListener('input', () => { clearTimeout(t); t = setTimeout(validate, 180); });
+        if (passwordInput) {
+            passwordInput.addEventListener('input', () => { clearTimeout(t); t = setTimeout(validate, 180); });
+        }
+
+        // Direct Email + Password Login for Sign In tab
+        async function doDirectSignIn() {
+            const email = emailInput.value.trim();
+            const password = passwordInput ? passwordInput.value : '';
+
+            if (!isValidEmailSyntax(email) || !isAllowedEmailDomain(email)) {
+                emailInput.classList.add('err');
+                setHelper('error', DOMAIN_ERROR_MSG);
+                return;
+            }
+            if (!password || password.length < 6) {
+                setHelper('error', 'Please enter a password with at least 6 characters.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            if (btnIcon) btnIcon.className = 'spinner-mini';
+            btnLabel.textContent = 'Signing in...';
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                
+                if (!userCredential.user.emailVerified) {
+                    await signOut(auth);
+                    setHelper('error', '<i class="fas fa-exclamation-triangle"></i> Your email ID is not verified yet! Please check your email inbox and click the verification link.');
+                    return;
+                }
+
+                setHelper('ok', '<i class="fas fa-check-circle"></i> Login successful! Redirecting...');
+                // Redirect triggers automatically via onAuthStateChanged!
+            } catch (err) {
+                console.error('Direct Sign In error:', err.code, err.message);
+                let msg = 'Authentication failed. Please try again.';
+                switch (err.code) {
+                    case 'auth/user-not-found':
+                    case 'auth/invalid-credential':
+                        msg = 'No account found with this email or wrong password. Switch to "Create Account" tab to register & verify your email.';
+                        break;
+                    case 'auth/wrong-password':
+                        msg = 'Incorrect password. Please try again.';
+                        break;
+                    case 'auth/too-many-requests':
+                        msg = 'Too many failed attempts. Please wait a few minutes and try again.';
+                        break;
+                    default:
+                        if (err.message) msg = `${err.message} (${err.code || 'Error'})`;
+                }
+                emailInput.classList.add('err');
+                setHelper('error', msg);
+            } finally {
+                submitBtn.disabled = !validate();
+                if (btnIcon) btnIcon.className = 'fas fa-sign-in-alt';
+                btnLabel.textContent = 'Sign In';
+            }
+        }
+
+        // Email Verification Link + Account Creation for Create Account tab
+        async function doCreateAccountWithVerification() {
+            const email = emailInput.value.trim();
+            const password = passwordInput ? passwordInput.value : '';
+
+            if (!isValidEmailSyntax(email) || !isAllowedEmailDomain(email)) {
+                emailInput.classList.add('err');
+                setHelper('error', DOMAIN_ERROR_MSG);
+                return;
+            }
+            if (!password || password.length < 6) {
+                setHelper('error', 'Please enter a password with at least 6 characters.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            if (btnIcon) btnIcon.className = 'spinner-mini';
+            btnLabel.textContent = 'Creating account & sending link...';
+
+            try {
+                // 1. Create account in Firebase Auth
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                
+                // 2. Send Email Verification to user's inbox
+                await sendEmailVerification(userCredential.user);
+                
+                // Sign out until verified
+                await signOut(auth);
+
+                signInForm.classList.add('hidden');
+                confirmationState.classList.remove('hidden');
+                confirmationEmail.textContent = email;
+
+                const confirmationDesc = document.getElementById('confirmationDesc');
+                if (confirmationDesc) {
+                    confirmationDesc.textContent = 'Account created successfully! A verification link has been sent to your email address below. Please click the link in your inbox to verify your email before logging in.';
+                }
+            } catch (err) {
+                console.error('Create Account error:', err.code, err.message);
+                let msg = 'Failed to create account. Please try again.';
+                switch (err.code) {
+                    case 'auth/email-already-in-use':
+                        msg = 'An account with this email already exists! Switch to the "Sign In" tab to log in.';
+                        break;
+                    case 'auth/invalid-email':
+                        msg = DOMAIN_ERROR_MSG;
+                        break;
+                    case 'auth/weak-password':
+                        msg = 'Password should be at least 6 characters long.';
+                        break;
+                    case 'auth/too-many-requests':
+                        msg = 'Too many requests. Please wait a few minutes and try again.';
+                        break;
+                    default:
+                        if (err.message) msg = `${err.message} (${err.code || 'Error'})`;
+                }
+                emailInput.classList.add('err');
+                setHelper('error', msg);
+            } finally {
+                submitBtn.disabled = !validate();
+                if (btnIcon) btnIcon.className = 'fas fa-user-plus';
+                btnLabel.textContent = 'Verify Email & Create Account';
+            }
+        }
+
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (currentMode === 'signin') {
+                doDirectSignIn();
+            } else {
+                doCreateAccountWithVerification();
+            }
+        });
+
+        let timer;
+        function startCountdown() {
+            resendBtn.disabled = true;
+            let s = 30;
+            resendText.textContent = `Resend link in ${s}s`;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                s--;
+                if (s <= 0) { clearInterval(timer); resendBtn.disabled = false; resendText.textContent = 'Resend link'; }
+                else resendText.textContent = `Resend link in ${s}s`;
+            }, 1000);
+        }
+        resendBtn.addEventListener('click', doCreateAccountWithVerification);
+        validate();
+    </script>
+</body>
+</html>
