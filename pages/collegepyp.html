@@ -1253,10 +1253,15 @@
         initTabs();
     </script>
     <script type="module">
-        import { db, collection, onSnapshot, query, orderBy, where } from '../js/admin-firebase-config.js';
+        import { db, collection, onSnapshot, query, where } from '../js/admin-firebase-config.js';
 
         // Global Data Sync Logic for College PYPs
         const loadResources = () => {
+            if (!db) {
+                console.error("Firestore DB instance is not initialized.");
+                return;
+            }
+
             const q = query(
                 collection(db, "resources"),
                 where("category", "==", "college")
@@ -1270,9 +1275,11 @@
                 // Grouping logic: { year: { subjectName: [papers] } }
                 const grouped = {};
                 data.forEach(item => {
-                    if (!grouped[item.year]) grouped[item.year] = {};
-                    if (!grouped[item.year][item.title]) grouped[item.year][item.title] = [];
-                    grouped[item.year][item.title].push(item);
+                    const yr = item.year || 'year1';
+                    const sub = item.title || item.subjectName || 'General';
+                    if (!grouped[yr]) grouped[yr] = {};
+                    if (!grouped[yr][sub]) grouped[yr][sub] = [];
+                    grouped[yr][sub].push(item);
                 });
 
                 // Render each year
@@ -1280,63 +1287,65 @@
                     const section = document.getElementById(yearId);
                     if (!section) return;
 
-                    // Remove "coming soon" if we have data
-                    if (grouped[yearId]) {
+                    const yearData = grouped[yearId];
+                    if (yearData && Object.keys(yearData).length > 0) {
                         const cs = section.querySelector('.coming-soon');
                         if (cs) cs.remove();
-                    }
 
-                    let grid = section.querySelector('.subjects-grid');
-                    if (!grid) {
-                        grid = document.createElement('div');
-                        grid.className = 'subjects-grid dynamic-college';
-                        section.appendChild(grid);
-                    }
+                        let grid = section.querySelector('.subjects-grid');
+                        if (!grid) {
+                            grid = document.createElement('div');
+                            grid.className = 'subjects-grid dynamic-college';
+                            section.appendChild(grid);
+                        }
 
-                    grid.innerHTML = ''; // Clear for fresh render
+                        grid.innerHTML = ''; // Fresh render for years with uploaded data
 
-                    const yearData = grouped[yearId] || {};
-                    Object.keys(yearData).forEach(subjectName => {
-                        const papers = yearData[subjectName];
-                        const card = document.createElement('div');
-                        card.className = 'subject-card college-special-card';
-                        card.style.display = 'block'; // Block layout for better structure
+                        Object.keys(yearData).forEach(subjectName => {
+                            const papers = yearData[subjectName];
+                            const card = document.createElement('div');
+                            card.className = 'subject-card college-special-card';
+                            card.style.display = 'block';
 
-                        card.innerHTML = `
-                            <div class="card-header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <div class="sub-icon-premium" style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent-secondary), #a855f7); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </div>
-                                    <div>
-                                        <h4 style="margin: 0; font-size: 1.2rem; color: #fff;">${subjectName}</h4>
-                                        <span style="font-size: 0.75rem; color: var(--text-secondary);">${papers.length} Papers Available</span>
+                            card.innerHTML = `
+                                <div class="card-header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="sub-icon-premium" style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent-secondary), #a855f7); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="margin: 0; font-size: 1.2rem; color: #fff;">${subjectName}</h4>
+                                            <span style="font-size: 0.75rem; color: var(--text-secondary);">${papers.length} Papers Available</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="papers-grid-layout" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
-                                ${papers.map(p => `
-                                    <a href="${p.link}" target="_blank" class="paper-download-btn">
-                                       <div class="btn-content">
-                                            <i class="fas fa-file-pdf"></i>
-                                            <span>${p.paperType || 'Resource'}</span>
-                                       </div>
-                                       <i class="fas fa-chevron-right arrow-icon"></i>
-                                    </a>
-                                `).join('')}
-                            </div>
-                        `;
-                        grid.appendChild(card);
-                    });
+                                
+                                <div class="papers-grid-layout" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
+                                    ${papers.map(p => `
+                                        <a href="${p.link || p.driveLink || '#'}" target="_blank" class="paper-download-btn">
+                                           <div class="btn-content">
+                                                <i class="fas fa-file-pdf"></i>
+                                                <span>${p.paperType || 'Resource'}</span>
+                                           </div>
+                                           <i class="fas fa-chevron-right arrow-icon"></i>
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            `;
+                            grid.appendChild(card);
+                        });
+                    }
                 });
             }, (error) => {
                 console.error("Firestore Error:", error);
             });
         };
 
-        // Initialize
-        loadResources();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadResources);
+        } else {
+            loadResources();
+        }
     </script>
     <style>
         .ad-floating { position: fixed; bottom: 20px; right: 20px; z-index: 9999; border-radius: 8px; background: transparent; }

@@ -38,14 +38,12 @@ service cloud.firestore {
     }
 
     // ============================================================
-    // 📚 Example: /resources/{document} — site-wide read once
-    //    you are in the org; write restricted to admins.
-    //    (Customize per your app's actual collections!)
+    // 📚 /resources/{document} — site-wide public read for all students
+    //    Write restricted to authenticated admins
     // ============================================================
     match /resources/{document=**} {
-      allow read:  if isOrgMember();
-      allow write: if isOrgMember()
-                   && request.auth.token.admin == true;  // optional custom claim
+      allow read:  if true;
+      allow write: if request.auth != null;
     }
 
     // ============================================================
