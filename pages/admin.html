@@ -193,7 +193,14 @@
                     <li><a href="contributors.html">Contributors</a></li>
                     
                     <li><a href="https://chat.whatsapp.com/BegnxxKgYZa4IWMV35CPxO" target="_blank" style="color: #25D366; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp</a></li>
-                    <li><a href="login.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+                    <li id="adminNavProfile" style="display: none;">
+                        <div style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 0.35rem 0.9rem; border-radius: 999px;">
+                            <i class="fas fa-user-shield" style="color: var(--accent-primary); font-size: 0.9rem;"></i>
+                            <span id="navAdminName" style="color: #fff; font-weight: 600; font-size: 0.85rem;">Admin</span>
+                            <span id="navAdminRoleBadge" style="font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 8px; font-weight: 700; text-transform: uppercase;"></span>
+                            <button id="logoutBtn" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0 0.2rem; margin-left: 0.3rem; font-size: 0.85rem;" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+                        </div>
+                    </li>
                     <li><a href="../index.html#projects" class="cta-btn-header">Resources</a></li>
                 </ul>
             </nav>
@@ -209,8 +216,8 @@
             <!-- Choice Screen -->
             <div id="adminChoice" class="admin-header"
                 style="flex-direction: column; gap: 4rem; text-align: center; display: block; padding-top: 4rem;">
-                <h1 class="hero-title">Welcome, <span class="gradient-text">Admin</span></h1>
-                <p class="hero-subtitle">Choose which ecosystem you want to manage today.</p>
+                <h1 class="hero-title">Welcome, <span class="gradient-text" id="welcomeAdminName">Admin</span></h1>
+                <p class="hero-subtitle" id="welcomeAdminRole">Choose which ecosystem you want to manage today.</p>
                 <div
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
                     <div id="btnAktu" class="rev-card choice-card" onclick="switchSection('aktu')"
@@ -249,6 +256,15 @@
                             style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1.5rem;"></i>
                         <h3>All Subject Notes</h3>
                         <p>Upload PDFs grouped by Subject and Year.</p>
+                    </div>
+
+                    <!-- Super Admin Team Control Card -->
+                    <div id="btnAdmins" class="rev-card choice-card" onclick="switchSection('admins')"
+                        style="display: none; cursor: pointer; background: rgba(168, 85, 247, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <i class="fas fa-users-cog"
+                            style="font-size: 3rem; color: #c084fc; margin-bottom: 1.5rem;"></i>
+                        <h3>Team Admin Hub</h3>
+                        <p>Create sub-admin accounts & manage team permissions.</p>
                     </div>
                 </div>
             </div>
@@ -500,6 +516,51 @@
                 </div>
             </div> <!-- End of Notes Manager -->
 
+            <!-- Team Admins Manager Section (Super Admin Only) -->
+            <div id="adminsManager" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
+                            class="fas fa-arrow-left" onclick="showChoice()"
+                            style="cursor: pointer; font-size: 1.5rem; margin-right: 1rem; opacity: 0.5;"></i> Team Admin
+                        <span class="gradient-text">Control Hub</span>
+                    </h1>
+                    <div class="stats-badge"
+                        style="background: rgba(168, 85, 247, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #c084fc;">
+                        <span id="totalAdmins">0</span> Sub-Admins
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="upload-card">
+                        <h3 style="color: #c084fc; margin-bottom: 0.5rem;"><i class="fas fa-user-plus"></i> Create Sub-Admin</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            Create login credentials for your team member. Sub-admins can upload papers & notes, but can only see their own uploads.
+                        </p>
+                        <form id="createAdminForm" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>Member Full Name</label>
+                                <input type="text" id="newAdminName" class="form-control" placeholder="e.g. Parth Agrawal" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Login Email Address</label>
+                                <input type="email" id="newAdminEmail" class="form-control" placeholder="e.g. parth@whatin.in" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="newAdminPassword" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #a855f7, #6366f1); border: none;">
+                                <i class="fas fa-user-check"></i> Create Sub-Admin Account
+                            </button>
+                        </form>
+                    </div>
+                    <div class="data-list-card">
+                        <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-users" style="color: var(--accent-primary); margin-right: 0.5rem;"></i> Active Sub-Admins</h3>
+                        <div id="adminsContainer"></div>
+                    </div>
+                </div>
+            </div> <!-- End of Admins Manager -->
+
         </div> <!-- End of Container -->
     </main>
 
@@ -541,6 +602,7 @@
             const bsa = document.getElementById('bsaManager');
             const placement = document.getElementById('placementManager');
             const notes = document.getElementById('notesManager');
+            const admins = document.getElementById('adminsManager');
 
             if (!choice || !aktu || !college) {
                 console.error("Admin elements not found!");
@@ -553,6 +615,7 @@
             if (bsa) bsa.style.display = 'none';
             if (placement) placement.style.display = 'none';
             if (notes) notes.style.display = 'none';
+            if (admins) admins.style.display = 'none';
 
             if (type === 'aktu') {
                 if (aktu) aktu.style.display = 'block';
@@ -566,6 +629,8 @@
                 if (placement) placement.style.display = 'block';
             } else if (type === 'notes') {
                 if (notes) notes.style.display = 'block';
+            } else if (type === 'admins') {
+                if (admins) admins.style.display = 'block';
             }
         }
 
@@ -577,6 +642,7 @@
             const bsa = document.getElementById('bsaManager'); if(bsa) bsa.style.display = 'none';
             const placement = document.getElementById('placementManager'); if(placement) placement.style.display = 'none';
             const notes = document.getElementById('notesManager'); if(notes) notes.style.display = 'none';
+            const admins = document.getElementById('adminsManager'); if(admins) admins.style.display = 'none';
         }
 
         function updateSubjects() {
@@ -615,56 +681,151 @@
     </style>
 
     <script type="module">
-        import { db, auth, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, onAuthStateChanged, signOut, where } from '../js/admin-firebase-config.js';
+        import {
+            db,
+            auth,
+            collection,
+            addDoc,
+            deleteDoc,
+            doc,
+            getDoc,
+            setDoc,
+            onSnapshot,
+            query,
+            orderBy,
+            where,
+            onAuthStateChanged,
+            signOut,
+            isSuperAdmin,
+            createSubAdminUser
+        } from '../js/admin-firebase-config.js';
+
+        // State
+        let currentAdminUser = null;
+        let currentAdminProfile = null;
+        let isUserSuperAdmin = false;
 
         // Elements
         const aktuContainer = document.getElementById('aktuContainer');
         const collegeContainer = document.getElementById('collegeContainer');
+        const bsaContainer = document.getElementById('bsaContainer');
+        const placementContainer = document.getElementById('placementContainer');
+        const notesContainer = document.getElementById('notesContainer');
+        const adminsContainer = document.getElementById('adminsContainer');
+
         const totalAktu = document.getElementById('totalAktu');
         const totalCollege = document.getElementById('totalCollege');
+        const totalBsa = document.getElementById('totalBsa');
+        const totalPlacement = document.getElementById('totalPlacement');
+        const totalNotes = document.getElementById('totalNotes');
+        const totalAdmins = document.getElementById('totalAdmins');
 
-        // Note: switchSection, showChoice, updateSubjects moved to global scope above.
-
-        // Auth Check
-        onAuthStateChanged(auth, (user) => {
+        // Auth Check & Profile Setup
+        onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 alert("You are not logged in or session expired. Redirecting to login page...");
                 window.location.href = 'login.html';
+                return;
+            }
+
+            currentAdminUser = user;
+            isUserSuperAdmin = isSuperAdmin(user.email);
+
+            // Fetch or initialize profile from Firestore 'admins' collection
+            try {
+                const adminDocRef = doc(db, "admins", user.uid);
+                const adminDocSnap = await getDoc(adminDocRef);
+
+                if (adminDocSnap.exists()) {
+                    currentAdminProfile = adminDocSnap.data();
+                } else {
+                    currentAdminProfile = {
+                        uid: user.uid,
+                        name: isUserSuperAdmin ? "Dushyant Saini" : (user.displayName || user.email.split('@')[0]),
+                        email: user.email.toLowerCase(),
+                        role: isUserSuperAdmin ? "superadmin" : "subadmin",
+                        createdAt: new Date()
+                    };
+                    await setDoc(adminDocRef, currentAdminProfile, { merge: true });
+                }
+            } catch (err) {
+                console.warn("Profile fetch fallback:", err);
+                currentAdminProfile = {
+                    uid: user.uid,
+                    name: isUserSuperAdmin ? "Dushyant Saini" : (user.displayName || user.email.split('@')[0]),
+                    email: user.email.toLowerCase(),
+                    role: isUserSuperAdmin ? "superadmin" : "subadmin"
+                };
+            }
+
+            // Update UI with Admin Profile details
+            const adminNavProfile = document.getElementById('adminNavProfile');
+            if (adminNavProfile) adminNavProfile.style.display = 'inline-block';
+
+            const navAdminName = document.getElementById('navAdminName');
+            if (navAdminName) navAdminName.innerText = currentAdminProfile.name || 'Admin';
+
+            const navAdminRoleBadge = document.getElementById('navAdminRoleBadge');
+            if (navAdminRoleBadge) {
+                navAdminRoleBadge.innerText = isUserSuperAdmin ? 'Super Admin' : 'Sub-Admin';
+                navAdminRoleBadge.style.background = isUserSuperAdmin ? 'rgba(234, 179, 8, 0.2)' : 'rgba(56, 189, 248, 0.2)';
+                navAdminRoleBadge.style.color = isUserSuperAdmin ? '#facc15' : '#38bdf8';
+                navAdminRoleBadge.style.border = isUserSuperAdmin ? '1px solid rgba(234, 179, 8, 0.4)' : '1px solid rgba(56, 189, 248, 0.4)';
+            }
+
+            const welcomeAdminName = document.getElementById('welcomeAdminName');
+            if (welcomeAdminName) welcomeAdminName.innerText = currentAdminProfile.name || 'Admin';
+
+            const welcomeAdminRole = document.getElementById('welcomeAdminRole');
+            if (welcomeAdminRole) {
+                welcomeAdminRole.innerText = isUserSuperAdmin
+                    ? 'Master Control: Full ecosystem and team management access.'
+                    : `Sub-Admin Portal: Upload resources. Your uploads will be credited to ${currentAdminProfile.name}.`;
+            }
+
+            // Only Super Admin gets the Team Admin Hub card
+            const btnAdmins = document.getElementById('btnAdmins');
+            if (btnAdmins) {
+                btnAdmins.style.display = isUserSuperAdmin ? 'block' : 'none';
+            }
+
+            // Initialize Data Listeners
+            initResourceListeners();
+            if (isUserSuperAdmin) {
+                initAdminsListener();
             }
         });
 
-        // Real-time Listeners
-        const qAktu = query(collection(db, "resources"), where("category", "==", "aktu"));
-        onSnapshot(qAktu, (snap) => {
-            const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            // Sort locally to avoid index requirement
-            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-            totalAktu.innerText = data.length;
-            renderList(data, aktuContainer, 'aktu');
-        }, (err) => console.error("AKTU Listener Error:", err));
+        // Filter Helper: Super admin sees all, Sub-admin sees only their own uploads
+        function filterForCurrentAdmin(items) {
+            if (isUserSuperAdmin) {
+                return items;
+            }
+            return items.filter(item => {
+                return (item.uploadedBy && (item.uploadedBy.uid === currentAdminUser.uid || item.uploadedBy.email === currentAdminUser.email));
+            });
+        }
 
-        const qCollege = query(collection(db, "resources"), where("category", "==", "college"));
-        onSnapshot(qCollege, (snap) => {
-            const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            // Sort locally to avoid index requirement
-            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-            totalCollege.innerText = data.length;
-            renderList(data, collegeContainer, 'college');
-        }, (err) => console.error("College Listener Error:", err));
-
+        // Render List for AKTU, College, and BSA
         const renderList = (items, container, type) => {
+            if (!container) return;
             if (items.length === 0) {
-                container.innerHTML = `<div style="opacity: 0.3; text-align: center; padding: 3rem;">
-                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                    <p>No items added yet</p>
+                container.innerHTML = `<div style="opacity: 0.4; text-align: center; padding: 3rem;">
+                    <i class="fas fa-folder-open" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-primary);"></i>
+                    <p style="margin: 0; font-size: 1.1rem; color: #fff;">${isUserSuperAdmin ? 'No items added yet' : "You haven't uploaded any items here yet"}</p>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">${isUserSuperAdmin ? 'Use the form on the left to add items.' : 'Use the form to add your first resource.'}</span>
                 </div>`;
                 return;
             }
             container.innerHTML = items.map(item => `
-                <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
                     <div style="flex: 1;">
                         <h4 style="margin: 0; color: #fff;">${item.title} ${item.paperType ? `<span style="color: var(--accent-primary); font-size: 0.8rem; margin-left: 5px;">[${item.paperType}]</span>` : ''}</h4>
-                        <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">${item.year.replace('year', 'Year ')}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">${(item.year || '').replace('year', 'Year ')}</span>
+                        <div style="margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); padding: 0.2rem 0.6rem; border-radius: 8px; color: #38bdf8;">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Uploaded by: <strong style="color: #fff;">${item.uploadedBy?.name || 'Main Admin'}</strong> <span style="opacity: 0.7;">(${item.uploadedBy?.email || 'dushyant@whatin.in'})</span></span>
+                        </div>
                     </div>
                     <div class="action-btns">
                         <button class="btn btn-delete btn-sm delete-btn" onclick="handleDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
@@ -679,74 +840,255 @@
             }
         };
 
-        // Form Handlers
-        document.getElementById('aktuForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.disabled = true;
-            btn.innerText = 'Uploading...';
-            try {
-                await addDoc(collection(db, "resources"), {
-                    category: 'aktu',
-                    title: document.getElementById('akTitle').value,
-                    year: document.getElementById('akYear').value,
-                    link: document.getElementById('akLink').value,
-                    createdAt: new Date()
-                });
-                e.target.reset();
-                alert('Success! Uploaded to AKTU Padhai.');
-            } catch (err) { alert(err.message); }
-            btn.disabled = false;
-            btn.innerText = 'Upload to Padhai';
+        // Render Placement List
+        const renderPlacementList = (items) => {
+            if (!placementContainer) return;
+            if (items.length === 0) {
+                placementContainer.innerHTML = `<div style="opacity: 0.4; text-align: center; padding: 3rem;">
+                    <i class="fas fa-briefcase" style="font-size: 2.5rem; margin-bottom: 1rem; color: #ffd700;"></i>
+                    <p style="margin: 0; font-size: 1.1rem; color: #fff;">${isUserSuperAdmin ? 'No placement boxes yet' : "You haven't uploaded any placement boxes yet"}</p>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Fill the form to add placement materials.</span>
+                </div>`;
+                return;
+            }
+            placementContainer.innerHTML = items.map(item => `
+                <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; color: #fff;">${item.title}</h4>
+                        <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 60)}...</span>
+                        <div style="margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); padding: 0.2rem 0.6rem; border-radius: 8px; color: #ffd700;">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Uploaded by: <strong style="color: #fff;">${item.uploadedBy?.name || 'Main Admin'}</strong> <span style="opacity: 0.7;">(${item.uploadedBy?.email || 'dushyant@whatin.in'})</span></span>
+                        </div>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn btn-delete btn-sm delete-btn" onclick="handlePlacementDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
         };
 
-        document.getElementById('collegeForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const subSelect = document.getElementById('colSubject').value;
-            const subCustom = document.getElementById('colSubjectCustom').value;
-            const finalSubject = subSelect === 'others' ? subCustom : subSelect;
-
-            if (!finalSubject) return alert('Please select or enter a subject name');
-
-            btn.disabled = true;
-            btn.innerText = 'Processing...';
-            try {
-                await addDoc(collection(db, "resources"), {
-                    category: 'college',
-                    title: finalSubject,
-                    paperType: document.getElementById('colPaperType').value,
-                    year: document.getElementById('colYear').value,
-                    link: document.getElementById('colLink').value,
-                    createdAt: new Date()
-                });
-                e.target.reset();
-                updateSubjects(); // Reset dropdown
-                alert('Success! Paper added to College Portal.');
-            } catch (err) { alert(err.message); }
-            btn.disabled = false;
-            btn.innerText = 'Add to College Portal';
+        window.handlePlacementDelete = async (id) => {
+            if (confirm('Are you sure you want to delete this placement box?')) {
+                await deleteDoc(doc(db, "resources", id));
+            }
         };
 
-        // BSA College Form Handlers and Listener
-        const bsaContainer = document.getElementById('bsaContainer');
-        const totalBsa = document.getElementById('totalBsa');
+        // Render Notes List
+        const renderNotesList = (items) => {
+            if (!notesContainer) return;
+            if (items.length === 0) {
+                notesContainer.innerHTML = `<div style="opacity: 0.4; text-align: center; padding: 3rem;">
+                    <i class="fas fa-book-open" style="font-size: 2.5rem; margin-bottom: 1rem; color: #ff6b6b;"></i>
+                    <p style="margin: 0; font-size: 1.1rem; color: #fff;">${isUserSuperAdmin ? 'No notes added yet' : "You haven't uploaded any notes yet"}</p>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Use the form to upload subject notes.</span>
+                </div>`;
+                return;
+            }
+            notesContainer.innerHTML = items.map(item => `
+                <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; color: #fff;">${item.subjectName} <span style="color: #ff6b6b; font-size: 0.8rem; margin-left: 5px;">[${(item.year || '').replace('year', 'Year ')}]</span></h4>
+                        <span style="font-size: 0.85rem; color: #ff8787;">${item.pdfTitle}</span>
+                        <br>
+                        <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 50)}...</span>
+                        <div style="margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; background: rgba(255, 107, 107, 0.05); border: 1px solid rgba(255, 107, 107, 0.2); padding: 0.2rem 0.6rem; border-radius: 8px; color: #ff8787;">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Uploaded by: <strong style="color: #fff;">${item.uploadedBy?.name || 'Main Admin'}</strong> <span style="opacity: 0.7;">(${item.uploadedBy?.email || 'dushyant@whatin.in'})</span></span>
+                        </div>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn btn-delete btn-sm delete-btn" onclick="handleNoteDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        };
 
-        const qBsa = query(collection(db, "resources"), where("category", "==", "bsacollege"));
-        onSnapshot(qBsa, (snap) => {
-            const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-            if(totalBsa) totalBsa.innerText = data.length;
-            if(bsaContainer) renderList(data, bsaContainer, 'bsa');
-        }, (err) => console.error("BSA Listener Error:", err));
+        window.handleNoteDelete = async (id) => {
+            if (confirm('Are you sure you want to delete this note?')) {
+                await deleteDoc(doc(db, "resources", id));
+            }
+        };
 
+        // Real-Time Listeners for all resources
+        function initResourceListeners() {
+            // AKTU
+            const qAktu = query(collection(db, "resources"), where("category", "==", "aktu"));
+            onSnapshot(qAktu, (snap) => {
+                const allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                allData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                const filtered = filterForCurrentAdmin(allData);
+                if (totalAktu) totalAktu.innerText = isUserSuperAdmin ? allData.length : `${filtered.length} (Mine)`;
+                renderList(filtered, aktuContainer, 'aktu');
+            }, (err) => console.error("AKTU Listener Error:", err));
+
+            // College GL Bajaj
+            const qCollege = query(collection(db, "resources"), where("category", "==", "college"));
+            onSnapshot(qCollege, (snap) => {
+                const allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                allData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                const filtered = filterForCurrentAdmin(allData);
+                if (totalCollege) totalCollege.innerText = isUserSuperAdmin ? allData.length : `${filtered.length} (Mine)`;
+                renderList(filtered, collegeContainer, 'college');
+            }, (err) => console.error("College Listener Error:", err));
+
+            // BSA College
+            const qBsa = query(collection(db, "resources"), where("category", "==", "bsacollege"));
+            onSnapshot(qBsa, (snap) => {
+                const allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                allData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                const filtered = filterForCurrentAdmin(allData);
+                if (totalBsa) totalBsa.innerText = isUserSuperAdmin ? allData.length : `${filtered.length} (Mine)`;
+                renderList(filtered, bsaContainer, 'bsa');
+            }, (err) => console.error("BSA Listener Error:", err));
+
+            // Placement
+            const qPlacement = query(collection(db, "resources"), where("category", "==", "placement"));
+            onSnapshot(qPlacement, (snap) => {
+                const allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                allData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                const filtered = filterForCurrentAdmin(allData);
+                if (totalPlacement) totalPlacement.innerText = isUserSuperAdmin ? allData.length : `${filtered.length} (Mine)`;
+                renderPlacementList(filtered);
+            }, (err) => console.error("Placement Listener Error:", err));
+
+            // Notes
+            const qNotes = query(collection(db, "resources"), where("category", "==", "notes"));
+            onSnapshot(qNotes, (snap) => {
+                const allData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                allData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                const filtered = filterForCurrentAdmin(allData);
+                if (totalNotes) totalNotes.innerText = isUserSuperAdmin ? allData.length : `${filtered.length} (Mine)`;
+                renderNotesList(filtered);
+            }, (err) => console.error("Notes Listener Error:", err));
+        }
+
+        // Sub-Admins Listener (Super Admin Only)
+        function initAdminsListener() {
+            const qAdmins = query(collection(db, "admins"));
+            onSnapshot(qAdmins, (snap) => {
+                const allAdmins = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                // Exclude super admins from list of managed sub-admins
+                const subAdmins = allAdmins.filter(a => a.role === 'subadmin' || (!isSuperAdmin(a.email) && a.email !== 'dushyant@whatin.in'));
+                
+                if (totalAdmins) totalAdmins.innerText = subAdmins.length;
+                if (!adminsContainer) return;
+
+                if (subAdmins.length === 0) {
+                    adminsContainer.innerHTML = `<div style="opacity: 0.4; text-align: center; padding: 3rem;">
+                        <i class="fas fa-users-slash" style="font-size: 2.5rem; margin-bottom: 1rem; color: #c084fc;"></i>
+                        <p style="margin: 0; font-size: 1.1rem; color: #fff;">No sub-admins created yet</p>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Use the form on the left to add your first team member.</span>
+                    </div>`;
+                    return;
+                }
+
+                adminsContainer.innerHTML = subAdmins.map(admin => `
+                    <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #6366f1); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">
+                                ${(admin.name || 'A').charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 style="margin: 0; color: #fff; font-size: 1rem;">${admin.name}</h4>
+                                <span style="font-size: 0.8rem; color: var(--text-secondary);">${admin.email}</span>
+                                <div style="margin-top: 0.2rem;">
+                                    <span style="font-size: 0.65rem; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.1rem 0.5rem; border-radius: 6px; font-weight: 600;">SUB-ADMIN</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-btns">
+                            <button class="btn btn-delete btn-sm delete-btn" onclick="handleAdminDelete('${admin.id}', '${admin.name}')" title="Revoke Access">
+                                <i class="fas fa-user-times"></i> Revoke
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }, (err) => console.error("Admins Listener Error:", err));
+        }
+
+        window.handleAdminDelete = async (id, name) => {
+            if (confirm(`Are you sure you want to revoke sub-admin access for ${name}?`)) {
+                await deleteDoc(doc(db, "admins", id));
+                alert(`Access revoked for ${name}.`);
+            }
+        };
+
+        // Helper to get attribution metadata
+        function getUploadAttribution() {
+            return {
+                name: currentAdminProfile?.name || (isUserSuperAdmin ? "Dushyant Saini" : "Sub-Admin"),
+                email: currentAdminUser?.email || "admin@whatin.in",
+                uid: currentAdminUser?.uid || "unknown"
+            };
+        }
+
+        // AKTU Form Submit
+        const aktuForm = document.getElementById('aktuForm');
+        if (aktuForm) {
+            aktuForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                btn.disabled = true;
+                btn.innerText = 'Uploading...';
+                try {
+                    await addDoc(collection(db, "resources"), {
+                        category: 'aktu',
+                        title: document.getElementById('akTitle').value.trim(),
+                        year: document.getElementById('akYear').value,
+                        link: document.getElementById('akLink').value.trim(),
+                        uploadedBy: getUploadAttribution(),
+                        createdAt: new Date()
+                    });
+                    e.target.reset();
+                    alert(`Success! Uploaded to AKTU Padhai under ${currentAdminProfile.name}.`);
+                } catch (err) { alert(err.message); }
+                btn.disabled = false;
+                btn.innerText = 'Upload to Padhai';
+            };
+        }
+
+        // College GL Bajaj Form Submit
+        const collegeForm = document.getElementById('collegeForm');
+        if (collegeForm) {
+            collegeForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const subSelect = document.getElementById('colSubject').value;
+                const subCustom = document.getElementById('colSubjectCustom').value.trim();
+                const finalSubject = subSelect === 'others' ? subCustom : subSelect;
+
+                if (!finalSubject) return alert('Please select or enter a subject name');
+
+                btn.disabled = true;
+                btn.innerText = 'Processing...';
+                try {
+                    await addDoc(collection(db, "resources"), {
+                        category: 'college',
+                        title: finalSubject,
+                        paperType: document.getElementById('colPaperType').value,
+                        year: document.getElementById('colYear').value,
+                        link: document.getElementById('colLink').value.trim(),
+                        uploadedBy: getUploadAttribution(),
+                        createdAt: new Date()
+                    });
+                    e.target.reset();
+                    updateSubjects();
+                    alert(`Success! Paper added to College Portal under ${currentAdminProfile.name}.`);
+                } catch (err) { alert(err.message); }
+                btn.disabled = false;
+                btn.innerText = 'Add to College Portal';
+            };
+        }
+
+        // BSA Form Submit
         const bsaForm = document.getElementById('bsaForm');
-        if(bsaForm) {
+        if (bsaForm) {
             bsaForm.onsubmit = async (e) => {
                 e.preventDefault();
                 const btn = e.target.querySelector('button');
                 const subSelect = document.getElementById('bsaSubject').value;
-                const subCustom = document.getElementById('bsaSubjectCustom').value;
+                const subCustom = document.getElementById('bsaSubjectCustom').value.trim();
                 const finalSubject = subSelect === 'others' ? subCustom : subSelect;
 
                 if (!finalSubject) return alert('Please select or enter a subject name');
@@ -759,57 +1101,22 @@
                         title: finalSubject,
                         paperType: document.getElementById('bsaPaperType').value,
                         year: document.getElementById('bsaYear').value,
-                        link: document.getElementById('bsaLink').value,
+                        link: document.getElementById('bsaLink').value.trim(),
+                        uploadedBy: getUploadAttribution(),
                         createdAt: new Date()
                     });
                     e.target.reset();
                     updateBsaSubjects();
-                    alert('Success! Paper added to BSA Portal.');
+                    alert(`Success! Paper added to BSA Portal under ${currentAdminProfile.name}.`);
                 } catch (err) { alert(err.message); }
                 btn.disabled = false;
                 btn.innerText = 'Add to BSA Portal';
             };
         }
 
-                // Placement Content Form Handlers and Listener
-        const placementContainer = document.getElementById('placementContainer');
-        const totalPlacement = document.getElementById('totalPlacement');
-
-        const qPlacement = query(collection(db, "resources"), where("category", "==", "placement"));
-        onSnapshot(qPlacement, (snap) => {
-            let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-            if(totalPlacement) totalPlacement.innerText = data.length;
-            if(placementContainer) {
-                if (data.length === 0) {
-                    placementContainer.innerHTML = `<div style="opacity: 0.3; text-align: center; padding: 3rem;">
-                        <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                        <p>No items added yet</p>
-                    </div>`;
-                    return;
-                }
-                placementContainer.innerHTML = data.map(item => `
-                    <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
-                        <div style="flex: 1;">
-                            <h4 style="margin: 0; color: #fff;">${item.title}</h4>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 50)}...</span>
-                        </div>
-                        <div class="action-btns">
-                            <button class="btn btn-delete btn-sm delete-btn" onclick="handlePlacementDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }, (err) => console.error("Placement Listener Error:", err));
-
-        window.handlePlacementDelete = async (id) => {
-            if (confirm('Are you sure you want to delete this placement box?')) {
-                await deleteDoc(doc(db, "resources", id));
-            }
-        };
-
+        // Placement Form Submit
         const placementForm = document.getElementById('placementForm');
-        if(placementForm) {
+        if (placementForm) {
             placementForm.onsubmit = async (e) => {
                 e.preventDefault();
                 const btn = e.target.querySelector('button');
@@ -827,55 +1134,18 @@
                         title: title,
                         description: desc,
                         driveLink: link,
+                        uploadedBy: getUploadAttribution(),
                         createdAt: new Date()
                     });
                     e.target.reset();
-                    alert('Success! Placement Box added.');
+                    alert(`Success! Placement Box added under ${currentAdminProfile.name}.`);
                 } catch (err) { alert(err.message); }
                 btn.disabled = false;
                 btn.innerText = 'Upload Box';
             };
         }
 
-        // Notes Manager Form Handlers and Listener
-        const notesContainer = document.getElementById('notesContainer');
-        const totalNotes = document.getElementById('totalNotes');
-
-        const qNotes = query(collection(db, "resources"), where("category", "==", "notes"));
-        onSnapshot(qNotes, (snap) => {
-            let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            data.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-            if (totalNotes) totalNotes.innerText = data.length;
-            if (notesContainer) {
-                if (data.length === 0) {
-                    notesContainer.innerHTML = `<div style="opacity: 0.3; text-align: center; padding: 3rem;">
-                        <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                        <p>No notes added yet</p>
-                    </div>`;
-                    return;
-                }
-                notesContainer.innerHTML = data.map(item => `
-                    <div class="resource-item" style="margin-bottom: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 15px; border: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
-                        <div style="flex: 1;">
-                            <h4 style="margin: 0; color: #fff;">${item.subjectName} <span style="color: #ff6b6b; font-size: 0.8rem; margin-left: 5px;">[${item.year.replace('year', 'Year ')}]</span></h4>
-                            <span style="font-size: 0.85rem; color: #ff8787;">${item.pdfTitle}</span>
-                            <br>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">${(item.description || '').substring(0, 50)}...</span>
-                        </div>
-                        <div class="action-btns">
-                            <button class="btn btn-delete btn-sm delete-btn" onclick="handleNoteDelete('${item.id}')" title="Delete"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }, (err) => console.error("Notes Listener Error:", err));
-
-        window.handleNoteDelete = async (id) => {
-            if (confirm('Are you sure you want to delete this note?')) {
-                await deleteDoc(doc(db, "resources", id));
-            }
-        };
-
+        // Notes Form Submit
         const subjectsByYear = {
             'year1': ['Physics', 'Math 1', 'Math 2', 'Chemistry', 'Mechanical', 'Electrical', 'Electronics', 'PPS', 'Soft Skills'],
             'year2': ['COA', 'DSTL', 'TAFL', 'OS', 'DS', 'Math 4', 'Python', 'OOPS', 'CS', 'DE'],
@@ -895,12 +1165,11 @@
 
         if(noteYearSelect) {
             noteYearSelect.addEventListener('change', updateNoteSubjects);
-            // We need to call it when Notes tab is shown, or just call it once initially
             updateNoteSubjects(); 
         }
 
         const notesForm = document.getElementById('notesForm');
-        if(notesForm) {
+        if (notesForm) {
             notesForm.onsubmit = async (e) => {
                 e.preventDefault();
                 const btn = e.target.querySelector('button');
@@ -923,22 +1192,57 @@
                         description: desc,
                         pdfTitle: title,
                         driveLink: link,
+                        uploadedBy: getUploadAttribution(),
                         createdAt: new Date()
                     });
                     
-                    // Reset only title and link, keep subject and desc for easy multiple uploads
                     document.getElementById('noteTitle').value = '';
                     document.getElementById('noteLink').value = '';
                     
-                    alert('Success! Note added.');
+                    alert(`Success! Note added under ${currentAdminProfile.name}.`);
                 } catch (err) { alert(err.message); }
                 btn.disabled = false;
                 btn.innerText = 'Upload Note';
             };
         }
 
+        // Super Admin: Create Sub-Admin Form Handler
+        const createAdminForm = document.getElementById('createAdminForm');
+        if (createAdminForm) {
+            createAdminForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const name = document.getElementById('newAdminName').value.trim();
+                const email = document.getElementById('newAdminEmail').value.trim();
+                const password = document.getElementById('newAdminPassword').value;
+
+                if (!name || !email || !password) return alert('All fields are required.');
+                if (password.length < 6) return alert('Password must be at least 6 characters.');
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+                try {
+                    await createSubAdminUser(name, email, password, currentAdminUser.email);
+                    e.target.reset();
+                    alert(`🎉 Sub-Admin Account Created Successfully!\n\nName: ${name}\nEmail: ${email}\n\nThey can now login at login.html with this email and password.`);
+                } catch (err) {
+                    console.error("Create Sub-Admin Error:", err);
+                    alert(`Failed to create sub-admin: ${err.message}`);
+                }
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-user-check"></i> Create Sub-Admin Account';
+            };
+        }
+
         // Logout
-        document.getElementById('logoutBtn').onclick = () => signOut(auth);
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.onclick = async () => {
+                await signOut(auth);
+                window.location.href = 'login.html';
+            };
+        }
     </script>
 
     <!-- Firebase Analytics SDK -->
