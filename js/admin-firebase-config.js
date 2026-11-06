@@ -70,13 +70,15 @@ function isSuperAdmin(email) {
 }
 
 /**
- * Creates a new Sub-Admin in Firebase Auth and records their profile in Firestore.
- * Uses an isolated secondary Firebase app instance to ensure the Super Admin stays logged in.
+ * Creates a new Sub-Admin or CEO in Firebase Auth and records their profile in Firestore.
+ * Uses an isolated secondary Firebase app instance to ensure the current Admin stays logged in.
  */
-async function createSubAdminUser(name, email, password, creatorEmail) {
+async function createAdminUser(name, email, password, role = 'subadmin', creatorEmail = '', creatorRole = 'superadmin') {
     const cleanEmail = email.trim().toLowerCase();
     const cleanName = name.trim();
-    const tempAppName = 'SubAdminCreator_' + Date.now();
+    // Safety check: only superadmin can create CEO
+    const finalRole = (role === 'ceo' && creatorRole === 'superadmin') ? 'ceo' : 'subadmin';
+    const tempAppName = 'AdminCreator_' + Date.now();
     const tempApp = initSecondaryApp(adminFirebaseConfig, tempAppName);
     try {
         const tempAuth = getSecondaryAuth(tempApp);
@@ -88,19 +90,24 @@ async function createSubAdminUser(name, email, password, creatorEmail) {
             uid: uid,
             name: cleanName,
             email: cleanEmail,
-            role: 'subadmin',
+            role: finalRole,
             createdBy: creatorEmail,
+            createdRole: creatorRole,
             createdAt: new Date()
         });
 
         await signOutSecondary(tempAuth);
         await deleteApp(tempApp);
-        return { success: true, uid, name: cleanName, email: cleanEmail };
+        return { success: true, uid, name: cleanName, email: cleanEmail, role: finalRole };
     } catch (err) {
         try { await deleteApp(tempApp); } catch (e) {}
         throw err;
     }
 }
+
+// Backward compatibility alias
+const createSubAdminUser = (name, email, password, creatorEmail) => 
+    createAdminUser(name, email, password, 'subadmin', creatorEmail, 'superadmin');
 
 export {
     adminApp,
@@ -125,5 +132,6 @@ export {
     signOut,
     SUPER_ADMINS,
     isSuperAdmin,
+    createAdminUser,
     createSubAdminUser
 };

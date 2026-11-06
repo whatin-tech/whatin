@@ -175,9 +175,9 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102790655622814"
      crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-3102790655622814">
-  <script type="module" crossorigin src="/assets/admin-D7-Vyn-1.js"></script>
+  <script type="module" crossorigin src="/assets/admin-BZdnJ9Yq.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/script-B8465DUt.js">
-  <link rel="modulepreload" crossorigin href="/assets/admin-firebase-config-qp5uovXZ.js">
+  <link rel="modulepreload" crossorigin href="/assets/admin-firebase-config-jejBgzOK.js">
   <link rel="stylesheet" crossorigin href="/assets/main-bsquem6Q.css">
 </head>
 
@@ -261,13 +261,13 @@
                         <p>Upload PDFs grouped by Subject and Year.</p>
                     </div>
 
-                    <!-- Super Admin Team Control Card -->
+                    <!-- Admin Team Control Card (Super Admin & CEO) -->
                     <div id="btnAdmins" class="rev-card choice-card" onclick="switchSection('admins')"
                         style="display: none; cursor: pointer; background: rgba(168, 85, 247, 0.05); transition: 0.3s; padding: 3rem; border-radius: 30px; border: 1px solid rgba(168, 85, 247, 0.2);">
                         <i class="fas fa-users-cog"
                             style="font-size: 3rem; color: #c084fc; margin-bottom: 1.5rem;"></i>
-                        <h3>Team Admin Hub</h3>
-                        <p>Create sub-admin accounts & manage team permissions.</p>
+                        <h3 id="btnAdminsTitle">Team Admin Hub</h3>
+                        <p id="btnAdminsDesc">Create sub-admin accounts & manage team permissions.</p>
                     </div>
                 </div>
             </div>
@@ -520,6 +520,7 @@
             </div> <!-- End of Notes Manager -->
 
             <!-- Team Admins Manager Section (Super Admin Only) -->
+            <!-- Team Admins Manager Section (Super Admin & CEO) -->
             <div id="adminsManager" style="display: none;">
                 <div class="admin-header">
                     <h1 class="hero-title" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;"><i
@@ -529,15 +530,15 @@
                     </h1>
                     <div class="stats-badge"
                         style="background: rgba(168, 85, 247, 0.1); padding: 0.8rem 1.5rem; border-radius: 12px; border: 1px solid #c084fc;">
-                        <span id="totalAdmins">0</span> Sub-Admins
+                        <span id="totalAdmins">0</span> Members
                     </div>
                 </div>
 
                 <div class="admin-grid">
                     <div class="upload-card">
-                        <h3 style="color: #c084fc; margin-bottom: 0.5rem;"><i class="fas fa-user-plus"></i> Create Sub-Admin</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                            Create login credentials for your team member. Sub-admins can upload papers & notes, but can only see their own uploads.
+                        <h3 id="createAdminTitle" style="color: #c084fc; margin-bottom: 0.5rem;"><i class="fas fa-user-plus"></i> Create Admin Account</h3>
+                        <p id="createAdminDesc" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            Create login credentials for your team member.
                         </p>
                         <form id="createAdminForm" onsubmit="return false;">
                             <div class="form-group">
@@ -552,13 +553,20 @@
                                 <label>Password</label>
                                 <input type="password" id="newAdminPassword" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #a855f7, #6366f1); border: none;">
-                                <i class="fas fa-user-check"></i> Create Sub-Admin Account
+                            <div class="form-group" id="roleSelectorGroup">
+                                <label>Assign Role</label>
+                                <select id="newAdminRole" class="form-control" required>
+                                    <option value="subadmin">Sub-Admin (Upload Resources)</option>
+                                    <option value="ceo">CEO Admin (Upload Resources + Create Sub-Admins)</option>
+                                </select>
+                            </div>
+                            <button type="submit" id="createAdminBtnSubmit" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #a855f7, #6366f1); border: none;">
+                                <i class="fas fa-user-check"></i> Create Account
                             </button>
                         </form>
                     </div>
                     <div class="data-list-card">
-                        <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-users" style="color: var(--accent-primary); margin-right: 0.5rem;"></i> Active Sub-Admins</h3>
+                        <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-users" style="color: var(--accent-primary); margin-right: 0.5rem;"></i> <span id="adminsListTitle">Active Team Members</span></h3>
                         <div id="adminsContainer"></div>
                     </div>
                 </div>
