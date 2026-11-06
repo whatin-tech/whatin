@@ -239,6 +239,403 @@
         <section id="projects" class="projects-section">
 
             <div class="container">
+                <!-- Team Circles Infinite Marquee - Responsive Masterpiece -->
+                <style>
+                    .team-spotlight-wrapper {
+                        margin: 1rem auto 4rem auto;
+                        padding: 0.8rem 0;
+                        background: transparent;
+                        border: none;
+                        box-shadow: none;
+                        position: relative;
+                        overflow: hidden;
+                        user-select: none;
+                        -webkit-user-select: none;
+                    }
+                    /* Smooth edge fade gradient masks for high-tech cinema feel */
+                    .team-marquee-viewport {
+                        position: relative;
+                        width: 100%;
+                        overflow: hidden;
+                        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+                        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+                    }
+                    .team-marquee-track {
+                        display: flex;
+                        gap: 2.2rem;
+                        width: max-content;
+                        animation: teamGlide 38s linear infinite;
+                        will-change: transform;
+                        align-items: center;
+                        padding: 0.8rem 0;
+                    }
+                    /* Desktop hover & Mobile touch pause */
+                    .team-marquee-track:hover,
+                    .team-marquee-track.is-paused {
+                        animation-play-state: paused;
+                    }
+                    @keyframes teamGlide {
+                        0% {
+                            transform: translate3d(0, 0, 0);
+                        }
+                        7.5% {
+                            transform: translate3d(0, 0, 0); /* 3s Pause on Founder Dushyant Saini */
+                        }
+                        100% {
+                            transform: translate3d(-50%, 0, 0);
+                        }
+                    }
+                    .team-member-chip {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        width: 125px;
+                        flex-shrink: 0;
+                        padding: 0.4rem 0.2rem;
+                        background: transparent;
+                        border: none;
+                        text-decoration: none;
+                        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+                        position: relative;
+                        cursor: pointer;
+                    }
+                    .team-member-chip:hover {
+                        transform: translateY(-8px) scale(1.08);
+                        filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7));
+                    }
+                    .team-avatar-box {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        margin-bottom: 0.65rem;
+                        padding: 2.5px;
+                        background: linear-gradient(135deg, var(--chip-color, #38bdf8), rgba(255, 255, 255, 0.2));
+                        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 14px var(--chip-glow, rgba(56, 189, 248, 0.25));
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                        overflow: hidden;
+                    }
+                    .team-member-chip:hover .team-avatar-box {
+                        box-shadow: 0 0 28px var(--chip-color, #38bdf8), 0 0 45px var(--chip-glow, rgba(56, 189, 248, 0.45));
+                        transform: rotate(3deg);
+                    }
+                    .team-avatar-box img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        display: block;
+                        transition: transform 0.4s ease;
+                    }
+                    .team-member-chip:hover .team-avatar-box img {
+                        transform: scale(1.12);
+                    }
+                    /* Founder Dushyant Saini Radiant Halo */
+                    .founder-chip .team-avatar-box {
+                        width: 90px;
+                        height: 90px;
+                        padding: 3.5px;
+                        background: linear-gradient(135deg, #38bdf8, #818cf8, #fbbf24);
+                        box-shadow: 0 0 25px rgba(56, 189, 248, 0.7), 0 0 12px #fbbf24;
+                        animation: founderGlow 3s ease-in-out infinite;
+                    }
+                    @keyframes founderGlow {
+                        0%, 100% {
+                            box-shadow: 0 0 18px rgba(56, 189, 248, 0.55), 0 0 10px rgba(251, 191, 36, 0.35);
+                            transform: scale(1);
+                        }
+                        50% {
+                            box-shadow: 0 0 38px rgba(56, 189, 248, 0.95), 0 0 22px rgba(251, 191, 36, 0.75);
+                            transform: scale(1.03);
+                        }
+                    }
+                    .team-member-name {
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        color: #ffffff;
+                        margin-bottom: 0.25rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 100%;
+                        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+                        letter-spacing: 0.3px;
+                        transition: color 0.3s;
+                    }
+                    .team-member-chip:hover .team-member-name {
+                        color: var(--chip-color, #38bdf8);
+                    }
+                    .team-member-role {
+                        font-size: 0.65rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        color: var(--chip-color, #38bdf8);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 100%;
+                        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+                        opacity: 0.9;
+                    }
+                    .founder-chip .team-member-role {
+                        color: #38bdf8;
+                        background: rgba(56, 189, 248, 0.12);
+                        border: 1px solid rgba(56, 189, 248, 0.35);
+                        padding: 0.15rem 0.55rem;
+                        border-radius: 999px;
+                        font-size: 0.62rem;
+                        letter-spacing: 0.7px;
+                        box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+                    }
+                    /* Tablet Viewport (768px - 1024px) */
+                    @media (max-width: 1024px) {
+                        .team-marquee-track {
+                            gap: 1.8rem;
+                        }
+                        .team-member-chip {
+                            width: 115px;
+                        }
+                        .team-avatar-box {
+                            width: 74px;
+                            height: 74px;
+                        }
+                        .founder-chip .team-avatar-box {
+                            width: 82px;
+                            height: 82px;
+                        }
+                        .team-member-name {
+                            font-size: 0.8rem;
+                        }
+                    }
+                    /* Mobile Devices (Under 768px) */
+                    @media (max-width: 768px) {
+                        .team-spotlight-wrapper {
+                            margin: 1rem auto 3rem auto;
+                            padding: 0.4rem 0;
+                        }
+                        .team-marquee-viewport {
+                            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+                            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+                        }
+                        .team-marquee-track {
+                            gap: 1.5rem;
+                            animation-duration: 32s;
+                        }
+                        .team-member-chip {
+                            width: 105px;
+                        }
+                        .team-avatar-box {
+                            width: 64px;
+                            height: 64px;
+                            margin-bottom: 0.5rem;
+                        }
+                        .founder-chip .team-avatar-box {
+                            width: 72px;
+                            height: 72px;
+                        }
+                        .team-member-name {
+                            font-size: 0.76rem;
+                            margin-bottom: 0.18rem;
+                        }
+                        .team-member-role {
+                            font-size: 0.6rem;
+                            letter-spacing: 0.3px;
+                        }
+                        .founder-chip .team-member-role {
+                            font-size: 0.56rem;
+                            padding: 0.1rem 0.45rem;
+                        }
+                    }
+                    /* Small Phones (Under 400px) */
+                    @media (max-width: 400px) {
+                        .team-marquee-track {
+                            gap: 1.2rem;
+                        }
+                        .team-member-chip {
+                            width: 95px;
+                        }
+                        .team-avatar-box {
+                            width: 58px;
+                            height: 58px;
+                        }
+                        .founder-chip .team-avatar-box {
+                            width: 66px;
+                            height: 66px;
+                        }
+                        .team-member-name {
+                            font-size: 0.72rem;
+                        }
+                        .team-member-role {
+                            font-size: 0.55rem;
+                        }
+                    }
+                </style>
+
+                <div class="team-spotlight-wrapper">
+                    <div class="team-marquee-viewport">
+                        <div class="team-marquee-track">
+                            <!-- Loop Set 1 -->
+                            <a href="pages/team.html" class="team-member-chip founder-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/dushyant_profile.png?v=2" alt="Dushyant Saini"></div>
+                                <span class="team-member-name">Dushyant Saini</span>
+                                <span class="team-member-role">FOUNDER, CTO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/neelesh_image.jpeg?v=2" alt="Neelesh Tiwari"></div>
+                                <span class="team-member-name">Neelesh Tiwari</span>
+                                <span class="team-member-role">CO-FOUNDER, COO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/unnati_gupta.jpg?v=2" alt="Unnati Gupta"></div>
+                                <span class="team-member-name">Unnati Gupta</span>
+                                <span class="team-member-role">CMO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #fbbf24;">
+                                <div class="team-avatar-box"><img src="images/kalpana.png?v=2" alt="Kalpana Yadav"></div>
+                                <span class="team-member-name">Kalpana Yadav</span>
+                                <span class="team-member-role">CCO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/jagesh.jpg?v=2" alt="Jagesh Chaudhary"></div>
+                                <span class="team-member-name">Jagesh Chaudhary</span>
+                                <span class="team-member-role">Academic Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/samriddhi.jpg?v=2" alt="Samriddhi Agrawal"></div>
+                                <span class="team-member-name">Samriddhi Agrawal</span>
+                                <span class="team-member-role">Resource Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #ec4899;">
+                                <div class="team-avatar-box"><img src="images/riya.jpg?v=2" alt="Riya Saini"></div>
+                                <span class="team-member-name">Riya Saini</span>
+                                <span class="team-member-role">Creative Director</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/radhika.jpeg" alt="Radhika Saini"></div>
+                                <span class="team-member-name">Radhika Saini</span>
+                                <span class="team-member-role">Community Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/prachi.jpg?v=2" alt="Prachi Gupta"></div>
+                                <span class="team-member-name">Prachi Gupta</span>
+                                <span class="team-member-role">Social Media</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #fbbf24;">
+                                <div class="team-avatar-box"><img src="images/kartik.jpg?v=2" alt="Kartik Bhardwaj"></div>
+                                <span class="team-member-name">Kartik Bhardwaj</span>
+                                <span class="team-member-role">Support Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/parth_agrawal.jpg?v=2" alt="Parth Agrawal"></div>
+                                <span class="team-member-name">Parth Agrawal</span>
+                                <span class="team-member-role">GLA Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/uma.jpeg?v=2" alt="Uma Saini"></div>
+                                <span class="team-member-name">Uma Saini</span>
+                                <span class="team-member-role">BSA Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/chetan.jpg?v=2" alt="Chetan Bansal"></div>
+                                <span class="team-member-name">Chetan Bansal</span>
+                                <span class="team-member-role">Video Editor</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/mradul.jpg?v=2" alt="Mradul Tiwari"></div>
+                                <span class="team-member-name">Mradul Tiwari</span>
+                                <span class="team-member-role">Academic Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/shyam.jpg?v=2" alt="Shyam Sundar Pandey"></div>
+                                <span class="team-member-name">Shyam Sundar</span>
+                                <span class="team-member-role">Coordinator</span>
+                            </a>
+
+                            <!-- Loop Set 2 (for seamless continuous infinite flow) -->
+                            <a href="pages/team.html" class="team-member-chip founder-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/dushyant_profile.png?v=2" alt="Dushyant Saini"></div>
+                                <span class="team-member-name">Dushyant Saini</span>
+                                <span class="team-member-role">FOUNDER, CTO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/neelesh_image.jpeg?v=2" alt="Neelesh Tiwari"></div>
+                                <span class="team-member-name">Neelesh Tiwari</span>
+                                <span class="team-member-role">CO-FOUNDER, COO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/unnati_gupta.jpg?v=2" alt="Unnati Gupta"></div>
+                                <span class="team-member-name">Unnati Gupta</span>
+                                <span class="team-member-role">CMO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #fbbf24;">
+                                <div class="team-avatar-box"><img src="images/kalpana.png?v=2" alt="Kalpana Yadav"></div>
+                                <span class="team-member-name">Kalpana Yadav</span>
+                                <span class="team-member-role">CCO</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/jagesh.jpg?v=2" alt="Jagesh Chaudhary"></div>
+                                <span class="team-member-name">Jagesh Chaudhary</span>
+                                <span class="team-member-role">Academic Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/samriddhi.jpg?v=2" alt="Samriddhi Agrawal"></div>
+                                <span class="team-member-name">Samriddhi Agrawal</span>
+                                <span class="team-member-role">Resource Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #ec4899;">
+                                <div class="team-avatar-box"><img src="images/riya.jpg?v=2" alt="Riya Saini"></div>
+                                <span class="team-member-name">Riya Saini</span>
+                                <span class="team-member-role">Creative Director</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/radhika.jpeg" alt="Radhika Saini"></div>
+                                <span class="team-member-name">Radhika Saini</span>
+                                <span class="team-member-role">Community Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/prachi.jpg?v=2" alt="Prachi Gupta"></div>
+                                <span class="team-member-name">Prachi Gupta</span>
+                                <span class="team-member-role">Social Media</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #fbbf24;">
+                                <div class="team-avatar-box"><img src="images/kartik.jpg?v=2" alt="Kartik Bhardwaj"></div>
+                                <span class="team-member-name">Kartik Bhardwaj</span>
+                                <span class="team-member-role">Support Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/parth_agrawal.jpg?v=2" alt="Parth Agrawal"></div>
+                                <span class="team-member-name">Parth Agrawal</span>
+                                <span class="team-member-role">GLA Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/uma.jpeg?v=2" alt="Uma Saini"></div>
+                                <span class="team-member-name">Uma Saini</span>
+                                <span class="team-member-role">BSA Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #34d399;">
+                                <div class="team-avatar-box"><img src="images/chetan.jpg?v=2" alt="Chetan Bansal"></div>
+                                <span class="team-member-name">Chetan Bansal</span>
+                                <span class="team-member-role">Video Editor</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #38bdf8;">
+                                <div class="team-avatar-box"><img src="images/mradul.jpg?v=2" alt="Mradul Tiwari"></div>
+                                <span class="team-member-name">Mradul Tiwari</span>
+                                <span class="team-member-role">Academic Head</span>
+                            </a>
+                            <a href="pages/team.html" class="team-member-chip" style="--chip-color: #a855f7;">
+                                <div class="team-avatar-box"><img src="images/shyam.jpg?v=2" alt="Shyam Sundar Pandey"></div>
+                                <span class="team-member-name">Shyam Sundar</span>
+                                <span class="team-member-role">Coordinator</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="section-header" style="text-align: center; margin-bottom: 5rem;">
                     <h2 class="section-title pop-in">The Digital Content Hub</h2>
                     <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Select your target domain
